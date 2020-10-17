@@ -1,16 +1,34 @@
-# github_finder
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/67290471/95930993-6676fd00-0d9e-11eb-916b-75461c349eec.png" alt="github_finder" heigth="40%" width="40%" />
+</p>
 
-A new Flutter project.
+<h3 align="center">Find user, repos and organizations in your phone</h3>
 
-## Getting Started
+## Table of Contents
 
-This project is a starting point for a Flutter application.
+- [Introduction](#introduction)
+- [Features](#features)
+- [Build Process](#build-process)
+- [Acknowledgments](#acknowledgments)
 
-A few resources to get you started if this is your first Flutter project:
+## Introduction
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+It's a easy way to search and find a user and your repos and organizations in your phone.
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Features
+
+Some things that you can do with Github_Finder:
+
+* Search users
+* See organizations
+* See repositories
+
+## Build Process
+
+* Download and install Flutter. You get started in [Flutter Install Guide](https://flutter.dev/docs/get-started/install).
+* Clone or download the repository
+* Get package with `flutter pub get`
+
+## Acknowledgments
+
+Thanks to [Diego Eiras](https://github.com/lucioeiras) that built [all screens](https://www.figma.com/file/lR4FK3bOmQa9O0bOoNHn7p/Repo-Finder?node-id=17%3A334) in figma.
