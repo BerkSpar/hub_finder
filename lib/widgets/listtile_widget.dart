@@ -9,9 +9,28 @@ class ListTileWidget extends StatelessWidget {
   ListTileWidget({
     @required this.imageUrl,
     @required this.title,
+    this.subtitle,
     @required this.onTap,
-    @required this.subtitle,
   });
+
+  Widget _getSubtitle() {
+    if (subtitle != null) {
+      return Column(
+        children: [
+          SizedBox(height: 8),
+          Text(
+            subtitle,
+            style: TextStyle(
+              fontSize: 14,
+              fontWeight: FontWeight.w300,
+            ),
+          ),
+        ],
+      );
+    } else {
+      return Container();
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -47,14 +66,7 @@ class ListTileWidget extends StatelessWidget {
                       fontWeight: FontWeight.w500,
                     ),
                   ),
-                  SizedBox(height: 8),
-                  Text(
-                    subtitle,
-                    style: TextStyle(
-                      fontSize: 14,
-                      fontWeight: FontWeight.w300,
-                    ),
-                  ),
+                  _getSubtitle(),
                 ],
               ),
             ),

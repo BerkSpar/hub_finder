@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-class UserHeaderWidget extends StatelessWidget {
+class HeaderWidget extends StatelessWidget {
   final String title;
   final String subtitle;
   final String imageUrl;
 
-  UserHeaderWidget({
+  HeaderWidget({
     @required this.imageUrl,
     @required this.subtitle,
     @required this.title,
@@ -27,7 +27,7 @@ class UserHeaderWidget extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'Felipe Passos',
+              title,
               style: TextStyle(
                 fontSize: 24,
                 fontWeight: FontWeight.w700,
@@ -35,10 +35,11 @@ class UserHeaderWidget extends StatelessWidget {
             ),
             SizedBox(height: 8),
             Text(
-              'Santo Antonio de Jesus, BA',
+              subtitle,
               style: TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.w300,
+                color: Colors.grey,
               ),
             ),
           ],

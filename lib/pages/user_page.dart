@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:github_finder/pages/organization_page.dart';
 import 'package:github_finder/widgets/info_widget.dart';
 import 'package:github_finder/widgets/listtile_widget.dart';
 import 'package:github_finder/widgets/repo_listtile_widget.dart';
-import 'package:github_finder/widgets/user_header_widget.dart';
+import 'package:github_finder/widgets/header_widget.dart';
 
 class UserPage extends StatelessWidget {
   @override
@@ -16,7 +17,7 @@ class UserPage extends StatelessWidget {
       body: ListView(
         padding: EdgeInsets.fromLTRB(24, 48, 24, 0),
         children: [
-          UserHeaderWidget(
+          HeaderWidget(
             imageUrl:
                 'https://avatars3.githubusercontent.com/u/47111228?s=460&u=2d077bf84376e754ef2ae90d879521f6d5a453ba&v=4',
             title: 'Felipe Passos',
@@ -66,7 +67,14 @@ class UserPage extends StatelessWidget {
                       'https://avatars1.githubusercontent.com/u/68427875?s=200&v=4',
                   title: 'G10 Sistemas',
                   subtitle: 'Mais que um software, um conceito',
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => OrganizationPage(),
+                      ),
+                    );
+                  },
                 ),
               );
             },
