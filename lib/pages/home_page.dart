@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:github_finder/utils/colors.dart';
+import 'package:github_finder/widgets/search_widget.dart';
+import 'package:github_finder/widgets/user_listtile_widget.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -11,105 +12,50 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Image.asset('asset/images/logo.png'),
+        title: Image.asset('asset/images/logo_light.png'),
         centerTitle: true,
+        elevation: 0,
       ),
       body: ListView(
-        padding: EdgeInsets.fromLTRB(24, 55, 32, 0),
+        padding: EdgeInsets.fromLTRB(24, 48, 24, 0),
         children: [
           Text(
-            'Find users in Github',
+            'Find users in GitHub',
             style: TextStyle(
-              fontSize: 42,
+              fontSize: 32,
               fontWeight: FontWeight.bold,
             ),
           ),
-          SizedBox(height: 20),
-          Row(
-            children: [
-              Expanded(
-                flex: 11,
-                child: Container(
-                  padding: EdgeInsets.all(5),
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(5),
-                  ),
-                  child: Padding(
-                    padding: EdgeInsets.only(left: 15),
-                    child: TextFormField(
-                      decoration: InputDecoration(
-                        border: InputBorder.none,
-                        hintText: 'Type the user name',
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-              SizedBox(width: 10),
-              Expanded(
-                flex: 2,
-                child: Container(
-                  height: 54,
-                  decoration: BoxDecoration(
-                    color: Theme.of(context).accentColor,
-                    borderRadius: BorderRadius.circular(5),
-                  ),
-                  child: Icon(
-                    Icons.search,
-                  ),
-                ),
-              ),
-            ],
+          SizedBox(height: 24),
+          SearchWidget(
+            onTapSearch: () {},
+            hintText: 'Type the user name',
           ),
-          SizedBox(height: 40),
+          SizedBox(height: 64),
           Text(
             'Searched users',
             style: TextStyle(
-              fontSize: 26,
+              fontSize: 20,
+              fontWeight: FontWeight.w300,
             ),
           ),
-          SizedBox(height: 20),
-          ListView(
+          SizedBox(height: 24),
+          ListView.builder(
             shrinkWrap: true,
-            children: [
-              Container(
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(5),
+            itemCount: 10,
+            physics: ScrollPhysics(),
+            itemBuilder: (context, index) {
+              return Padding(
+                padding: EdgeInsets.symmetric(vertical: 5),
+                child: UserListTileWidget(
+                  imageUrl:
+                      'https://avatars3.githubusercontent.com/u/47111228?s=460&u=2d077bf84376e754ef2ae90d879521f6d5a453ba&v=4',
+                  title: 'Felipe Passos',
+                  subtitle: 'Santo Antônio de Jesus, BA',
+                  onTap: () {},
                 ),
-                height: 80,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Expanded(
-                      flex: 2,
-                      child: Image.network(
-                        'https://avatars3.githubusercontent.com/u/47111228?s=460&u=2d077bf84376e754ef2ae90d879521f6d5a453ba&v=4',
-                      ),
-                    ),
-                    Expanded(
-                      child: Column(
-                        children: [
-                          Text(
-                            'Felipe Passos',
-                          ),
-                        ],
-                      ),
-                    ),
-                    Expanded(
-                      flex: 1,
-                      child: Center(
-                        child: Icon(
-                          Icons.arrow_forward_ios,
-                          color: Theme.of(context).accentColor,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ],
+              );
+            },
           ),
         ],
       ),

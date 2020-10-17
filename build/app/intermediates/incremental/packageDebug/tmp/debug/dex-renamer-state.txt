@@ -1,4 +1,4 @@
-#Fri Oct 16 15:20:21 BRT 2020
+#Sat Oct 17 08:46:04 BRT 2020
 base.0=/home/g10/Documentos/github/github-finder/build/app/intermediates/dex/debug/mergeDexDebug/out/classes.dex
 path.0=classes.dex
 renamed.0=classes.dex

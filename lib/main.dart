@@ -19,11 +19,11 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: lightColor,
         accentColor: Colors.black,
-        scaffoldBackgroundColor: Color(0xFFE5E5E5),
         iconTheme: IconThemeData(
           color: Colors.white,
         ),
         visualDensity: VisualDensity.adaptivePlatformDensity,
+        backgroundColor: Color(0xfff0f0f5),
       ),
       home: HomePage(),
     );
