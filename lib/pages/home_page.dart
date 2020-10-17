@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:github_finder/pages/user_page.dart';
 import 'package:github_finder/widgets/search_widget.dart';
-import 'package:github_finder/widgets/user_listtile_widget.dart';
+import 'package:github_finder/widgets/listtile_widget.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -47,12 +48,17 @@ class _HomePageState extends State<HomePage> {
             itemBuilder: (context, index) {
               return Padding(
                 padding: EdgeInsets.symmetric(vertical: 5),
-                child: UserListTileWidget(
+                child: ListTileWidget(
                   imageUrl:
                       'https://avatars3.githubusercontent.com/u/47111228?s=460&u=2d077bf84376e754ef2ae90d879521f6d5a453ba&v=4',
                   title: 'Felipe Passos',
                   subtitle: 'Santo Antônio de Jesus, BA',
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => UserPage()),
+                    );
+                  },
                 ),
               );
             },

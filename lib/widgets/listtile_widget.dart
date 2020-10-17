@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
-class UserListTileWidget extends StatelessWidget {
+class ListTileWidget extends StatelessWidget {
   final String imageUrl;
   final String title;
   final String subtitle;
   final Function onTap;
 
-  UserListTileWidget({
+  ListTileWidget({
     @required this.imageUrl,
     @required this.title,
     @required this.onTap,
@@ -47,6 +47,7 @@ class UserListTileWidget extends StatelessWidget {
                       fontWeight: FontWeight.w500,
                     ),
                   ),
+                  SizedBox(height: 8),
                   Text(
                     subtitle,
                     style: TextStyle(
