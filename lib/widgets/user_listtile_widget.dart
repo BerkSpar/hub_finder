@@ -62,7 +62,8 @@ class UserListTileWidget extends StatelessWidget {
               child: Center(
                 child: Icon(
                   Icons.arrow_forward_ios,
-                  color: Theme.of(context).accentColor,
+                  color: Colors.grey,
+                  size: 18,
                 ),
               ),
             ),
