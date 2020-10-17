@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:github_finder/widgets/language_badge_widget.dart';
 
 class RepoListTileWidget extends StatelessWidget {
   final String title;
@@ -38,25 +39,9 @@ class RepoListTileWidget extends StatelessWidget {
                     ),
                   ),
                   SizedBox(height: 8),
-                  Row(
-                    children: [
-                      Container(
-                        height: 8,
-                        width: 8,
-                        decoration: BoxDecoration(
-                          color: color,
-                          borderRadius: BorderRadius.circular(30),
-                        ),
-                      ),
-                      SizedBox(width: 8),
-                      Text(
-                        subtitle,
-                        style: TextStyle(
-                          fontSize: 14,
-                          fontWeight: FontWeight.w300,
-                        ),
-                      ),
-                    ],
+                  LanguageBadgeWidget(
+                    color: color,
+                    title: subtitle,
                   ),
                 ],
               ),
