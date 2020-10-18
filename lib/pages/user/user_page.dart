@@ -52,6 +52,111 @@ class Body extends StatelessWidget {
 
   Body(this.controller);
 
+  Widget _getBio() {
+    if (controller.user.bio != null) {
+      return Text(
+        controller.user.bio,
+        maxLines: 4,
+        overflow: TextOverflow.ellipsis,
+        style: TextStyle(
+          fontSize: 16,
+          color: Colors.grey,
+        ),
+      );
+    } else {
+      return Container();
+    }
+  }
+
+  Widget _getOrganizations() {
+    if (controller.organizations.length > 0) {
+      return Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          SizedBox(height: 53),
+          Text(
+            'Organizations',
+            style: TextStyle(
+              fontSize: 20,
+            ),
+          ),
+          SizedBox(height: 24),
+          ListView.builder(
+            shrinkWrap: true,
+            itemCount: controller.organizations.length,
+            physics: ScrollPhysics(),
+            itemBuilder: (context, index) {
+              final organization = controller.organizations[index];
+
+              return Padding(
+                padding: EdgeInsets.symmetric(vertical: 5),
+                child: ListTileWidget(
+                  imageUrl: organization.avatarUrl,
+                  title: organization.login,
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => OrganizationPage(),
+                      ),
+                    );
+                  },
+                ),
+              );
+            },
+          ),
+        ],
+      );
+    } else {
+      return Container();
+    }
+  }
+
+  Widget _getPublicRepositories() {
+    if (controller.repositories.length > 0) {
+      return Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          SizedBox(height: 48),
+          Text(
+            'Public repositories',
+            style: TextStyle(
+              fontSize: 20,
+            ),
+          ),
+          SizedBox(height: 24),
+          ListView.builder(
+            itemCount: controller.repositories.length,
+            shrinkWrap: true,
+            physics: ScrollPhysics(),
+            itemBuilder: (context, index) {
+              final repositories = controller.repositories[index];
+
+              return Padding(
+                padding: EdgeInsets.symmetric(vertical: 5),
+                child: RepoListTileWidget(
+                  title: repositories.name,
+                  subtitle: repositories.language,
+                  color: language_colors[repositories.language],
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => RepoPage(),
+                      ),
+                    );
+                  },
+                ),
+              );
+            },
+          ),
+        ],
+      );
+    } else {
+      return Container();
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return ListView(
@@ -63,15 +168,7 @@ class Body extends StatelessWidget {
           subtitle: controller.user.location,
         ),
         SizedBox(height: 20),
-        Text(
-          controller.user.bio,
-          maxLines: 4,
-          overflow: TextOverflow.ellipsis,
-          style: TextStyle(
-            fontSize: 16,
-            color: Colors.grey,
-          ),
-        ),
+        _getBio(),
         SizedBox(height: 32),
         Row(
           children: [
@@ -86,70 +183,8 @@ class Body extends StatelessWidget {
             ),
           ],
         ),
-        SizedBox(height: 53),
-        Text(
-          'Organizations',
-          style: TextStyle(
-            fontSize: 20,
-          ),
-        ),
-        SizedBox(height: 24),
-        ListView.builder(
-          shrinkWrap: true,
-          itemCount: controller.organizations.length,
-          physics: ScrollPhysics(),
-          itemBuilder: (context, index) {
-            final organization = controller.organizations[index];
-
-            return Padding(
-              padding: EdgeInsets.symmetric(vertical: 5),
-              child: ListTileWidget(
-                imageUrl: organization.avatarUrl,
-                title: organization.login,
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => OrganizationPage(),
-                    ),
-                  );
-                },
-              ),
-            );
-          },
-        ),
-        SizedBox(height: 48),
-        Text(
-          'Public repositories',
-          style: TextStyle(
-            fontSize: 20,
-          ),
-        ),
-        ListView.builder(
-          itemCount: controller.repositories.length,
-          shrinkWrap: true,
-          physics: ScrollPhysics(),
-          itemBuilder: (context, index) {
-            final repositories = controller.repositories[index];
-
-            return Padding(
-              padding: EdgeInsets.symmetric(vertical: 5),
-              child: RepoListTileWidget(
-                title: repositories.name,
-                subtitle: repositories.language,
-                color: language_colors[repositories.language],
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => RepoPage(),
-                    ),
-                  );
-                },
-              ),
-            );
-          },
-        ),
+        _getOrganizations(),
+        _getPublicRepositories(),
       ],
     );
   }
