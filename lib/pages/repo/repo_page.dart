@@ -20,7 +20,7 @@ class RepoPage extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Image.asset('asset/images/logo_light.png'),
+        title: Image.asset('asset/images/logo_light.png', height: 32),
         centerTitle: true,
         elevation: 0,
       ),
@@ -54,12 +54,14 @@ class Body extends StatelessWidget {
   Widget _getSubtitle() {
     if (controller.repository.description != null) {
       return Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           SizedBox(height: 20),
           Text(
             controller.repository.description,
             style: TextStyle(
               fontSize: 16,
+              color: Colors.grey,
             ),
           ),
         ],

@@ -17,7 +17,7 @@ class OrganizationPage extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Image.asset('asset/images/logo_light.png'),
+        title: Image.asset('asset/images/logo_light.png', height: 32),
         centerTitle: true,
         elevation: 0,
       ),
