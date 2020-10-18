@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:github_finder/pages/home_page.dart';
+import 'package:github_finder/pages/home/home_page.dart';
 import 'package:github_finder/utils/colors.dart';
 
 void main() {

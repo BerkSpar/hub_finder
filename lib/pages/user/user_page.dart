@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:github_finder/pages/organization_page.dart';
-import 'package:github_finder/pages/repo_page.dart';
+import 'package:github_finder/pages/organization/organization_page.dart';
+import 'package:github_finder/pages/repo/repo_page.dart';
 import 'package:github_finder/widgets/info_widget.dart';
 import 'package:github_finder/widgets/listtile_widget.dart';
 import 'package:github_finder/widgets/repo_listtile_widget.dart';

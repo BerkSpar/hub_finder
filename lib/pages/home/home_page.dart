@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:github_finder/pages/user_page.dart';
+import 'package:github_finder/pages/user/user_page.dart';
+import 'package:github_finder/shared/repositories/github_datasource.dart';
 import 'package:github_finder/widgets/search_widget.dart';
 import 'package:github_finder/widgets/listtile_widget.dart';
 
@@ -29,7 +30,13 @@ class _HomePageState extends State<HomePage> {
           ),
           SizedBox(height: 24),
           SearchWidget(
-            onTapSearch: () {},
+            onTapSearch: () async {
+              final ds = GithubDataSource();
+
+              final user = await ds.getUser('berkspar');
+
+              print(user.name);
+            },
             hintText: 'Type the user name',
           ),
           SizedBox(height: 64),
