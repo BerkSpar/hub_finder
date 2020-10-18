@@ -42,6 +42,24 @@ class GithubDataSource {
     }
   }
 
+  Future<ObservableList<User>> getMembersByOrganization(
+    String name,
+  ) async {
+    try {
+      final result = await dio.get('/orgs/$name/members');
+
+      final list = <User>[].asObservable();
+
+      result.data.forEach((e) {
+        list.add(User.fromJson(e));
+      });
+
+      return list;
+    } catch (e) {
+      throw Exception();
+    }
+  }
+
   Future<Organization> getOrganization(
     String name,
   ) async {

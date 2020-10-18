@@ -11,6 +11,26 @@ class HeaderWidget extends StatelessWidget {
     @required this.title,
   });
 
+  Widget _getSubtitle() {
+    if (subtitle != null) {
+      return Column(
+        children: [
+          SizedBox(height: 8),
+          Text(
+            subtitle,
+            style: TextStyle(
+              fontSize: 16,
+              fontWeight: FontWeight.w300,
+              color: Colors.grey,
+            ),
+          ),
+        ],
+      );
+    } else {
+      return Container();
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -33,15 +53,7 @@ class HeaderWidget extends StatelessWidget {
                 fontWeight: FontWeight.w700,
               ),
             ),
-            SizedBox(height: 8),
-            Text(
-              subtitle,
-              style: TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.w300,
-                color: Colors.grey,
-              ),
-            ),
+            _getSubtitle(),
           ],
         ),
       ],

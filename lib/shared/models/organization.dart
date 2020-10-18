@@ -3,6 +3,7 @@ class Organization {
   int id;
   String nodeId;
   String url;
+  String name;
   String reposUrl;
   String eventsUrl;
   String hooksUrl;
@@ -15,6 +16,7 @@ class Organization {
   Organization({
     this.login,
     this.id,
+    this.name,
     this.nodeId,
     this.url,
     this.reposUrl,
@@ -30,6 +32,7 @@ class Organization {
   Organization.fromJson(Map<String, dynamic> json) {
     login = json['login'];
     id = json['id'];
+    name = json['name'];
     nodeId = json['node_id'];
     url = json['url'];
     reposUrl = json['repos_url'];
@@ -46,6 +49,7 @@ class Organization {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['login'] = this.login;
     data['id'] = this.id;
+    data['name'] = this.id;
     data['node_id'] = this.nodeId;
     data['url'] = this.url;
     data['repos_url'] = this.reposUrl;

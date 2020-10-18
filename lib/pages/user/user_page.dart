@@ -92,7 +92,7 @@ class Body extends StatelessWidget {
                 padding: EdgeInsets.symmetric(vertical: 5),
                 child: ListTileWidget(
                   imageUrl: organization.avatarUrl,
-                  title: organization.login,
+                  title: '@${organization.login}',
                   onTap: () {
                     Navigator.push(
                       context,

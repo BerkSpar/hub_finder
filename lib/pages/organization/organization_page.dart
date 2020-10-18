@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:github_finder/pages/organization/organization_controller.dart';
+import 'package:github_finder/pages/user/user_page.dart';
 import 'package:github_finder/shared/models/load_state.dart';
 import 'package:github_finder/widgets/header_widget.dart';
 import 'package:github_finder/widgets/listtile_widget.dart';
@@ -69,7 +70,7 @@ class Body extends StatelessWidget {
       children: [
         HeaderWidget(
           imageUrl: controller.organization.avatarUrl,
-          title: controller.organization.login,
+          title: controller.organization.name,
           subtitle: 'Organization',
         ),
         _getBio(),
@@ -82,17 +83,25 @@ class Body extends StatelessWidget {
         ),
         SizedBox(height: 24),
         ListView.builder(
-          itemCount: 8,
+          itemCount: controller.members.length,
           shrinkWrap: true,
           physics: ScrollPhysics(),
           itemBuilder: (context, index) {
+            final member = controller.members[index];
+
             return Padding(
               padding: EdgeInsets.symmetric(vertical: 5),
               child: ListTileWidget(
-                imageUrl:
-                    'https://avatars2.githubusercontent.com/u/53619830?s=460&u=9809495b28fe821a29996d7b65b0091723fe95ad&v=4',
-                title: 'Bruno Assis',
-                onTap: () {},
+                imageUrl: member.avatarUrl,
+                title: member.login,
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => UserPage(member.login),
+                    ),
+                  );
+                },
               ),
             );
           },
