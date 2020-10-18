@@ -55,7 +55,7 @@ class _HomePageState extends State<HomePage> {
           SizedBox(height: 24),
           ListView.builder(
             shrinkWrap: true,
-            itemCount: 10,
+            itemCount: 1,
             physics: ScrollPhysics(),
             itemBuilder: (context, index) {
               return Padding(
@@ -65,7 +65,14 @@ class _HomePageState extends State<HomePage> {
                       'https://avatars3.githubusercontent.com/u/47111228?s=460&u=2d077bf84376e754ef2ae90d879521f6d5a453ba&v=4',
                   title: 'Felipe Passos',
                   subtitle: 'Santo Antônio de Jesus, BA',
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => UserPage('berkspar'),
+                      ),
+                    );
+                  },
                 ),
               );
             },
