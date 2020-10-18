@@ -143,7 +143,7 @@ class Body extends StatelessWidget {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => RepoPage(),
+                        builder: (context) => RepoPage(repositories.fullName),
                       ),
                     );
                   },

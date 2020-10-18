@@ -72,6 +72,18 @@ class GithubDataSource {
     }
   }
 
+  Future<Repository> getRepository(
+    String fullName,
+  ) async {
+    try {
+      final result = await dio.get('/repos/$fullName');
+
+      return Repository.fromJson(result.data);
+    } catch (e) {
+      throw Exception();
+    }
+  }
+
   Future<ObservableList<Repository>> getPublicRepositories(
     String username,
   ) async {
