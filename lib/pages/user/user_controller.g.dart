@@ -24,6 +24,36 @@ mixin _$UserController on _UserControllerBase, Store {
     });
   }
 
+  final _$organizationsAtom = Atom(name: '_UserControllerBase.organizations');
+
+  @override
+  ObservableList<Organization> get organizations {
+    _$organizationsAtom.reportRead();
+    return super.organizations;
+  }
+
+  @override
+  set organizations(ObservableList<Organization> value) {
+    _$organizationsAtom.reportWrite(value, super.organizations, () {
+      super.organizations = value;
+    });
+  }
+
+  final _$repositoriesAtom = Atom(name: '_UserControllerBase.repositories');
+
+  @override
+  ObservableList<Repository> get repositories {
+    _$repositoriesAtom.reportRead();
+    return super.repositories;
+  }
+
+  @override
+  set repositories(ObservableList<Repository> value) {
+    _$repositoriesAtom.reportWrite(value, super.repositories, () {
+      super.repositories = value;
+    });
+  }
+
   final _$loadAtom = Atom(name: '_UserControllerBase.load');
 
   @override
@@ -43,6 +73,8 @@ mixin _$UserController on _UserControllerBase, Store {
   String toString() {
     return '''
 user: ${user},
+organizations: ${organizations},
+repositories: ${repositories},
 load: ${load}
     ''';
   }

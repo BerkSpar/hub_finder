@@ -14,6 +14,22 @@ class RepoListTileWidget extends StatelessWidget {
     @required this.onTap,
   });
 
+  Widget _getSubtitle() {
+    if (subtitle != null) {
+      return Column(
+        children: [
+          SizedBox(height: 8),
+          LanguageBadgeWidget(
+            color: color,
+            title: subtitle,
+          ),
+        ],
+      );
+    } else {
+      return Container();
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -38,11 +54,7 @@ class RepoListTileWidget extends StatelessWidget {
                       fontWeight: FontWeight.w500,
                     ),
                   ),
-                  SizedBox(height: 8),
-                  LanguageBadgeWidget(
-                    color: color,
-                    title: subtitle,
-                  ),
+                  _getSubtitle(),
                 ],
               ),
             ),

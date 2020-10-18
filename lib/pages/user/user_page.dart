@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:github_finder/pages/organization/organization_page.dart';
 import 'package:github_finder/pages/repo/repo_page.dart';
 import 'package:github_finder/pages/user/user_controller.dart';
+import 'package:github_finder/shared/models/load_state.dart';
+import 'package:github_finder/utils/colors.dart';
 import 'package:github_finder/widgets/info_widget.dart';
 import 'package:github_finder/widgets/listtile_widget.dart';
 import 'package:github_finder/widgets/repo_listtile_widget.dart';
@@ -124,16 +126,18 @@ class Body extends StatelessWidget {
           ),
         ),
         ListView.builder(
-          itemCount: 4,
+          itemCount: controller.repositories.length,
           shrinkWrap: true,
           physics: ScrollPhysics(),
           itemBuilder: (context, index) {
+            final repositories = controller.repositories[index];
+
             return Padding(
               padding: EdgeInsets.symmetric(vertical: 5),
               child: RepoListTileWidget(
-                title: 'Bunnie',
-                subtitle: 'Dart',
-                color: Colors.blue,
+                title: repositories.name,
+                subtitle: repositories.language,
+                color: language_colors[repositories.language],
                 onTap: () {
                   Navigator.push(
                     context,
