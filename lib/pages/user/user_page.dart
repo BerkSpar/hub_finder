@@ -93,17 +93,17 @@ class Body extends StatelessWidget {
         ),
         SizedBox(height: 24),
         ListView.builder(
-          itemCount: 1,
           shrinkWrap: true,
+          itemCount: controller.organizations.length,
           physics: ScrollPhysics(),
           itemBuilder: (context, index) {
+            final organization = controller.organizations[index];
+
             return Padding(
               padding: EdgeInsets.symmetric(vertical: 5),
               child: ListTileWidget(
-                imageUrl:
-                    'https://avatars1.githubusercontent.com/u/68427875?s=200&v=4',
-                title: 'G10 Sistemas',
-                subtitle: 'Mais que um software, um conceito',
+                imageUrl: organization.avatarUrl,
+                title: organization.login,
                 onTap: () {
                   Navigator.push(
                     context,

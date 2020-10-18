@@ -1,3 +1,4 @@
+import 'package:github_finder/shared/models/organization.dart';
 import 'package:github_finder/shared/models/user.dart';
 import 'package:github_finder/shared/repositories/github_datasource.dart';
 import 'package:mobx/mobx.dart';
@@ -15,6 +16,9 @@ abstract class _UserControllerBase with Store {
   User user;
 
   @observable
+  ObservableList<Organization> organizations = <Organization>[].asObservable();
+
+  @observable
   LoadState load = LoadState.loading;
 
   _UserControllerBase(String username) {
@@ -24,6 +28,7 @@ abstract class _UserControllerBase with Store {
   _init(String username) async {
     try {
       user = await datasource.getUser(username);
+      organizations = await datasource.getOrganizationsByUser(username);
 
       load = LoadState.loaded;
     } catch (e) {
