@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:github_finder/pages/repo/repo_controller.dart';
+import 'package:github_finder/pages/user/user_page.dart';
 import 'package:github_finder/shared/models/load_state.dart';
 import 'package:github_finder/utils/colors.dart';
 import 'package:github_finder/widgets/header_widget.dart';
@@ -74,10 +75,9 @@ class Body extends StatelessWidget {
       padding: EdgeInsets.fromLTRB(24, 48, 24, 0),
       children: [
         HeaderWidget(
-          imageUrl:
-              'https://avatars3.githubusercontent.com/u/47111228?s=460&u=2d077bf84376e754ef2ae90d879521f6d5a453ba&v=4',
+          imageUrl: controller.contributors[0].avatarUrl,
           title: controller.repository.name,
-          subtitle: 'Felipe Passos',
+          subtitle: controller.contributors[0].login,
         ),
         _getSubtitle(),
         SizedBox(height: 16),
@@ -113,18 +113,26 @@ class Body extends StatelessWidget {
         ),
         SizedBox(height: 24),
         ListView.builder(
-          itemCount: 6,
+          itemCount: controller.contributors.length,
           shrinkWrap: true,
           physics: ScrollPhysics(),
           itemBuilder: (context, index) {
+            final contributor = controller.contributors[index];
+
             return Padding(
               padding: EdgeInsets.symmetric(vertical: 5),
               child: ListTileWidget(
-                imageUrl:
-                    'https://avatars2.githubusercontent.com/u/53619830?s=460&u=9809495b28fe821a29996d7b65b0091723fe95ad&v=4',
-                title: 'Bruno Assis',
-                subtitle: '6 contributions',
-                onTap: () {},
+                imageUrl: contributor.avatarUrl,
+                title: contributor.login,
+                subtitle: '${contributor.contributions} contributions',
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => UserPage(contributor.login),
+                    ),
+                  );
+                },
               ),
             );
           },

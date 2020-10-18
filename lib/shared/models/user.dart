@@ -15,28 +15,32 @@ class User {
   int publicRepos;
   int followers;
   int following;
+  int contributions;
 
-  User(
-      {this.login,
-      this.id,
-      this.avatarUrl,
-      this.url,
-      this.followersUrl,
-      this.followingUrl,
-      this.organizationsUrl,
-      this.reposUrl,
-      this.type,
-      this.name,
-      this.company,
-      this.location,
-      this.bio,
-      this.publicRepos,
-      this.followers,
-      this.following});
+  User({
+    this.login,
+    this.contributions,
+    this.id,
+    this.avatarUrl,
+    this.url,
+    this.followersUrl,
+    this.followingUrl,
+    this.organizationsUrl,
+    this.reposUrl,
+    this.type,
+    this.name,
+    this.company,
+    this.location,
+    this.bio,
+    this.publicRepos,
+    this.followers,
+    this.following,
+  });
 
   User.fromJson(Map<String, dynamic> json) {
     login = json['login'];
     id = json['id'];
+    contributions = json['contributions'];
     avatarUrl = json['avatar_url'];
     url = json['url'];
     followersUrl = json['followers_url'];
@@ -57,6 +61,7 @@ class User {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['login'] = this.login;
     data['id'] = this.id;
+    data['contributions'] = this.contributions;
     data['avatar_url'] = this.avatarUrl;
     data['url'] = this.url;
     data['followers_url'] = this.followersUrl;

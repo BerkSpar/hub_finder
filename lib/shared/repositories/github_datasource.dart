@@ -101,4 +101,22 @@ class GithubDataSource {
       throw Exception();
     }
   }
+
+  Future<ObservableList<User>> getContributors(
+    String fullName,
+  ) async {
+    try {
+      final result = await dio.get('/repos/$fullName/contributors');
+
+      final list = <User>[].asObservable();
+
+      result.data.forEach((e) {
+        list.add(User.fromJson(e));
+      });
+
+      return list;
+    } catch (e) {
+      throw Exception();
+    }
+  }
 }
