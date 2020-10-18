@@ -48,14 +48,7 @@ class OrganizationPage extends StatelessWidget {
                   imageUrl:
                       'https://avatars2.githubusercontent.com/u/53619830?s=460&u=9809495b28fe821a29996d7b65b0091723fe95ad&v=4',
                   title: 'Bruno Assis',
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => UserPage(),
-                      ),
-                    );
-                  },
+                  onTap: () {},
                 ),
               );
             },

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:github_finder/pages/home/home_controller.dart';
 import 'package:github_finder/pages/user/user_page.dart';
-import 'package:github_finder/shared/repositories/github_datasource.dart';
 import 'package:github_finder/widgets/search_widget.dart';
 import 'package:github_finder/widgets/listtile_widget.dart';
 
@@ -10,6 +10,8 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  final controller = HomeController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,12 +33,15 @@ class _HomePageState extends State<HomePage> {
           SizedBox(height: 24),
           SearchWidget(
             onTapSearch: () async {
-              final ds = GithubDataSource();
-
-              final user = await ds.getUser('berkspar');
-
-              print(user.name);
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) =>
+                      UserPage(controller.searchController.text),
+                ),
+              );
             },
+            searchController: controller.searchController,
             hintText: 'Type the user name',
           ),
           SizedBox(height: 64),
@@ -60,12 +65,7 @@ class _HomePageState extends State<HomePage> {
                       'https://avatars3.githubusercontent.com/u/47111228?s=460&u=2d077bf84376e754ef2ae90d879521f6d5a453ba&v=4',
                   title: 'Felipe Passos',
                   subtitle: 'Santo Antônio de Jesus, BA',
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => UserPage()),
-                    );
-                  },
+                  onTap: () {},
                 ),
               );
             },

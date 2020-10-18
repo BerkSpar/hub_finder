@@ -9,8 +9,12 @@ class GithubDataSource {
   }
 
   Future<User> getUser(String username) async {
-    final result = await dio.get('/users/$username');
+    try {
+      final result = await dio.get('/users/$username');
 
-    return User.fromJson(result.data);
+      return User.fromJson(result.data);
+    } catch (e) {
+      throw Exception();
+    }
   }
 }
