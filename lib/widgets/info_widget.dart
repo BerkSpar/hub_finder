@@ -5,8 +5,8 @@ class InfoWidget extends StatelessWidget {
   final String subtitle;
 
   InfoWidget({
-    @required this.title,
-    @required this.subtitle,
+    required this.title,
+    required this.subtitle,
   });
 
   @override

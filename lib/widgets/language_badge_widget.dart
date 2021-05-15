@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
 class LanguageBadgeWidget extends StatelessWidget {
-  final Color color;
-  final String title;
+  final Color? color;
+  final String? title;
 
   LanguageBadgeWidget({
-    @required this.color,
-    @required this.title,
+    required this.color,
+    required this.title,
   });
 
   @override
@@ -23,7 +23,7 @@ class LanguageBadgeWidget extends StatelessWidget {
         ),
         SizedBox(width: 8),
         Text(
-          title,
+          title!,
           style: TextStyle(
             fontSize: 14,
             fontWeight: FontWeight.w300,

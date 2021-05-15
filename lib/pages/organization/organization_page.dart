@@ -7,7 +7,7 @@ import 'package:github_finder/widgets/header_widget.dart';
 import 'package:github_finder/widgets/listtile_widget.dart';
 
 class OrganizationPage extends StatelessWidget {
-  final String name;
+  final String? name;
 
   OrganizationPage(this.name);
 
@@ -53,7 +53,7 @@ class Body extends StatelessWidget {
       children: [
         SizedBox(height: 20),
         Text(
-          controller.organization.description,
+          controller.organization.description!,
           style: TextStyle(
             fontSize: 16,
             color: Colors.grey,

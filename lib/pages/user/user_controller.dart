@@ -13,7 +13,7 @@ abstract class _UserControllerBase with Store {
   final datasource = GithubDataSource();
 
   @observable
-  User user;
+  User? user;
 
   @observable
   ObservableList<Organization> organizations = <Organization>[].asObservable();
@@ -24,11 +24,11 @@ abstract class _UserControllerBase with Store {
   @observable
   LoadState load = LoadState.loading;
 
-  _UserControllerBase(String username) {
+  _UserControllerBase(String? username) {
     _init(username);
   }
 
-  _init(String username) async {
+  _init(String? username) async {
     try {
       user = await datasource.getUser(username);
       organizations = await datasource.getOrganizationsByUser(username);
