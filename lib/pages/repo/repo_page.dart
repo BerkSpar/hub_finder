@@ -10,7 +10,7 @@ import 'package:github_finder/widgets/language_badge_widget.dart';
 import 'package:github_finder/widgets/listtile_widget.dart';
 
 class RepoPage extends StatelessWidget {
-  final String? fullName;
+  final String fullName;
 
   RepoPage(this.fullName);
 
@@ -58,7 +58,7 @@ class Body extends StatelessWidget {
         children: [
           SizedBox(height: 20),
           Text(
-            controller.repository.description!,
+            controller.repository.description,
             style: TextStyle(
               fontSize: 16,
               color: Colors.grey,

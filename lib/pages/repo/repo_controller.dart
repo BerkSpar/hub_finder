@@ -20,11 +20,11 @@ abstract class _RepoControllerBase with Store {
   @observable
   LoadState load = LoadState.loading;
 
-  _RepoControllerBase(String? fullName) {
+  _RepoControllerBase(String fullName) {
     _init(fullName);
   }
 
-  _init(String? fullName) async {
+  _init(String fullName) async {
     try {
       repository = await datasource.getRepository(fullName);
       contributors = await datasource.getContributors(fullName);

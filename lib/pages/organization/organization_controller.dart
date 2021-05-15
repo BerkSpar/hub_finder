@@ -21,11 +21,11 @@ abstract class _OrganizationControllerBase with Store {
   @observable
   LoadState load = LoadState.loading;
 
-  _OrganizationControllerBase(String? organization) {
+  _OrganizationControllerBase(String organization) {
     _init(organization);
   }
 
-  _init(String? name) async {
+  _init(String name) async {
     try {
       organization = await datasource.getOrganization(name);
       members = await datasource.getMembersByOrganization(name);

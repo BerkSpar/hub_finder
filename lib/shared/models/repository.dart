@@ -1,13 +1,13 @@
 class Repository {
-  int? id;
-  String? nodeId;
-  String? name;
-  String? fullName;
-  String? description;
-  String? language;
-  int? openIssues;
-  int? forks;
-  int? stars;
+  int id;
+  String nodeId;
+  String name;
+  String fullName;
+  String description;
+  String language;
+  int openIssues;
+  int forks;
+  int stars;
 
   Repository({
     this.id,

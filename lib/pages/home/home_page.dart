@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:github_finder/pages/home/home_controller.dart';
 import 'package:github_finder/pages/user/user_page.dart';
+import 'package:github_finder/shared/models/cached_user.dart';
 import 'package:github_finder/widgets/search_widget.dart';
 import 'package:github_finder/widgets/listtile_widget.dart';
 
@@ -53,30 +55,33 @@ class _HomePageState extends State<HomePage> {
             ),
           ),
           SizedBox(height: 24),
-          ListView.builder(
-            shrinkWrap: true,
-            itemCount: 1,
-            physics: ScrollPhysics(),
-            itemBuilder: (context, index) {
-              return Padding(
-                padding: EdgeInsets.symmetric(vertical: 5),
-                child: ListTileWidget(
-                  imageUrl:
-                      'https://avatars3.githubusercontent.com/u/47111228?s=460&u=2d077bf84376e754ef2ae90d879521f6d5a453ba&v=4',
-                  title: 'Felipe Passos',
-                  subtitle: 'Santo Antônio de Jesus, BA',
+          Observer(builder: (_) {
+            return ListView.separated(
+              shrinkWrap: true,
+              itemCount: controller.cachedUsers?.length ?? 0,
+              physics: ScrollPhysics(),
+              itemBuilder: (context, index) {
+                final cachedUser = controller.cachedUsers[index];
+
+                return ListTileWidget(
+                  imageUrl: cachedUser.imageUrl,
+                  title: cachedUser.title,
+                  subtitle: cachedUser.subtitle,
                   onTap: () {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => UserPage('berkspar'),
+                        builder: (context) => UserPage(cachedUser.username),
                       ),
                     );
                   },
-                ),
-              );
-            },
-          ),
+                );
+              },
+              separatorBuilder: (_, __) {
+                return SizedBox(height: 5);
+              },
+            );
+          }),
         ],
       ),
     );

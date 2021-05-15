@@ -1,17 +1,17 @@
 class Organization {
-  String? login;
-  int? id;
-  String? nodeId;
-  String? url;
-  String? name;
-  String? reposUrl;
-  String? eventsUrl;
-  String? hooksUrl;
-  String? issuesUrl;
-  String? membersUrl;
-  String? publicMembersUrl;
-  String? avatarUrl;
-  String? description;
+  String login;
+  int id;
+  String nodeId;
+  String url;
+  String name;
+  String reposUrl;
+  String eventsUrl;
+  String hooksUrl;
+  String issuesUrl;
+  String membersUrl;
+  String publicMembersUrl;
+  String avatarUrl;
+  String description;
 
   Organization({
     this.login,

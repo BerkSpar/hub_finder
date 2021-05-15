@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 
 class ListTileWidget extends StatelessWidget {
-  final String? imageUrl;
-  final String? title;
-  final String? subtitle;
+  final String imageUrl;
+  final String title;
+  final String subtitle;
   final Function onTap;
 
   ListTileWidget({
-    required this.imageUrl,
-    required this.title,
+    @required this.imageUrl,
+    @required this.title,
     this.subtitle,
-    required this.onTap,
+    @required this.onTap,
   });
 
   Widget _getSubtitle() {
@@ -19,7 +19,7 @@ class ListTileWidget extends StatelessWidget {
         children: [
           SizedBox(height: 8),
           Text(
-            subtitle!,
+            subtitle,
             style: TextStyle(
               fontSize: 14,
               fontWeight: FontWeight.w300,
@@ -35,7 +35,7 @@ class ListTileWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: onTap as void Function()?,
+      onTap: onTap as void Function(),
       child: Container(
         decoration: BoxDecoration(
           color: Colors.white,
@@ -50,7 +50,7 @@ class ListTileWidget extends StatelessWidget {
                 height: 52,
                 width: 52,
                 child: CircleAvatar(
-                  backgroundImage: NetworkImage(imageUrl!),
+                  backgroundImage: NetworkImage(imageUrl),
                 ),
               ),
             ),
@@ -60,7 +60,7 @@ class ListTileWidget extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    title!,
+                    title,
                     style: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.w500,

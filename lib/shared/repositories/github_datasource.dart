@@ -14,7 +14,7 @@ class GithubDataSource {
     };
   }
 
-  Future<User> getUser(String? username) async {
+  Future<User> getUser(String username) async {
     try {
       final result = await dio.get('/users/$username');
 
@@ -25,7 +25,7 @@ class GithubDataSource {
   }
 
   Future<ObservableList<Organization>> getOrganizationsByUser(
-    String? username,
+    String username,
   ) async {
     try {
       final result = await dio.get('/users/$username/orgs');
@@ -43,7 +43,7 @@ class GithubDataSource {
   }
 
   Future<ObservableList<User>> getMembersByOrganization(
-    String? name,
+    String name,
   ) async {
     try {
       final result = await dio.get('/orgs/$name/members');
@@ -61,7 +61,7 @@ class GithubDataSource {
   }
 
   Future<Organization> getOrganization(
-    String? name,
+    String name,
   ) async {
     try {
       final result = await dio.get('/orgs/$name');
@@ -73,7 +73,7 @@ class GithubDataSource {
   }
 
   Future<Repository> getRepository(
-    String? fullName,
+    String fullName,
   ) async {
     try {
       final result = await dio.get('/repos/$fullName');
@@ -85,7 +85,7 @@ class GithubDataSource {
   }
 
   Future<ObservableList<Repository>> getPublicRepositories(
-    String? username,
+    String username,
   ) async {
     try {
       final result = await dio.get('/users/$username/repos');
@@ -103,7 +103,7 @@ class GithubDataSource {
   }
 
   Future<ObservableList<User>> getContributors(
-    String? fullName,
+    String fullName,
   ) async {
     try {
       final result = await dio.get('/repos/$fullName/contributors');
