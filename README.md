@@ -1,8 +1,12 @@
 <p align="center">
-  <img src="https://raw.githubusercontent.com/BerkSpar/hub_finder/main/asset/images/logo_light.png" alt="github_finder" heigth="40%" width="40%" />
+  <img src="https://raw.githubusercontent.com/BerkSpar/hub_finder/main/asset/images/logo_light.png" alt="hub_finder" heigth="40%" width="40%" />
 </p>
 
 <h3 align="center">Find user, repos and organizations in your phone</h3>
+
+<h5 align="center">
+  <a href="https://play.google.com/store/apps/details?id=tech.bunnie.hub_finder">Available on Google Play Store</a>
+</h5>
 
 ## Table of Contents
 
@@ -17,7 +21,7 @@ It's a easy way to search and find a user and your repos and organizations in yo
 
 ## Features
 
-Some things that you can do with Github_Finder:
+Some things that you can do with Hub Finder:
 
 * Search users
 * See organizations
