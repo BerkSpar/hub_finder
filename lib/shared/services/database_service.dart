@@ -13,7 +13,6 @@ class DatabaseService {
         ? response.map((c) => CachedUser.fromMap(c)).toList()
         : [];
 
-    print(list.length);
     return list;
   }
 
