@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:github_finder/widgets/language_badge_widget.dart';
+import 'package:hub_finder/widgets/language_badge_widget.dart';
 
 class RepoListTileWidget extends StatelessWidget {
   final String title;

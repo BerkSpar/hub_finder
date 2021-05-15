@@ -1,4 +1,4 @@
-import 'package:github_finder/shared/models/cached_user.dart';
+import 'package:hub_finder/shared/models/cached_user.dart';
 import 'package:sqflite/sqflite.dart';
 
 class DatabaseService {

@@ -1,7 +1,7 @@
-import 'package:github_finder/shared/models/load_state.dart';
-import 'package:github_finder/shared/models/repository.dart';
-import 'package:github_finder/shared/models/user.dart';
-import 'package:github_finder/shared/repositories/github_datasource.dart';
+import 'package:hub_finder/shared/models/load_state.dart';
+import 'package:hub_finder/shared/models/repository.dart';
+import 'package:hub_finder/shared/models/user.dart';
+import 'package:hub_finder/shared/repositories/github_datasource.dart';
 import 'package:mobx/mobx.dart';
 
 part 'repo_controller.g.dart';

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:github_finder/pages/organization/organization_controller.dart';
-import 'package:github_finder/pages/user/user_page.dart';
-import 'package:github_finder/shared/models/load_state.dart';
-import 'package:github_finder/widgets/header_widget.dart';
-import 'package:github_finder/widgets/listtile_widget.dart';
+import 'package:hub_finder/pages/organization/organization_controller.dart';
+import 'package:hub_finder/pages/user/user_page.dart';
+import 'package:hub_finder/shared/models/load_state.dart';
+import 'package:hub_finder/widgets/header_widget.dart';
+import 'package:hub_finder/widgets/listtile_widget.dart';
 
 class OrganizationPage extends StatelessWidget {
   final String name;

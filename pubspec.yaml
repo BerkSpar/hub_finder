@@ -1,4 +1,4 @@
-name: github_finder
+name: hub_finder
 description: Find user, repos and organizations in your phone.
 
 publish_to: 'none'

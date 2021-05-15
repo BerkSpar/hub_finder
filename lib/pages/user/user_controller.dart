@@ -1,10 +1,10 @@
-import 'package:github_finder/shared/models/cached_user.dart';
-import 'package:github_finder/shared/models/load_state.dart';
-import 'package:github_finder/shared/models/organization.dart';
-import 'package:github_finder/shared/models/repository.dart';
-import 'package:github_finder/shared/models/user.dart';
-import 'package:github_finder/shared/repositories/github_datasource.dart';
-import 'package:github_finder/shared/services/database_service.dart';
+import 'package:hub_finder/shared/models/cached_user.dart';
+import 'package:hub_finder/shared/models/load_state.dart';
+import 'package:hub_finder/shared/models/organization.dart';
+import 'package:hub_finder/shared/models/repository.dart';
+import 'package:hub_finder/shared/models/user.dart';
+import 'package:hub_finder/shared/repositories/github_datasource.dart';
+import 'package:hub_finder/shared/services/database_service.dart';
 import 'package:mobx/mobx.dart';
 
 part 'user_controller.g.dart';

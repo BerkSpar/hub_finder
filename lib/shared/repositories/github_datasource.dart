@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
-import 'package:github_finder/shared/models/organization.dart';
-import 'package:github_finder/shared/models/repository.dart';
-import 'package:github_finder/shared/models/user.dart';
+import 'package:hub_finder/shared/models/organization.dart';
+import 'package:hub_finder/shared/models/repository.dart';
+import 'package:hub_finder/shared/models/user.dart';
 import 'package:mobx/mobx.dart';
 
 class GithubDataSource {

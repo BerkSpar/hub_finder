@@ -1,8 +1,8 @@
 import 'dart:async';
 
 import 'package:flutter/cupertino.dart';
-import 'package:github_finder/shared/models/cached_user.dart';
-import 'package:github_finder/shared/services/database_service.dart';
+import 'package:hub_finder/shared/models/cached_user.dart';
+import 'package:hub_finder/shared/services/database_service.dart';
 import 'package:mobx/mobx.dart';
 
 part 'home_controller.g.dart';
