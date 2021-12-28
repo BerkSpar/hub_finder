@@ -65,47 +65,63 @@ class Body extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView(
-      padding: EdgeInsets.fromLTRB(24, 48, 24, 0),
+    return Column(
       children: [
-        HeaderWidget(
-          imageUrl: controller.organization.avatarUrl,
-          title: controller.organization.name,
-          subtitle: 'Organization',
-        ),
-        _getBio(),
-        SizedBox(height: 48),
-        Text(
-          'Members',
-          style: TextStyle(
-            fontSize: 20,
-          ),
-        ),
-        SizedBox(height: 24),
-        ListView.builder(
-          itemCount: controller.members.length,
-          shrinkWrap: true,
-          physics: ScrollPhysics(),
-          itemBuilder: (context, index) {
-            final member = controller.members[index];
+        Expanded(
+          child: ListView(
+            padding: EdgeInsets.fromLTRB(24, 48, 24, 0),
+            children: [
+              HeaderWidget(
+                imageUrl: controller.organization.avatarUrl,
+                title: controller.organization.name,
+                subtitle: 'Organization',
+              ),
+              _getBio(),
+              SizedBox(height: 48),
+              Text(
+                'Members',
+                style: TextStyle(
+                  fontSize: 20,
+                ),
+              ),
+              SizedBox(height: 24),
+              ListView.builder(
+                itemCount: controller.members.length,
+                shrinkWrap: true,
+                physics: ScrollPhysics(),
+                itemBuilder: (context, index) {
+                  final member = controller.members[index];
 
-            return Padding(
-              padding: EdgeInsets.symmetric(vertical: 5),
-              child: ListTileWidget(
-                imageUrl: member.avatarUrl,
-                title: member.login,
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => UserPage(member.login),
+                  return Padding(
+                    padding: EdgeInsets.symmetric(vertical: 5),
+                    child: ListTileWidget(
+                      imageUrl: member.avatarUrl,
+                      title: member.login,
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => UserPage(member.login),
+                          ),
+                        );
+                      },
                     ),
                   );
                 },
               ),
-            );
-          },
+            ],
+          ),
         ),
+        Observer(builder: (context) {
+          if (!controller.showAd) return Container();
+
+          return Container(
+            alignment: Alignment.center,
+            child: controller.adWidget,
+            width: MediaQuery.of(context).size.width,
+            height: 50,
+          );
+        }),
       ],
     );
   }

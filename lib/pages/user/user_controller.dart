@@ -1,3 +1,5 @@
+import 'package:google_mobile_ads/google_mobile_ads.dart';
+import 'package:hub_finder/shared/core/app_core.dart';
 import 'package:hub_finder/shared/models/cached_user.dart';
 import 'package:hub_finder/shared/models/load_state.dart';
 import 'package:hub_finder/shared/models/organization.dart';
@@ -27,11 +29,17 @@ abstract class _UserControllerBase with Store {
   @observable
   LoadState load = LoadState.loading;
 
+  AdWidget adWidget;
+  BannerAd myBanner;
+  @observable
+  bool showAd = false;
+
   _UserControllerBase(String username) {
     _init(username);
   }
 
   _init(String username) async {
+    _loadAd();
     try {
       user = await datasource.getUser(username);
       organizations = await datasource.getOrganizationsByUser(username);
@@ -54,5 +62,20 @@ abstract class _UserControllerBase with Store {
       subtitle: user.location,
       username: user.login,
     ));
+  }
+
+  _loadAd() async {
+    myBanner = BannerAd(
+      adUnitId: AppAd.getBannerUnitId('ca-app-pub-2005622694052245/1183861251'),
+      size: AdSize.banner,
+      request: AdRequest(),
+      listener: BannerAdListener(),
+    );
+
+    await myBanner.load();
+
+    adWidget = AdWidget(ad: myBanner);
+
+    showAd = true;
   }
 }

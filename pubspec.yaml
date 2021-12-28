@@ -9,6 +9,7 @@ environment:
   sdk: ">=2.7.0 <3.0.0"
 
 dependencies:
+  google_mobile_ads: ^1.0.1
   path_provider: ^2.0.8
   dio: ^4.0.4
   flutter_mobx: ^2.0.3+2

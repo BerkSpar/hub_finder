@@ -22,66 +22,83 @@ class _HomePageState extends State<HomePage> {
         centerTitle: true,
         elevation: 0,
       ),
-      body: ListView(
-        padding: EdgeInsets.fromLTRB(24, 48, 24, 0),
+      body: Column(
         children: [
-          Text(
-            'Find users in GitHub',
-            style: TextStyle(
-              fontSize: 32,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-          SizedBox(height: 24),
-          SearchWidget(
-            onTapSearch: () async {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) =>
-                      UserPage(controller.searchController.text),
+          Expanded(
+            child: ListView(
+              padding: EdgeInsets.fromLTRB(24, 48, 24, 0),
+              children: [
+                Text(
+                  'Find users in GitHub',
+                  style: TextStyle(
+                    fontSize: 32,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
-              );
-            },
-            searchController: controller.searchController,
-            hintText: 'Type the user name',
-          ),
-          SizedBox(height: 64),
-          Text(
-            'Searched users',
-            style: TextStyle(
-              fontSize: 20,
-              fontWeight: FontWeight.w300,
-            ),
-          ),
-          SizedBox(height: 24),
-          Observer(builder: (_) {
-            return ListView.separated(
-              shrinkWrap: true,
-              itemCount: controller.cachedUsers?.length ?? 0,
-              physics: ScrollPhysics(),
-              itemBuilder: (context, index) {
-                final cachedUser = controller.cachedUsers[index];
-
-                return ListTileWidget(
-                  imageUrl: cachedUser.imageUrl,
-                  title: cachedUser.title,
-                  subtitle: cachedUser.subtitle,
-                  onTap: () {
+                SizedBox(height: 24),
+                SearchWidget(
+                  onTapSearch: () async {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => UserPage(cachedUser.username),
+                        builder: (context) =>
+                            UserPage(controller.searchController.text),
                       ),
                     );
                   },
-                );
-              },
-              separatorBuilder: (_, __) {
-                return SizedBox(height: 5);
-              },
+                  searchController: controller.searchController,
+                  hintText: 'Type the user name',
+                ),
+                SizedBox(height: 64),
+                Text(
+                  'Searched users',
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.w300,
+                  ),
+                ),
+                SizedBox(height: 24),
+                Observer(builder: (_) {
+                  return ListView.separated(
+                    shrinkWrap: true,
+                    itemCount: controller.cachedUsers?.length ?? 0,
+                    physics: ScrollPhysics(),
+                    itemBuilder: (context, index) {
+                      final cachedUser = controller.cachedUsers[index];
+
+                      return ListTileWidget(
+                        imageUrl: cachedUser.imageUrl,
+                        title: cachedUser.title,
+                        subtitle: cachedUser.subtitle,
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) =>
+                                  UserPage(cachedUser.username),
+                            ),
+                          );
+                        },
+                      );
+                    },
+                    separatorBuilder: (_, __) {
+                      return SizedBox(height: 5);
+                    },
+                  );
+                }),
+              ],
+            ),
+          ),
+          Observer(builder: (context) {
+            if (!controller.showAd) return Container();
+
+            return Container(
+              alignment: Alignment.center,
+              child: controller.adWidget,
+              width: MediaQuery.of(context).size.width,
+              height: 50,
             );
-          }),
+          })
         ],
       ),
     );

@@ -55,12 +55,28 @@ mixin _$OrganizationController on _OrganizationControllerBase, Store {
     });
   }
 
+  final _$showAdAtom = Atom(name: '_OrganizationControllerBase.showAd');
+
+  @override
+  bool get showAd {
+    _$showAdAtom.reportRead();
+    return super.showAd;
+  }
+
+  @override
+  set showAd(bool value) {
+    _$showAdAtom.reportWrite(value, super.showAd, () {
+      super.showAd = value;
+    });
+  }
+
   @override
   String toString() {
     return '''
 organization: ${organization},
 members: ${members},
-load: ${load}
+load: ${load},
+showAd: ${showAd}
     ''';
   }
 }

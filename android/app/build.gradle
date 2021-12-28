@@ -49,7 +49,7 @@ android {
 
     defaultConfig {
         applicationId "tech.bunnie.hub_finder"
-        minSdkVersion flutter.minSdkVersion
+        minSdkVersion 21
         targetSdkVersion flutter.targetSdkVersion
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName

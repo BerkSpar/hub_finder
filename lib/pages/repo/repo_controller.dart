@@ -1,3 +1,5 @@
+import 'package:google_mobile_ads/google_mobile_ads.dart';
+import 'package:hub_finder/shared/core/app_core.dart';
 import 'package:hub_finder/shared/models/load_state.dart';
 import 'package:hub_finder/shared/models/repository.dart';
 import 'package:hub_finder/shared/models/user.dart';
@@ -20,8 +22,14 @@ abstract class _RepoControllerBase with Store {
   @observable
   LoadState load = LoadState.loading;
 
+  AdWidget adWidget;
+  BannerAd myBanner;
+  @observable
+  bool showAd = false;
+
   _RepoControllerBase(String fullName) {
     _init(fullName);
+    _loadAd();
   }
 
   _init(String fullName) async {
@@ -33,5 +41,20 @@ abstract class _RepoControllerBase with Store {
     } catch (e) {
       load = LoadState.error;
     }
+  }
+
+  _loadAd() async {
+    myBanner = BannerAd(
+      adUnitId: AppAd.getBannerUnitId('ca-app-pub-2005622694052245/7359237423'),
+      size: AdSize.banner,
+      request: AdRequest(),
+      listener: BannerAdListener(),
+    );
+
+    await myBanner.load();
+
+    adWidget = AdWidget(ad: myBanner);
+
+    showAd = true;
   }
 }

@@ -73,72 +73,88 @@ class Body extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView(
-      padding: EdgeInsets.fromLTRB(24, 48, 24, 0),
+    return Column(
       children: [
-        HeaderWidget(
-          imageUrl: controller.contributors[0].avatarUrl,
-          title: controller.repository.name,
-          subtitle: controller.contributors[0].login,
-        ),
-        _getSubtitle(),
-        SizedBox(height: 16),
-        LanguageBadgeWidget(
-          color: language_colors[controller.repository.language],
-          title: controller.repository.language,
-        ),
-        SizedBox(height: 32),
-        Row(
-          children: [
-            InfoWidget(
-              title: controller.repository.stars.toString(),
-              subtitle: 'Stars',
-            ),
-            SizedBox(width: 34),
-            InfoWidget(
-              title: controller.repository.forks.toString(),
-              subtitle: 'Forks',
-            ),
-            SizedBox(width: 34),
-            InfoWidget(
-              title: controller.repository.openIssues.toString(),
-              subtitle: 'Open Issues',
-            ),
-          ],
-        ),
-        SizedBox(height: 48),
-        Text(
-          'Contributors',
-          style: TextStyle(
-            fontSize: 20,
-          ),
-        ),
-        SizedBox(height: 24),
-        ListView.builder(
-          itemCount: controller.contributors.length,
-          shrinkWrap: true,
-          physics: ScrollPhysics(),
-          itemBuilder: (context, index) {
-            final contributor = controller.contributors[index];
+        Expanded(
+          child: ListView(
+            padding: EdgeInsets.fromLTRB(24, 48, 24, 0),
+            children: [
+              HeaderWidget(
+                imageUrl: controller.contributors[0].avatarUrl,
+                title: controller.repository.name,
+                subtitle: controller.contributors[0].login,
+              ),
+              _getSubtitle(),
+              SizedBox(height: 16),
+              LanguageBadgeWidget(
+                color: language_colors[controller.repository.language],
+                title: controller.repository.language,
+              ),
+              SizedBox(height: 32),
+              Row(
+                children: [
+                  InfoWidget(
+                    title: controller.repository.stars.toString(),
+                    subtitle: 'Stars',
+                  ),
+                  SizedBox(width: 34),
+                  InfoWidget(
+                    title: controller.repository.forks.toString(),
+                    subtitle: 'Forks',
+                  ),
+                  SizedBox(width: 34),
+                  InfoWidget(
+                    title: controller.repository.openIssues.toString(),
+                    subtitle: 'Open Issues',
+                  ),
+                ],
+              ),
+              SizedBox(height: 48),
+              Text(
+                'Contributors',
+                style: TextStyle(
+                  fontSize: 20,
+                ),
+              ),
+              SizedBox(height: 24),
+              ListView.builder(
+                itemCount: controller.contributors.length,
+                shrinkWrap: true,
+                physics: ScrollPhysics(),
+                itemBuilder: (context, index) {
+                  final contributor = controller.contributors[index];
 
-            return Padding(
-              padding: EdgeInsets.symmetric(vertical: 5),
-              child: ListTileWidget(
-                imageUrl: contributor.avatarUrl,
-                title: contributor.login,
-                subtitle: '${contributor.contributions} contributions',
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => UserPage(contributor.login),
+                  return Padding(
+                    padding: EdgeInsets.symmetric(vertical: 5),
+                    child: ListTileWidget(
+                      imageUrl: contributor.avatarUrl,
+                      title: contributor.login,
+                      subtitle: '${contributor.contributions} contributions',
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => UserPage(contributor.login),
+                          ),
+                        );
+                      },
                     ),
                   );
                 },
               ),
-            );
-          },
+            ],
+          ),
         ),
+        Observer(builder: (context) {
+          if (!controller.showAd) return Container();
+
+          return Container(
+            alignment: Alignment.center,
+            child: controller.adWidget,
+            width: MediaQuery.of(context).size.width,
+            height: 50,
+          );
+        }),
       ],
     );
   }

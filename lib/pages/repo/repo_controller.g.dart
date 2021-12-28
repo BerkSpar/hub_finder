@@ -54,12 +54,28 @@ mixin _$RepoController on _RepoControllerBase, Store {
     });
   }
 
+  final _$showAdAtom = Atom(name: '_RepoControllerBase.showAd');
+
+  @override
+  bool get showAd {
+    _$showAdAtom.reportRead();
+    return super.showAd;
+  }
+
+  @override
+  set showAd(bool value) {
+    _$showAdAtom.reportWrite(value, super.showAd, () {
+      super.showAd = value;
+    });
+  }
+
   @override
   String toString() {
     return '''
 repository: ${repository},
 contributors: ${contributors},
-load: ${load}
+load: ${load},
+showAd: ${showAd}
     ''';
   }
 }

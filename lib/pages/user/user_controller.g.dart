@@ -69,13 +69,29 @@ mixin _$UserController on _UserControllerBase, Store {
     });
   }
 
+  final _$showAdAtom = Atom(name: '_UserControllerBase.showAd');
+
+  @override
+  bool get showAd {
+    _$showAdAtom.reportRead();
+    return super.showAd;
+  }
+
+  @override
+  set showAd(bool value) {
+    _$showAdAtom.reportWrite(value, super.showAd, () {
+      super.showAd = value;
+    });
+  }
+
   @override
   String toString() {
     return '''
 user: ${user},
 organizations: ${organizations},
 repositories: ${repositories},
-load: ${load}
+load: ${load},
+showAd: ${showAd}
     ''';
   }
 }

@@ -160,32 +160,48 @@ class Body extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView(
-      padding: EdgeInsets.fromLTRB(24, 48, 24, 0),
+    return Column(
       children: [
-        HeaderWidget(
-          imageUrl: controller.user.avatarUrl,
-          title: controller.user.name,
-          subtitle: controller.user.location,
+        Expanded(
+          child: ListView(
+            padding: EdgeInsets.fromLTRB(24, 48, 24, 0),
+            children: [
+              HeaderWidget(
+                imageUrl: controller.user.avatarUrl,
+                title: controller.user.name,
+                subtitle: controller.user.location,
+              ),
+              SizedBox(height: 20),
+              _getBio(),
+              SizedBox(height: 32),
+              Row(
+                children: [
+                  InfoWidget(
+                    title: controller.user.followers.toString(),
+                    subtitle: 'Followers',
+                  ),
+                  SizedBox(width: 34),
+                  InfoWidget(
+                    title: controller.user.following.toString(),
+                    subtitle: 'Following',
+                  ),
+                ],
+              ),
+              _getOrganizations(),
+              _getPublicRepositories(),
+            ],
+          ),
         ),
-        SizedBox(height: 20),
-        _getBio(),
-        SizedBox(height: 32),
-        Row(
-          children: [
-            InfoWidget(
-              title: controller.user.followers.toString(),
-              subtitle: 'Followers',
-            ),
-            SizedBox(width: 34),
-            InfoWidget(
-              title: controller.user.following.toString(),
-              subtitle: 'Following',
-            ),
-          ],
-        ),
-        _getOrganizations(),
-        _getPublicRepositories(),
+        Observer(builder: (context) {
+          if (!controller.showAd) return Container();
+
+          return Container(
+            alignment: Alignment.center,
+            child: controller.adWidget,
+            width: MediaQuery.of(context).size.width,
+            height: 50,
+          );
+        }),
       ],
     );
   }
