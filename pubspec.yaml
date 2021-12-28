@@ -3,10 +3,10 @@ description: Find user, repos and organizations in your phone.
 
 publish_to: "none"
 
-version: 1.0.1+3
+version: 1.0.2+4
 
 environment:
-  sdk: '>=2.12.0 <3.0.0'
+  sdk: ">=2.12.0 <3.0.0"
 
 dependencies:
   google_mobile_ads: ^1.0.1
