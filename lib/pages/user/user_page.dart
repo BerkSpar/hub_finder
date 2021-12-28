@@ -11,7 +11,7 @@ import 'package:hub_finder/widgets/header_widget.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 
 class UserPage extends StatelessWidget {
-  final String username;
+  final String? username;
 
   UserPage(this.username);
 
@@ -30,16 +30,15 @@ class UserPage extends StatelessWidget {
           switch (controller.load) {
             case LoadState.loaded:
               return Body(controller);
-              break;
+
             case LoadState.loading:
               return Center(child: CircularProgressIndicator());
-              break;
+
             case LoadState.error:
               return Center(child: Text('User not found'));
-              break;
+
             default:
               return Center(child: CircularProgressIndicator());
-              break;
           }
         },
       ),
@@ -53,9 +52,9 @@ class Body extends StatelessWidget {
   Body(this.controller);
 
   Widget _getBio() {
-    if (controller.user.bio != null) {
+    if (controller.user!.bio != null) {
       return Text(
-        controller.user.bio,
+        controller.user!.bio!,
         maxLines: 4,
         overflow: TextOverflow.ellipsis,
         style: TextStyle(
@@ -167,9 +166,9 @@ class Body extends StatelessWidget {
             padding: EdgeInsets.fromLTRB(24, 48, 24, 0),
             children: [
               HeaderWidget(
-                imageUrl: controller.user.avatarUrl,
-                title: controller.user.name,
-                subtitle: controller.user.location,
+                imageUrl: controller.user!.avatarUrl,
+                title: controller.user!.name,
+                subtitle: controller.user!.location,
               ),
               SizedBox(height: 20),
               _getBio(),
@@ -177,12 +176,12 @@ class Body extends StatelessWidget {
               Row(
                 children: [
                   InfoWidget(
-                    title: controller.user.followers.toString(),
+                    title: controller.user!.followers.toString(),
                     subtitle: 'Followers',
                   ),
                   SizedBox(width: 34),
                   InfoWidget(
-                    title: controller.user.following.toString(),
+                    title: controller.user!.following.toString(),
                     subtitle: 'Following',
                   ),
                 ],

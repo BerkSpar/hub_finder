@@ -7,7 +7,7 @@ import 'package:hub_finder/widgets/header_widget.dart';
 import 'package:hub_finder/widgets/listtile_widget.dart';
 
 class OrganizationPage extends StatelessWidget {
-  final String name;
+  final String? name;
 
   OrganizationPage(this.name);
 
@@ -26,16 +26,15 @@ class OrganizationPage extends StatelessWidget {
           switch (controller.load) {
             case LoadState.loaded:
               return Body(controller);
-              break;
+
             case LoadState.loading:
               return Center(child: CircularProgressIndicator());
-              break;
+
             case LoadState.error:
               return Center(child: Text('Ocurr an error'));
-              break;
+
             default:
               return CircularProgressIndicator();
-              break;
           }
         },
       ),
@@ -53,7 +52,7 @@ class Body extends StatelessWidget {
       children: [
         SizedBox(height: 20),
         Text(
-          controller.organization.description,
+          controller.organization.description!,
           style: TextStyle(
             fontSize: 16,
             color: Colors.grey,

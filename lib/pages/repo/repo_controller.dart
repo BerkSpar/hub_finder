@@ -22,17 +22,17 @@ abstract class _RepoControllerBase with Store {
   @observable
   LoadState load = LoadState.loading;
 
-  AdWidget adWidget;
-  BannerAd myBanner;
+  AdWidget? adWidget;
+  late BannerAd myBanner;
   @observable
   bool showAd = false;
 
-  _RepoControllerBase(String fullName) {
+  _RepoControllerBase(String? fullName) {
     _init(fullName);
     _loadAd();
   }
 
-  _init(String fullName) async {
+  _init(String? fullName) async {
     try {
       repository = await datasource.getRepository(fullName);
       contributors = await datasource.getContributors(fullName);

@@ -15,8 +15,8 @@ abstract class _HomeControllerBase with Store {
   final TextEditingController searchController = TextEditingController();
   final DatabaseService databaseService = DatabaseService();
 
-  AdWidget adWidget;
-  BannerAd myBanner;
+  AdWidget? adWidget;
+  late BannerAd myBanner;
   @observable
   bool showAd = false;
 

@@ -23,17 +23,17 @@ abstract class _OrganizationControllerBase with Store {
   @observable
   LoadState load = LoadState.loading;
 
-  AdWidget adWidget;
-  BannerAd myBanner;
+  AdWidget? adWidget;
+  late BannerAd myBanner;
   @observable
   bool showAd = false;
 
-  _OrganizationControllerBase(String organization) {
+  _OrganizationControllerBase(String? organization) {
     _init(organization);
     _loadAd();
   }
 
-  _init(String name) async {
+  _init(String? name) async {
     try {
       organization = await datasource.getOrganization(name);
       members = await datasource.getMembersByOrganization(name);

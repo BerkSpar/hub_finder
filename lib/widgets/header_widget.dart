@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 
 class HeaderWidget extends StatelessWidget {
-  final String title;
-  final String subtitle;
-  final String imageUrl;
+  final String? title;
+  final String? subtitle;
+  final String? imageUrl;
 
   HeaderWidget({
-    @required this.imageUrl,
-    @required this.subtitle,
-    @required this.title,
+    required this.imageUrl,
+    required this.subtitle,
+    required this.title,
   });
 
   Widget _getSubtitle() {
@@ -17,7 +17,7 @@ class HeaderWidget extends StatelessWidget {
         children: [
           SizedBox(height: 8),
           Text(
-            subtitle,
+            subtitle!,
             style: TextStyle(
               fontSize: 16,
               fontWeight: FontWeight.w300,
@@ -39,7 +39,7 @@ class HeaderWidget extends StatelessWidget {
           height: 80,
           width: 80,
           child: CircleAvatar(
-            backgroundImage: NetworkImage(imageUrl),
+            backgroundImage: NetworkImage(imageUrl!),
           ),
         ),
         SizedBox(width: 16),
@@ -47,7 +47,7 @@ class HeaderWidget extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              title,
+              title!,
               style: TextStyle(
                 fontSize: 24,
                 fontWeight: FontWeight.w700,

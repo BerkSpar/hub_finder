@@ -1,21 +1,21 @@
 class User {
-  String login;
-  int id;
-  String avatarUrl;
-  String url;
-  String followersUrl;
-  String followingUrl;
-  String organizationsUrl;
-  String reposUrl;
-  String type;
-  String name;
-  String company;
-  String location;
-  String bio;
-  int publicRepos;
-  int followers;
-  int following;
-  int contributions;
+  String? login;
+  int? id;
+  String? avatarUrl;
+  String? url;
+  String? followersUrl;
+  String? followingUrl;
+  String? organizationsUrl;
+  String? reposUrl;
+  String? type;
+  String? name;
+  String? company;
+  String? location;
+  String? bio;
+  int? publicRepos;
+  int? followers;
+  int? following;
+  int? contributions;
 
   User({
     this.login,

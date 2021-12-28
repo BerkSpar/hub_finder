@@ -2,16 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:hub_finder/widgets/language_badge_widget.dart';
 
 class RepoListTileWidget extends StatelessWidget {
-  final String title;
-  final String subtitle;
-  final Color color;
+  final String? title;
+  final String? subtitle;
+  final Color? color;
   final Function onTap;
 
   RepoListTileWidget({
-    @required this.title,
-    @required this.subtitle,
-    @required this.color,
-    @required this.onTap,
+    required this.title,
+    required this.subtitle,
+    required this.color,
+    required this.onTap,
   });
 
   Widget _getSubtitle() {
@@ -48,7 +48,7 @@ class RepoListTileWidget extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    title,
+                    title!,
                     style: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.w500,

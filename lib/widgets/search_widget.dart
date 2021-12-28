@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 
 class SearchWidget extends StatelessWidget {
   final Function onTapSearch;
-  final TextEditingController searchController;
-  final String hintText;
+  final TextEditingController? searchController;
+  final String? hintText;
 
   SearchWidget({
-    @required this.onTapSearch,
+    required this.onTapSearch,
     this.searchController,
     this.hintText,
   });

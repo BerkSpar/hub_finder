@@ -1,18 +1,16 @@
 import 'dart:convert';
 
-import 'package:flutter/material.dart';
-
 class CachedUser {
-  String imageUrl;
-  String title;
-  String subtitle;
-  String username;
+  String? imageUrl;
+  String? title;
+  String? subtitle;
+  String? username;
 
   CachedUser({
-    @required this.imageUrl,
-    @required this.title,
-    @required this.subtitle,
-    @required this.username,
+    required this.imageUrl,
+    required this.title,
+    required this.subtitle,
+    required this.username,
   });
 
   Map<String, dynamic> toMap() {
