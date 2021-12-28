@@ -1,45 +1,36 @@
+import 'dart:async';
+import 'package:hive/hive.dart';
 import 'package:hub_finder/shared/models/cached_user.dart';
-import 'package:sqflite/sqflite.dart';
+import 'package:path_provider/path_provider.dart';
 
 class DatabaseService {
-  DatabaseHelper _helper = DatabaseHelper();
+  Completer<Box> boxCompleter = Completer<Box>();
+
+  DatabaseService() {
+    _init();
+  }
+
+  _init() async {
+    final directory = await getApplicationDocumentsDirectory();
+    Hive.init(directory.path);
+
+    final box = await Hive.openBox('cache');
+    if (!boxCompleter.isCompleted) boxCompleter.complete(box);
+  }
 
   Future<List<CachedUser>> getCachedUsers() async {
-    final db = await _helper.getDatabase();
+    final box = await boxCompleter.future;
 
-    var response = await db.rawQuery('SELECT * FROM users ORDER BY id desc');
-
-    List<CachedUser> list = response.isNotEmpty
-        ? response.map((c) => CachedUser.fromMap(c)).toList()
+    List<CachedUser> list = box.values.isNotEmpty
+        ? box.values.map((c) => CachedUser.fromMap(c)).toList()
         : [];
 
     return list;
   }
 
-  Future addCachedUser(CachedUser cachedUser) async {
-    final db = await _helper.getDatabase();
+  Future<int> addCachedUser(CachedUser cachedUser) async {
+    final box = await boxCompleter.future;
 
-    await db.insert('users', {
-      'username': cachedUser.username,
-      'title': cachedUser.title,
-      'subtitle': cachedUser.subtitle,
-      'imageUrl': cachedUser.imageUrl,
-    });
-  }
-}
-
-class DatabaseHelper {
-  Future<Database> getDatabase() async {
-    return await openDatabase(
-      await getDatabasesPath() + '/app.db',
-      version: 1,
-      onCreate: _onCreate,
-    );
-  }
-
-  _onCreate(Database db, int version) async {
-    await db.execute(
-      "CREATE TABLE users (id INTEGER PRIMARY KEY, username TEXT, subtitle TEXT, title TEXT, imageUrl TEXT)",
-    );
+    return await box.add(cachedUser.toMap());
   }
 }
