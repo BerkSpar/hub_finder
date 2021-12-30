@@ -48,16 +48,26 @@ class _HomePageState extends State<HomePage> {
                   searchController: controller.searchController,
                   hintText: 'Type the user name',
                 ),
-                SizedBox(height: 64),
-                Text(
-                  'Searched users',
-                  style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.w300,
-                  ),
-                ),
-                SizedBox(height: 24),
+                SizedBox(height: 48),
+                Observer(builder: (context) {
+                  if (controller.cachedUsers.isEmpty) {
+                    return Container();
+                  }
+
+                  return Text(
+                    'Searched users',
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.w300,
+                    ),
+                  );
+                }),
+                SizedBox(height: 16),
                 Observer(builder: (_) {
+                  if (controller.cachedUsers.isEmpty) {
+                    return Container();
+                  }
+
                   return ListView.separated(
                     shrinkWrap: true,
                     itemCount: controller.cachedUsers.length,
@@ -89,11 +99,9 @@ class _HomePageState extends State<HomePage> {
             ),
           ),
           Observer(builder: (context) {
-            if (!controller.showAd) return Container();
-
             return Container(
               alignment: Alignment.center,
-              child: controller.adWidget,
+              child: controller.showAd ? controller.adWidget : null,
               width: MediaQuery.of(context).size.width,
               height: 50,
             );

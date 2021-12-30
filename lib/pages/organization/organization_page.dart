@@ -112,11 +112,9 @@ class Body extends StatelessWidget {
           ),
         ),
         Observer(builder: (context) {
-          if (!controller.showAd) return Container();
-
           return Container(
             alignment: Alignment.center,
-            child: controller.adWidget,
+            child: controller.showAd ? controller.adWidget : null,
             width: MediaQuery.of(context).size.width,
             height: 50,
           );
