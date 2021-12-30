@@ -85,10 +85,11 @@ class Body extends StatelessWidget {
               ),
               _getSubtitle(),
               SizedBox(height: 16),
-              LanguageBadgeWidget(
-                color: language_colors[controller.repository.language],
-                title: controller.repository.language,
-              ),
+              if (controller.repository.language != null)
+                LanguageBadgeWidget(
+                  color: language_colors[controller.repository.language],
+                  title: controller.repository.language,
+                ),
               SizedBox(height: 32),
               Row(
                 children: [

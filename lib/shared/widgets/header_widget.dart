@@ -33,30 +33,34 @@ class HeaderWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        Container(
-          height: 80,
-          width: 80,
-          child: CircleAvatar(
-            backgroundImage: NetworkImage(imageUrl!),
-          ),
-        ),
-        SizedBox(width: 16),
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              title!,
-              style: TextStyle(
-                fontSize: 24,
-                fontWeight: FontWeight.w700,
-              ),
+    return Container(
+      child: Row(
+        children: [
+          Container(
+            height: 80,
+            width: 80,
+            child: CircleAvatar(
+              backgroundImage: NetworkImage(imageUrl ?? ''),
             ),
-            _getSubtitle(),
-          ],
-        ),
-      ],
+          ),
+          SizedBox(width: 16),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  title ?? '',
+                  style: TextStyle(
+                    fontSize: 24,
+                    fontWeight: FontWeight.w700,
+                  ),
+                ),
+                _getSubtitle(),
+              ],
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
