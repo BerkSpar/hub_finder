@@ -1,5 +1,5 @@
 import 'package:google_mobile_ads/google_mobile_ads.dart';
-import 'package:hub_finder/shared/core/app_core.dart';
+import 'package:hub_finder/shared/core/app_ad.dart';
 import 'package:hub_finder/shared/models/load_state.dart';
 import 'package:hub_finder/shared/models/repository.dart';
 import 'package:hub_finder/shared/models/user.dart';

@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:hub_finder/pages/organization/organization_page.dart';
 import 'package:hub_finder/pages/repo/repo_page.dart';
 import 'package:hub_finder/pages/user/user_controller.dart';
+import 'package:hub_finder/shared/core/app_colors.dart';
 import 'package:hub_finder/shared/models/load_state.dart';
-import 'package:hub_finder/utils/colors.dart';
-import 'package:hub_finder/widgets/info_widget.dart';
-import 'package:hub_finder/widgets/listtile_widget.dart';
-import 'package:hub_finder/widgets/repo_listtile_widget.dart';
-import 'package:hub_finder/widgets/header_widget.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:hub_finder/shared/widgets/header_widget.dart';
+import 'package:hub_finder/shared/widgets/info_widget.dart';
+import 'package:hub_finder/shared/widgets/listtile_widget.dart';
+import 'package:hub_finder/shared/widgets/repo_listtile_widget.dart';
 
 class UserPage extends StatelessWidget {
   final String? username;

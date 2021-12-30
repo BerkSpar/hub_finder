@@ -1,5 +1,5 @@
 import 'package:google_mobile_ads/google_mobile_ads.dart';
-import 'package:hub_finder/shared/core/app_core.dart';
+import 'package:hub_finder/shared/core/app_ad.dart';
 import 'package:hub_finder/shared/models/cached_user.dart';
 import 'package:hub_finder/shared/models/load_state.dart';
 import 'package:hub_finder/shared/models/organization.dart';
@@ -15,7 +15,7 @@ class UserController = _UserControllerBase with _$UserController;
 
 abstract class _UserControllerBase with Store {
   final datasource = GithubDataSource();
-  final database = DatabaseService();
+  final localStorage = LocalStorageService();
 
   @observable
   User? user;
@@ -56,7 +56,7 @@ abstract class _UserControllerBase with Store {
   }
 
   _addCachedUser() {
-    database.addCachedUser(CachedUser(
+    localStorage.addCachedUser(CachedUser(
       imageUrl: user!.avatarUrl,
       title: user!.name,
       subtitle: user!.location,

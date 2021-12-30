@@ -3,10 +3,10 @@ import 'package:hive/hive.dart';
 import 'package:hub_finder/shared/models/cached_user.dart';
 import 'package:path_provider/path_provider.dart';
 
-class DatabaseService {
+class LocalStorageService {
   Completer<Box> boxCompleter = Completer<Box>();
 
-  DatabaseService() {
+  LocalStorageService() {
     _init();
   }
 

@@ -1,8 +1,7 @@
 import 'dart:async';
-
 import 'package:flutter/cupertino.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
-import 'package:hub_finder/shared/core/app_core.dart';
+import 'package:hub_finder/shared/core/app_ad.dart';
 import 'package:hub_finder/shared/models/cached_user.dart';
 import 'package:hub_finder/shared/services/database_service.dart';
 import 'package:mobx/mobx.dart';
@@ -13,7 +12,7 @@ class HomeController = _HomeControllerBase with _$HomeController;
 
 abstract class _HomeControllerBase with Store {
   final TextEditingController searchController = TextEditingController();
-  final DatabaseService databaseService = DatabaseService();
+  final localStorage = LocalStorageService();
 
   AdWidget? adWidget;
   late BannerAd myBanner;
@@ -30,7 +29,7 @@ abstract class _HomeControllerBase with Store {
 
   _init() async {
     Timer.periodic(Duration(seconds: 1), (_) async {
-      cachedUsers = await databaseService.getCachedUsers();
+      cachedUsers = await localStorage.getCachedUsers();
     });
   }
 

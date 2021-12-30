@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:hub_finder/pages/home/home_page.dart';
-import 'package:hub_finder/utils/colors.dart';
+import 'package:hub_finder/shared/core/app_colors.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Github Finder',
+      title: 'Hub Finder',
       theme: ThemeData(
         iconTheme: IconThemeData(
           color: Colors.white,

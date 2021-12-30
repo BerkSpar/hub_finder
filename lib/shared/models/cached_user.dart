@@ -22,7 +22,7 @@ class CachedUser {
     };
   }
 
-  factory CachedUser.fromMap(Map<String, dynamic> map) {
+  factory CachedUser.fromMap(Map map) {
     return CachedUser(
       imageUrl: map['imageUrl'],
       title: map['title'],
