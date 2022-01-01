@@ -54,18 +54,18 @@ mixin _$RepoController on _RepoControllerBase, Store {
     });
   }
 
-  final _$showAdAtom = Atom(name: '_RepoControllerBase.showAd');
+  final _$showBannerAdAtom = Atom(name: '_RepoControllerBase.showBannerAd');
 
   @override
-  bool get showAd {
-    _$showAdAtom.reportRead();
-    return super.showAd;
+  bool get showBannerAd {
+    _$showBannerAdAtom.reportRead();
+    return super.showBannerAd;
   }
 
   @override
-  set showAd(bool value) {
-    _$showAdAtom.reportWrite(value, super.showAd, () {
-      super.showAd = value;
+  set showBannerAd(bool value) {
+    _$showBannerAdAtom.reportWrite(value, super.showBannerAd, () {
+      super.showBannerAd = value;
     });
   }
 
@@ -75,7 +75,7 @@ mixin _$RepoController on _RepoControllerBase, Store {
 repository: ${repository},
 contributors: ${contributors},
 load: ${load},
-showAd: ${showAd}
+showBannerAd: ${showBannerAd}
     ''';
   }
 }

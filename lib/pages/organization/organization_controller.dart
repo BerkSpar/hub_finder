@@ -26,7 +26,7 @@ abstract class _OrganizationControllerBase with Store {
   AdWidget? adWidget;
   late BannerAd myBanner;
   @observable
-  bool showAd = false;
+  bool showBannerAd = false;
 
   _OrganizationControllerBase(String? organization) {
     _init(organization);
@@ -56,6 +56,6 @@ abstract class _OrganizationControllerBase with Store {
 
     adWidget = AdWidget(ad: myBanner);
 
-    showAd = true;
+    showBannerAd = true;
   }
 }

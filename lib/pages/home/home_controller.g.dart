@@ -9,18 +9,33 @@ part of 'home_controller.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$HomeController on _HomeControllerBase, Store {
-  final _$showAdAtom = Atom(name: '_HomeControllerBase.showAd');
+  final _$showBannerAdAtom = Atom(name: '_HomeControllerBase.showBannerAd');
 
   @override
-  bool get showAd {
-    _$showAdAtom.reportRead();
-    return super.showAd;
+  bool get showBannerAd {
+    _$showBannerAdAtom.reportRead();
+    return super.showBannerAd;
   }
 
   @override
-  set showAd(bool value) {
-    _$showAdAtom.reportWrite(value, super.showAd, () {
-      super.showAd = value;
+  set showBannerAd(bool value) {
+    _$showBannerAdAtom.reportWrite(value, super.showBannerAd, () {
+      super.showBannerAd = value;
+    });
+  }
+
+  final _$myRewardedAdAtom = Atom(name: '_HomeControllerBase.myRewardedAd');
+
+  @override
+  RewardedAd? get myRewardedAd {
+    _$myRewardedAdAtom.reportRead();
+    return super.myRewardedAd;
+  }
+
+  @override
+  set myRewardedAd(RewardedAd? value) {
+    _$myRewardedAdAtom.reportWrite(value, super.myRewardedAd, () {
+      super.myRewardedAd = value;
     });
   }
 
@@ -42,7 +57,8 @@ mixin _$HomeController on _HomeControllerBase, Store {
   @override
   String toString() {
     return '''
-showAd: ${showAd},
+showBannerAd: ${showBannerAd},
+myRewardedAd: ${myRewardedAd},
 cachedUsers: ${cachedUsers}
     ''';
   }

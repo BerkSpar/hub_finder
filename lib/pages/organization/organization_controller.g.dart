@@ -55,18 +55,19 @@ mixin _$OrganizationController on _OrganizationControllerBase, Store {
     });
   }
 
-  final _$showAdAtom = Atom(name: '_OrganizationControllerBase.showAd');
+  final _$showBannerAdAtom =
+      Atom(name: '_OrganizationControllerBase.showBannerAd');
 
   @override
-  bool get showAd {
-    _$showAdAtom.reportRead();
-    return super.showAd;
+  bool get showBannerAd {
+    _$showBannerAdAtom.reportRead();
+    return super.showBannerAd;
   }
 
   @override
-  set showAd(bool value) {
-    _$showAdAtom.reportWrite(value, super.showAd, () {
-      super.showAd = value;
+  set showBannerAd(bool value) {
+    _$showBannerAdAtom.reportWrite(value, super.showBannerAd, () {
+      super.showBannerAd = value;
     });
   }
 
@@ -76,7 +77,7 @@ mixin _$OrganizationController on _OrganizationControllerBase, Store {
 organization: ${organization},
 members: ${members},
 load: ${load},
-showAd: ${showAd}
+showBannerAd: ${showBannerAd}
     ''';
   }
 }

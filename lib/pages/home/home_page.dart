@@ -48,7 +48,24 @@ class _HomePageState extends State<HomePage> {
                   searchController: controller.searchController,
                   hintText: 'Type the user name',
                 ),
-                SizedBox(height: 48),
+                SizedBox(height: 8),
+                Observer(builder: (context) {
+                  if (controller.myRewardedAd == null) {
+                    return Container();
+                  }
+
+                  return ElevatedButton(
+                    onPressed: () {
+                      controller.myRewardedAd!.show(
+                        onUserEarnedReward: (ad, item) {
+                          controller.myRewardedAd = null;
+                        },
+                      );
+                    },
+                    child: Text('Remove ads'),
+                  );
+                }),
+                SizedBox(height: 32),
                 Observer(builder: (context) {
                   if (controller.cachedUsers.isEmpty) {
                     return Container();
@@ -101,7 +118,7 @@ class _HomePageState extends State<HomePage> {
           Observer(builder: (context) {
             return Container(
               alignment: Alignment.center,
-              child: controller.showAd ? controller.adWidget : null,
+              child: controller.showBannerAd ? controller.adWidget : null,
               width: MediaQuery.of(context).size.width,
               height: 50,
             );

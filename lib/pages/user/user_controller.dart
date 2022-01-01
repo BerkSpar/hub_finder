@@ -32,14 +32,14 @@ abstract class _UserControllerBase with Store {
   AdWidget? adWidget;
   late BannerAd myBanner;
   @observable
-  bool showAd = false;
+  bool showBannerAd = false;
 
   _UserControllerBase(String? username) {
     _init(username);
+    _loadAd();
   }
 
   _init(String? username) async {
-    _loadAd();
     try {
       user = await datasource.getUser(username);
       organizations = await datasource.getOrganizationsByUser(username);
@@ -76,6 +76,6 @@ abstract class _UserControllerBase with Store {
 
     adWidget = AdWidget(ad: myBanner);
 
-    showAd = true;
+    showBannerAd = true;
   }
 }

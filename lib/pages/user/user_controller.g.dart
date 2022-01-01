@@ -69,18 +69,18 @@ mixin _$UserController on _UserControllerBase, Store {
     });
   }
 
-  final _$showAdAtom = Atom(name: '_UserControllerBase.showAd');
+  final _$showBannerAdAtom = Atom(name: '_UserControllerBase.showBannerAd');
 
   @override
-  bool get showAd {
-    _$showAdAtom.reportRead();
-    return super.showAd;
+  bool get showBannerAd {
+    _$showBannerAdAtom.reportRead();
+    return super.showBannerAd;
   }
 
   @override
-  set showAd(bool value) {
-    _$showAdAtom.reportWrite(value, super.showAd, () {
-      super.showAd = value;
+  set showBannerAd(bool value) {
+    _$showBannerAdAtom.reportWrite(value, super.showBannerAd, () {
+      super.showBannerAd = value;
     });
   }
 
@@ -91,7 +91,7 @@ user: ${user},
 organizations: ${organizations},
 repositories: ${repositories},
 load: ${load},
-showAd: ${showAd}
+showBannerAd: ${showBannerAd}
     ''';
   }
 }

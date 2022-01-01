@@ -25,7 +25,7 @@ abstract class _RepoControllerBase with Store {
   AdWidget? adWidget;
   late BannerAd myBanner;
   @observable
-  bool showAd = false;
+  bool showBannerAd = false;
 
   _RepoControllerBase(String? fullName) {
     _init(fullName);
@@ -55,6 +55,6 @@ abstract class _RepoControllerBase with Store {
 
     adWidget = AdWidget(ad: myBanner);
 
-    showAd = true;
+    showBannerAd = true;
   }
 }

@@ -15,16 +15,20 @@ abstract class _HomeControllerBase with Store {
   final localStorage = LocalStorageService();
 
   AdWidget? adWidget;
-  late BannerAd myBanner;
+  late BannerAd myBannerAd;
   @observable
-  bool showAd = false;
+  bool showBannerAd = false;
+
+  @observable
+  RewardedAd? myRewardedAd;
 
   @observable
   List<CachedUser> cachedUsers = <CachedUser>[];
 
   _HomeControllerBase() {
     _init();
-    _loadAd();
+    _loadBannerAd();
+    _loadRewardedAd();
   }
 
   _init() async {
@@ -33,18 +37,33 @@ abstract class _HomeControllerBase with Store {
     });
   }
 
-  _loadAd() async {
-    myBanner = BannerAd(
+  _loadRewardedAd() {
+    RewardedAd.load(
+      adUnitId: AppAd.getRewardedUnitId(
+        'ca-app-pub-2005622694052245/8489869159',
+      ),
+      request: AdRequest(),
+      rewardedAdLoadCallback: RewardedAdLoadCallback(
+        onAdLoaded: (RewardedAd ad) {
+          myRewardedAd = ad;
+        },
+        onAdFailedToLoad: (_) {},
+      ),
+    );
+  }
+
+  _loadBannerAd() async {
+    myBannerAd = BannerAd(
       adUnitId: AppAd.getBannerUnitId('ca-app-pub-2005622694052245/2018624292'),
       size: AdSize.banner,
       request: AdRequest(),
       listener: BannerAdListener(),
     );
 
-    await myBanner.load();
+    await myBannerAd.load();
 
-    adWidget = AdWidget(ad: myBanner);
+    adWidget = AdWidget(ad: myBannerAd);
 
-    showAd = true;
+    showBannerAd = true;
   }
 }
