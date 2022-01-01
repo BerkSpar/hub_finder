@@ -53,7 +53,7 @@ class LocalStorageService {
 
     final removeAdDate = DateTime.fromMillisecondsSinceEpoch(data);
 
-    if (DateTime.now().difference(removeAdDate).inDays <= 7) return true;
+    if (DateTime.now().difference(removeAdDate).inDays >= 2) return true;
 
     return false;
   }

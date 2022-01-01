@@ -38,6 +38,8 @@ abstract class _HomeControllerBase with Store {
   }
 
   _loadRewardedAd() {
+    if (!AppAd.showAd) return;
+
     RewardedAd.load(
       adUnitId: AppAd.getRewardedUnitId(
         'ca-app-pub-2005622694052245/8489869159',
@@ -50,6 +52,12 @@ abstract class _HomeControllerBase with Store {
         onAdFailedToLoad: (_) {},
       ),
     );
+  }
+
+  Future onUserEarnedReward(ad, item) async {
+    myRewardedAd = null;
+    AppAd.showAd = false;
+    await localStorage.saveRemoveAdDate();
   }
 
   _loadBannerAd() async {

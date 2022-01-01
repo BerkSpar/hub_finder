@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hub_finder/pages/organization/organization_page.dart';
 import 'package:hub_finder/pages/repo/repo_page.dart';
 import 'package:hub_finder/pages/user/user_controller.dart';
+import 'package:hub_finder/shared/core/app_ad.dart';
 import 'package:hub_finder/shared/core/app_colors.dart';
 import 'package:hub_finder/shared/models/load_state.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
@@ -191,14 +192,15 @@ class Body extends StatelessWidget {
             ],
           ),
         ),
-        Observer(builder: (context) {
-          return Container(
-            alignment: Alignment.center,
-            child: controller.showBannerAd ? controller.adWidget : null,
-            width: MediaQuery.of(context).size.width,
-            height: 50,
-          );
-        }),
+        if (AppAd.showAd)
+          Observer(builder: (context) {
+            return Container(
+              alignment: Alignment.center,
+              child: controller.showBannerAd ? controller.adWidget : null,
+              width: MediaQuery.of(context).size.width,
+              height: 50,
+            );
+          }),
       ],
     );
   }

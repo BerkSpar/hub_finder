@@ -2,11 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:hub_finder/pages/home/home_page.dart';
+import 'package:hub_finder/shared/core/app_ad.dart';
 import 'package:hub_finder/shared/core/app_colors.dart';
+import 'package:hub_finder/shared/services/database_service.dart';
 
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   MobileAds.instance.initialize();
+
+  AppAd.showAd = await LocalStorageService().showAds();
 
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
     statusBarColor: Colors.transparent,
