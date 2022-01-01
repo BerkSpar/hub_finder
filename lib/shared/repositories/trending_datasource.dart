@@ -1,6 +1,5 @@
 import 'package:dio/dio.dart';
 import 'package:hub_finder/shared/models/repository.dart';
-import 'package:hub_finder/shared/repositories/github_datasource.dart';
 
 class TrendingDataSource {
   final Dio dio = Dio();
