@@ -3,6 +3,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:hub_finder/shared/core/app_ad.dart';
 import 'package:hub_finder/shared/models/cached_user.dart';
+import 'package:hub_finder/shared/models/repository.dart';
+import 'package:hub_finder/shared/repositories/trending_datasource.dart';
 import 'package:hub_finder/shared/services/database_service.dart';
 import 'package:mobx/mobx.dart';
 
@@ -11,7 +13,7 @@ part 'home_controller.g.dart';
 class HomeController = _HomeControllerBase with _$HomeController;
 
 abstract class _HomeControllerBase with Store {
-  final TextEditingController searchController = TextEditingController();
+  final trendingDatasource = TrendingDataSource();
   final localStorage = LocalStorageService();
 
   AdWidget? adWidget;
@@ -25,16 +27,27 @@ abstract class _HomeControllerBase with Store {
   @observable
   List<CachedUser> cachedUsers = <CachedUser>[];
 
+  @observable
+  List<Repository> trendingRepositories = <Repository>[];
+
+  final searchController = TextEditingController();
+
   _HomeControllerBase() {
-    _init();
+    _loadCachedUsers();
     _loadBannerAd();
     _loadRewardedAd();
+    _loadTredingRepositories();
   }
 
-  _init() async {
-    Timer.periodic(Duration(seconds: 1), (_) async {
+  _loadCachedUsers() async {
+    cachedUsers = await localStorage.getCachedUsers();
+    Timer.periodic(Duration(seconds: 3), (_) async {
       cachedUsers = await localStorage.getCachedUsers();
     });
+  }
+
+  _loadTredingRepositories() async {
+    trendingRepositories = await trendingDatasource.getRepositories();
   }
 
   _loadRewardedAd() {

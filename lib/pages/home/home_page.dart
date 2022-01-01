@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:hub_finder/pages/home/home_controller.dart';
+import 'package:hub_finder/pages/repo/repo_page.dart';
 import 'package:hub_finder/pages/user/user_page.dart';
 import 'package:hub_finder/shared/core/app_ad.dart';
+import 'package:hub_finder/shared/core/app_colors.dart';
 import 'package:hub_finder/shared/widgets/listtile_widget.dart';
+import 'package:hub_finder/shared/widgets/repo_listtile_widget.dart';
 import 'package:hub_finder/shared/widgets/search_widget.dart';
 
 class HomePage extends StatefulWidget {
@@ -68,6 +71,58 @@ class _HomePageState extends State<HomePage> {
                   );
                 }),
                 SizedBox(height: 32),
+                Observer(builder: (context) {
+                  if (controller.trendingRepositories.isEmpty) {
+                    return Container();
+                  }
+
+                  return Text(
+                    'Treding repositories',
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.w300,
+                    ),
+                  );
+                }),
+                SizedBox(height: 16),
+                Observer(builder: (_) {
+                  if (controller.trendingRepositories.isEmpty) {
+                    return Container();
+                  }
+
+                  return ListView.separated(
+                    shrinkWrap: true,
+                    itemCount: controller.trendingRepositories.length >= 5
+                        ? 5
+                        : controller.trendingRepositories.length,
+                    physics: ScrollPhysics(),
+                    itemBuilder: (context, index) {
+                      final repository = controller.trendingRepositories[index];
+
+                      return Padding(
+                        padding: EdgeInsets.symmetric(vertical: 5),
+                        child: RepoListTileWidget(
+                          title: repository.name,
+                          subtitle: repository.language,
+                          color: language_colors[repository.language],
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    RepoPage(repository.fullName),
+                              ),
+                            );
+                          },
+                        ),
+                      );
+                    },
+                    separatorBuilder: (_, __) {
+                      return SizedBox(height: 5);
+                    },
+                  );
+                }),
+                SizedBox(height: 16),
                 Observer(builder: (context) {
                   if (controller.cachedUsers.isEmpty) {
                     return Container();
