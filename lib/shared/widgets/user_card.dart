@@ -21,25 +21,28 @@ class UserCard extends StatelessWidget {
           borderRadius: BorderRadius.circular(5),
         ),
         padding: EdgeInsets.all(16),
-        child: Column(
-          children: [
-            Container(
-              height: 40,
-              width: 40,
-              child: CircleAvatar(
-                backgroundImage: NetworkImage(user.avatarUrl ?? ''),
+        child: Center(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Container(
+                height: 48,
+                width: 48,
+                child: CircleAvatar(
+                  backgroundImage: NetworkImage(user.avatarUrl ?? ''),
+                ),
               ),
-            ),
-            SizedBox(height: 8),
-            Text(
-              user.name!,
-              style: TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.w300,
-                color: Colors.grey,
+              SizedBox(height: 8),
+              Text(
+                user.name!,
+                style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.w300,
+                  color: Colors.grey,
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
