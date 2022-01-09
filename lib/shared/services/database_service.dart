@@ -48,7 +48,7 @@ class LocalStorageService {
     box.put('remove_ad_date', DateTime.now().millisecondsSinceEpoch);
   }
 
-  Future saveReviewData() async {
+  Future saveReviewDate() async {
     final box = await reviewCompleter.future;
 
     box.put('review_date', DateTime.now().millisecondsSinceEpoch);
