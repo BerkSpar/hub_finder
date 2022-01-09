@@ -8,6 +8,7 @@ import 'package:hub_finder/shared/core/app_colors.dart';
 import 'package:hub_finder/shared/widgets/listtile_widget.dart';
 import 'package:hub_finder/shared/widgets/repo_listtile_widget.dart';
 import 'package:hub_finder/shared/widgets/search_widget.dart';
+import 'package:hub_finder/shared/widgets/user_card.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -76,50 +77,97 @@ class _HomePageState extends State<HomePage> {
                     return Container();
                   }
 
-                  return Text(
-                    'Treding repositories',
-                    style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.w300,
-                    ),
+                  return Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'Treding users',
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.w300,
+                        ),
+                      ),
+                      SizedBox(height: 16),
+                      GridView.builder(
+                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 2,
+                          crossAxisSpacing: 16,
+                          mainAxisSpacing: 16,
+                          childAspectRatio: 3 / 1.807,
+                        ),
+                        shrinkWrap: true,
+                        physics: ScrollPhysics(),
+                        itemCount: controller.trendingUsers.length >= 4
+                            ? 4
+                            : controller.trendingUsers.length,
+                        itemBuilder: (_, index) {
+                          final user = controller.trendingUsers[index];
+
+                          return UserCard(
+                              user: user,
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => UserPage(user.login),
+                                  ),
+                                );
+                              });
+                        },
+                      ),
+                    ],
                   );
                 }),
                 SizedBox(height: 16),
-                Observer(builder: (_) {
+                Observer(builder: (context) {
                   if (controller.trendingRepositories.isEmpty) {
                     return Container();
                   }
 
-                  return ListView.separated(
-                    shrinkWrap: true,
-                    itemCount: controller.trendingRepositories.length >= 5
-                        ? 5
-                        : controller.trendingRepositories.length,
-                    physics: ScrollPhysics(),
-                    itemBuilder: (context, index) {
-                      final repository = controller.trendingRepositories[index];
-
-                      return Padding(
-                        padding: EdgeInsets.symmetric(vertical: 5),
-                        child: RepoListTileWidget(
-                          title: repository.name,
-                          subtitle: repository.language,
-                          color: language_colors[repository.language],
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) =>
-                                    RepoPage(repository.fullName),
-                              ),
-                            );
-                          },
+                  return Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'Treding repositories',
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.w300,
                         ),
-                      );
-                    },
-                    separatorBuilder: (_, __) {
-                      return SizedBox(height: 5);
-                    },
+                      ),
+                      SizedBox(height: 16),
+                      ListView.separated(
+                        shrinkWrap: true,
+                        itemCount: controller.trendingRepositories.length >= 5
+                            ? 5
+                            : controller.trendingRepositories.length,
+                        physics: ScrollPhysics(),
+                        itemBuilder: (context, index) {
+                          final repository =
+                              controller.trendingRepositories[index];
+
+                          return Padding(
+                            padding: EdgeInsets.symmetric(vertical: 5),
+                            child: RepoListTileWidget(
+                              title: repository.name,
+                              subtitle: repository.language,
+                              color: language_colors[repository.language],
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) =>
+                                        RepoPage(repository.fullName),
+                                  ),
+                                );
+                              },
+                            ),
+                          );
+                        },
+                        separatorBuilder: (_, __) {
+                          return SizedBox(height: 5);
+                        },
+                      )
+                    ],
                   );
                 }),
                 SizedBox(height: 16),
@@ -128,45 +176,44 @@ class _HomePageState extends State<HomePage> {
                     return Container();
                   }
 
-                  return Text(
-                    'Searched users',
-                    style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.w300,
-                    ),
-                  );
-                }),
-                SizedBox(height: 16),
-                Observer(builder: (_) {
-                  if (controller.cachedUsers.isEmpty) {
-                    return Container();
-                  }
+                  return Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'Searched users',
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.w300,
+                        ),
+                      ),
+                      SizedBox(height: 16),
+                      ListView.separated(
+                        shrinkWrap: true,
+                        itemCount: controller.cachedUsers.length,
+                        physics: ScrollPhysics(),
+                        itemBuilder: (context, index) {
+                          final cachedUser = controller.cachedUsers[index];
 
-                  return ListView.separated(
-                    shrinkWrap: true,
-                    itemCount: controller.cachedUsers.length,
-                    physics: ScrollPhysics(),
-                    itemBuilder: (context, index) {
-                      final cachedUser = controller.cachedUsers[index];
-
-                      return ListTileWidget(
-                        imageUrl: cachedUser.imageUrl,
-                        title: cachedUser.title,
-                        subtitle: cachedUser.subtitle,
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) =>
-                                  UserPage(cachedUser.username),
-                            ),
+                          return ListTileWidget(
+                            imageUrl: cachedUser.imageUrl,
+                            title: cachedUser.title,
+                            subtitle: cachedUser.subtitle,
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) =>
+                                      UserPage(cachedUser.username),
+                                ),
+                              );
+                            },
                           );
                         },
-                      );
-                    },
-                    separatorBuilder: (_, __) {
-                      return SizedBox(height: 5);
-                    },
+                        separatorBuilder: (_, __) {
+                          return SizedBox(height: 5);
+                        },
+                      )
+                    ],
                   );
                 }),
               ],
@@ -176,9 +223,9 @@ class _HomePageState extends State<HomePage> {
             Observer(builder: (context) {
               return Container(
                 alignment: Alignment.center,
-                child: controller.showBannerAd ? controller.adWidget : null,
                 width: MediaQuery.of(context).size.width,
                 height: 50,
+                child: controller.showBannerAd ? controller.adWidget : null,
               );
             })
         ],
