@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:hub_finder/shared/core/app_ad.dart';
 import 'package:hub_finder/shared/models/cached_user.dart';
@@ -52,6 +53,7 @@ abstract class _HomeControllerBase with Store {
 
   _loadRewardedAd() {
     if (!AppAd.showAd) return;
+    if (!kReleaseMode) return;
 
     RewardedAd.load(
       adUnitId: AppAd.getRewardedUnitId(
