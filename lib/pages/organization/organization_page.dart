@@ -6,6 +6,7 @@ import 'package:hub_finder/shared/core/app_ad.dart';
 import 'package:hub_finder/shared/models/load_state.dart';
 import 'package:hub_finder/shared/widgets/header_widget.dart';
 import 'package:hub_finder/shared/widgets/listtile_widget.dart';
+import 'package:share_plus/share_plus.dart';
 
 class OrganizationPage extends StatelessWidget {
   final String? name;
@@ -21,6 +22,16 @@ class OrganizationPage extends StatelessWidget {
         title: Image.asset('asset/images/logo_light.png', height: 32),
         centerTitle: true,
         elevation: 0,
+        actions: [
+          IconButton(
+            onPressed: () {
+              Share.share(
+                'Download Hub Finder and explore all of the Github on your hands!\n\nhttps://play.google.com/store/apps/details?id=tech.bunnie.hub_finder',
+              );
+            },
+            icon: Icon(Icons.share),
+          ),
+        ],
       ),
       body: Observer(
         builder: (context) {
