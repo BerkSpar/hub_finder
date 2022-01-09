@@ -16,6 +16,8 @@ dependencies:
   flutter_mobx: ^2.0.3+2
   mobx: ^2.0.6+1
   hive: ^2.0.5
+  in_app_review: ^2.0.3
+  
   flutter:
     sdk: flutter
 
