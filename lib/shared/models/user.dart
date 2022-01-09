@@ -57,6 +57,13 @@ class User {
     following = json['following'];
   }
 
+  User.fromTreding(Map json) {
+    login = json['username'];
+    avatarUrl = json['avatar'];
+    url = json['url'];
+    name = json['name'] ?? '';
+  }
+
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['login'] = this.login;

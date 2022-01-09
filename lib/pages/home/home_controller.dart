@@ -5,6 +5,7 @@ import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:hub_finder/shared/core/app_ad.dart';
 import 'package:hub_finder/shared/models/cached_user.dart';
 import 'package:hub_finder/shared/models/repository.dart';
+import 'package:hub_finder/shared/models/user.dart';
 import 'package:hub_finder/shared/repositories/trending_datasource.dart';
 import 'package:hub_finder/shared/services/database_service.dart';
 import 'package:mobx/mobx.dart';
@@ -31,13 +32,17 @@ abstract class _HomeControllerBase with Store {
   @observable
   List<Repository> trendingRepositories = <Repository>[];
 
+  @observable
+  List<User> trendingUsers = <User>[];
+
   final searchController = TextEditingController();
 
   _HomeControllerBase() {
-    _loadCachedUsers();
     _loadBannerAd();
     _loadRewardedAd();
     _loadTredingRepositories();
+    _loadTredingUsers();
+    _loadCachedUsers();
   }
 
   _loadCachedUsers() async {
@@ -49,6 +54,10 @@ abstract class _HomeControllerBase with Store {
 
   _loadTredingRepositories() async {
     trendingRepositories = await trendingDatasource.getRepositories();
+  }
+
+  _loadTredingUsers() async {
+    trendingUsers = await trendingDatasource.getUsers();
   }
 
   _loadRewardedAd() {

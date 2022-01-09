@@ -71,13 +71,29 @@ mixin _$HomeController on _HomeControllerBase, Store {
     });
   }
 
+  final _$trendingUsersAtom = Atom(name: '_HomeControllerBase.trendingUsers');
+
+  @override
+  List<User> get trendingUsers {
+    _$trendingUsersAtom.reportRead();
+    return super.trendingUsers;
+  }
+
+  @override
+  set trendingUsers(List<User> value) {
+    _$trendingUsersAtom.reportWrite(value, super.trendingUsers, () {
+      super.trendingUsers = value;
+    });
+  }
+
   @override
   String toString() {
     return '''
 showBannerAd: ${showBannerAd},
 myRewardedAd: ${myRewardedAd},
 cachedUsers: ${cachedUsers},
-trendingRepositories: ${trendingRepositories}
+trendingRepositories: ${trendingRepositories},
+trendingUsers: ${trendingUsers}
     ''';
   }
 }
