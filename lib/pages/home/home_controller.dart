@@ -66,7 +66,7 @@ abstract class _HomeControllerBase with Store {
 
     RewardedAd.load(
       adUnitId: AppAd.getRewardedUnitId(
-        'ca-app-pub-2005622694052245/8489869159',
+        'ca-app-pub-2005622694052245/1931838279',
       ),
       request: AdRequest(),
       rewardedAdLoadCallback: RewardedAdLoadCallback(
