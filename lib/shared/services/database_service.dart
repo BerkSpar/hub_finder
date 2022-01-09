@@ -6,6 +6,7 @@ import 'package:path_provider/path_provider.dart';
 class LocalStorageService {
   Completer<Box> cacheCompleter = Completer<Box>();
   Completer<Box> adsCompleter = Completer<Box>();
+  Completer<Box> reviewCompleter = Completer<Box>();
 
   LocalStorageService() {
     _init();
@@ -20,6 +21,9 @@ class LocalStorageService {
 
     final adsBox = await Hive.openBox('ads');
     if (!adsCompleter.isCompleted) adsCompleter.complete(adsBox);
+
+    final reviewBox = await Hive.openBox('review');
+    if (!reviewCompleter.isCompleted) reviewCompleter.complete(reviewBox);
   }
 
   Future<List<CachedUser>> getCachedUsers() async {
@@ -42,6 +46,22 @@ class LocalStorageService {
     final box = await adsCompleter.future;
 
     box.put('remove_ad_date', DateTime.now().millisecondsSinceEpoch);
+  }
+
+  Future saveReviewData() async {
+    final box = await reviewCompleter.future;
+
+    box.put('review_date', DateTime.now().millisecondsSinceEpoch);
+  }
+
+  Future<bool> showReview() async {
+    final box = await reviewCompleter.future;
+
+    final data = box.get('review_date');
+
+    if (data == null) return true;
+
+    return false;
   }
 
   Future<bool> showAds() async {
