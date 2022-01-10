@@ -17,7 +17,7 @@
 
 ## Introduction
 
-It's a easy way to search and find a user and your repos and organizations in your phone.
+Connecting with other programmers has never been easier! Use our app to find other developers, groups and repositories on GitHub. With Hub Finder, you'll be able to get help from others and share your work easily. All for free, of course.
 
 ## Features
 
