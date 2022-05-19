@@ -6,10 +6,11 @@ part of 'repo_controller.dart';
 // StoreGenerator
 // **************************************************************************
 
-// ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
+// ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic, no_leading_underscores_for_local_identifiers
 
 mixin _$RepoController on _RepoControllerBase, Store {
-  final _$repositoryAtom = Atom(name: '_RepoControllerBase.repository');
+  late final _$repositoryAtom =
+      Atom(name: '_RepoControllerBase.repository', context: context);
 
   @override
   Repository get repository {
@@ -24,7 +25,8 @@ mixin _$RepoController on _RepoControllerBase, Store {
     });
   }
 
-  final _$contributorsAtom = Atom(name: '_RepoControllerBase.contributors');
+  late final _$contributorsAtom =
+      Atom(name: '_RepoControllerBase.contributors', context: context);
 
   @override
   ObservableList<User> get contributors {
@@ -39,7 +41,8 @@ mixin _$RepoController on _RepoControllerBase, Store {
     });
   }
 
-  final _$loadAtom = Atom(name: '_RepoControllerBase.load');
+  late final _$loadAtom =
+      Atom(name: '_RepoControllerBase.load', context: context);
 
   @override
   LoadState get load {
@@ -54,7 +57,8 @@ mixin _$RepoController on _RepoControllerBase, Store {
     });
   }
 
-  final _$showBannerAdAtom = Atom(name: '_RepoControllerBase.showBannerAd');
+  late final _$showBannerAdAtom =
+      Atom(name: '_RepoControllerBase.showBannerAd', context: context);
 
   @override
   bool get showBannerAd {
