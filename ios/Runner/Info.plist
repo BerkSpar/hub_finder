@@ -42,6 +42,12 @@
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
+	<false/>
+	<key>CADisableMinimumFrameDurationOnPhone</key>
 	<true/>
+	<key>UIApplicationSupportsIndirectInputEvents</key>
+	<true/>
+	<key>GADApplicationIdentifier</key>
+	<string>ca-app-pub-2005622694052245~7777189761</string>
 </dict>
 </plist>

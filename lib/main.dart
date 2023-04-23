@@ -31,12 +31,13 @@ class MyApp extends StatelessWidget {
           color: Colors.white,
         ),
         visualDensity: VisualDensity.adaptivePlatformDensity,
-        backgroundColor: Color(0xfff0f0f5),
         colorScheme: ColorScheme.fromSwatch(
           primarySwatch: lightColor,
-        ).copyWith(
-          secondary: Colors.black,
-        ),
+        )
+            .copyWith(
+              secondary: Colors.black,
+            )
+            .copyWith(background: Color(0xfff0f0f5)),
       ),
       home: HomePage(),
     );
