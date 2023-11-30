@@ -45,7 +45,10 @@ abstract class _RepoControllerBase with Store {
 
   _loadAd() async {
     myBanner = BannerAd(
-      adUnitId: AppAd.getBannerUnitId('ca-app-pub-2005622694052245/7359237423'),
+      adUnitId: AppAd.getBannerUnitId(
+        'ca-app-pub-2005622694052245/7359237423',
+        'ca-app-pub-2005622694052245/8336476395',
+      ),
       size: AdSize.banner,
       request: AdRequest(),
       listener: BannerAdListener(),

@@ -66,7 +66,10 @@ abstract class _UserControllerBase with Store {
 
   _loadAd() async {
     myBanner = BannerAd(
-      adUnitId: AppAd.getBannerUnitId('ca-app-pub-2005622694052245/1183861251'),
+      adUnitId: AppAd.getBannerUnitId(
+        'ca-app-pub-2005622694052245/1183861251',
+        'ca-app-pub-2005622694052245/7877349380',
+      ),
       size: AdSize.banner,
       request: AdRequest(),
       listener: BannerAdListener(),
