@@ -11,7 +11,8 @@ import 'firebase_options.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  MobileAds.instance.initialize();
+
+  await MobileAds.instance.initialize();
 
   AppAd.showAd = await LocalStorageService().showAds();
   ReviewService.showReview();
