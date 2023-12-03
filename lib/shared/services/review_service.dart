@@ -8,7 +8,7 @@ class ReviewService {
   static void showReview() async {
     if (!(await LocalStorageService().showReview())) return;
 
-    await Future.delayed(Duration(seconds: 10));
+    await Future.delayed(Duration(seconds: 20));
 
     if (await inAppReview.isAvailable()) {
       inAppReview.requestReview();

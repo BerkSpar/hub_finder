@@ -1,8 +1,10 @@
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:hub_finder/pages/organization/organization_controller.dart';
 import 'package:hub_finder/pages/user/user_page.dart';
 import 'package:hub_finder/shared/core/app_ad.dart';
+import 'package:hub_finder/shared/core/app_config.dart';
 import 'package:hub_finder/shared/models/load_state.dart';
 import 'package:hub_finder/shared/widgets/header_widget.dart';
 import 'package:hub_finder/shared/widgets/listtile_widget.dart';
@@ -24,9 +26,15 @@ class OrganizationPage extends StatelessWidget {
         elevation: 0,
         actions: [
           IconButton(
-            onPressed: () {
-              Share.share(
-                'Download Hub Finder and explore all of the Github on your hands!\n\nhttps://play.google.com/store/apps/details?id=tech.bunnie.hub_finder',
+            onPressed: () async {
+              await Share.share(
+                'Download Hub Finder and explore all of the Github on your hands!\n\n${AppConfig.storeUrl}',
+              );
+
+              FirebaseAnalytics.instance.logShare(
+                contentType: 'organization',
+                itemId: '${name}',
+                method: 'unknown',
               );
             },
             icon: Icon(Icons.share),
