@@ -1,3 +1,4 @@
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:hub_finder/pages/home/home_controller.dart';
@@ -48,6 +49,10 @@ class _HomePageState extends State<HomePage> {
                         builder: (context) =>
                             UserPage(controller.searchController.text),
                       ),
+                    );
+
+                    FirebaseAnalytics.instance.logSearch(
+                      searchTerm: controller.searchController.text,
                     );
                   },
                   searchController: controller.searchController,
