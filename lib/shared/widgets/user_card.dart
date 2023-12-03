@@ -34,7 +34,7 @@ class UserCard extends StatelessWidget {
               ),
               SizedBox(height: 8),
               Text(
-                user.name!,
+                user.login ?? user.name ?? '',
                 style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.w300,

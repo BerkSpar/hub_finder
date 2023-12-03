@@ -6,7 +6,7 @@ import 'package:hub_finder/shared/core/app_ad.dart';
 import 'package:hub_finder/shared/models/cached_user.dart';
 import 'package:hub_finder/shared/models/repository.dart';
 import 'package:hub_finder/shared/models/user.dart';
-import 'package:hub_finder/shared/repositories/trending_datasource.dart';
+import 'package:hub_finder/shared/repositories/github_datasource.dart';
 import 'package:hub_finder/shared/services/database_service.dart';
 import 'package:mobx/mobx.dart';
 
@@ -15,8 +15,8 @@ part 'home_controller.g.dart';
 class HomeController = _HomeControllerBase with _$HomeController;
 
 abstract class _HomeControllerBase with Store {
-  final trendingDatasource = TrendingDataSource();
   final localStorage = LocalStorageService();
+  final githubDatasource = GithubDataSource();
 
   AdWidget? adWidget;
   late BannerAd myBannerAd;
@@ -53,11 +53,11 @@ abstract class _HomeControllerBase with Store {
   }
 
   _loadTredingRepositories() async {
-    trendingRepositories = await trendingDatasource.getRepositories();
+    trendingRepositories = await githubDatasource.getRepositories();
   }
 
   _loadTredingUsers() async {
-    trendingUsers = await trendingDatasource.getUsers();
+    trendingUsers = await githubDatasource.getUsers();
   }
 
   _loadRewardedAd() {
@@ -88,7 +88,7 @@ abstract class _HomeControllerBase with Store {
   _loadBannerAd() async {
     myBannerAd = BannerAd(
       adUnitId: AppAd.getBannerUnitId(
-        'ca-app-pub-2005622694052245/2018624292', 
+        'ca-app-pub-2005622694052245/2018624292',
         'ca-app-pub-2005622694052245/1730689531',
       ),
       size: AdSize.banner,

@@ -98,7 +98,7 @@ class _HomePageState extends State<HomePage> {
                           crossAxisCount: 2,
                           crossAxisSpacing: 16,
                           mainAxisSpacing: 16,
-                          childAspectRatio: 3 / 1.807,
+                          childAspectRatio: 16 / 12,
                         ),
                         shrinkWrap: true,
                         physics: ScrollPhysics(),

@@ -14,6 +14,40 @@ class GithubDataSource {
     };
   }
 
+  Future<ObservableList<Repository>> getRepositories() async {
+    try {
+      final result = await dio.get('/repositories');
+
+      final list = <Repository>[].asObservable();
+
+      result.data.forEach((e) {
+        list.add(Repository.fromJson(e));
+      });
+
+      return list;
+    } catch (e) {
+      throw Exception();
+    }
+  }
+
+  Future<ObservableList<User>> getUsers() async {
+    try {
+      final result = await dio.get('/users');
+
+      print(result.data);
+
+      final list = <User>[].asObservable();
+
+      result.data.forEach((e) {
+        list.add(User.fromJson(e));
+      });
+
+      return list;
+    } catch (e) {
+      throw Exception();
+    }
+  }
+
   Future<User> getUser(String? username) async {
     try {
       final result = await dio.get('/users/$username');
