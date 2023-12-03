@@ -17,7 +17,12 @@ import 'package:share_plus/share_plus.dart';
 class UserPage extends StatelessWidget {
   final String? username;
 
-  UserPage(this.username);
+  UserPage(this.username) {
+    FirebaseAnalytics.instance.logSelectContent(
+      contentType: 'user',
+      itemId: '${username}',
+    );
+  }
 
   @override
   Widget build(BuildContext context) {

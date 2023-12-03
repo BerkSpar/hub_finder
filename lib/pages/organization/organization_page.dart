@@ -13,7 +13,12 @@ import 'package:share_plus/share_plus.dart';
 class OrganizationPage extends StatelessWidget {
   final String? name;
 
-  OrganizationPage(this.name);
+  OrganizationPage(this.name) {
+    FirebaseAnalytics.instance.logSelectContent(
+      contentType: 'organization',
+      itemId: '${name}',
+    );
+  }
 
   @override
   Widget build(BuildContext context) {

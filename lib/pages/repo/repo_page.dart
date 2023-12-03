@@ -16,7 +16,12 @@ import 'package:share_plus/share_plus.dart';
 class RepoPage extends StatelessWidget {
   final String? fullName;
 
-  RepoPage(this.fullName);
+  RepoPage(this.fullName) {
+    FirebaseAnalytics.instance.logSelectContent(
+      contentType: 'repo',
+      itemId: '${fullName}',
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
