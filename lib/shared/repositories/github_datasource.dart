@@ -34,8 +34,6 @@ class GithubDataSource {
     try {
       final result = await dio.get('/users');
 
-      print(result.data);
-
       final list = <User>[].asObservable();
 
       result.data.forEach((e) {
