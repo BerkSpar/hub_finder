@@ -1,12 +1,14 @@
 import 'dart:async';
 import 'package:hive/hive.dart';
 import 'package:hub_finder/shared/models/cached_user.dart';
+import 'package:hub_finder/shared/models/user_config.dart';
 import 'package:path_provider/path_provider.dart';
 
 class LocalStorageService {
   Completer<Box> cacheCompleter = Completer<Box>();
   Completer<Box> adsCompleter = Completer<Box>();
   Completer<Box> reviewCompleter = Completer<Box>();
+  Completer<Box> configCompleter = Completer<Box>();
 
   LocalStorageService() {
     _init();
@@ -24,6 +26,9 @@ class LocalStorageService {
 
     final reviewBox = await Hive.openBox('review');
     if (!reviewCompleter.isCompleted) reviewCompleter.complete(reviewBox);
+
+    final configBox = await Hive.openBox('config');
+    if (!configCompleter.isCompleted) configCompleter.complete(configBox);
   }
 
   Future<List<CachedUser>> getCachedUsers() async {
@@ -76,5 +81,21 @@ class LocalStorageService {
     if (DateTime.now().difference(removeAdDate).inHours >= 2) return true;
 
     return false;
+  }
+
+  Future<void> saveConfig(UserConfig config) async {
+    final box = await configCompleter.future;
+
+    return await box.put('config', config.toMap());
+  }
+
+  Future<UserConfig> getConfig() async {
+    final box = await configCompleter.future;
+
+    final data = box.get('config');
+
+    if (data == null) return UserConfig();
+
+    return UserConfig.fromMap(data);
   }
 }
