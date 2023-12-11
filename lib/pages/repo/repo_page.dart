@@ -19,7 +19,7 @@ class RepoPage extends StatelessWidget {
   RepoPage(this.fullName) {
     FirebaseAnalytics.instance.logSelectContent(
       contentType: 'repo',
-      itemId: '${fullName}',
+      itemId: '$fullName',
     );
   }
 
@@ -41,7 +41,7 @@ class RepoPage extends StatelessWidget {
 
               FirebaseAnalytics.instance.logShare(
                 contentType: 'repo',
-                itemId: '${fullName}',
+                itemId: '$fullName',
                 method: 'unknown',
               );
             },

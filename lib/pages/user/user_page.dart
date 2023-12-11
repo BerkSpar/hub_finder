@@ -20,7 +20,7 @@ class UserPage extends StatelessWidget {
   UserPage(this.username) {
     FirebaseAnalytics.instance.logSelectContent(
       contentType: 'user',
-      itemId: '${username}',
+      itemId: '$username',
     );
   }
 
@@ -42,7 +42,7 @@ class UserPage extends StatelessWidget {
 
               FirebaseAnalytics.instance.logShare(
                 contentType: 'user',
-                itemId: '${username}',
+                itemId: '$username',
                 method: 'unknown',
               );
             },

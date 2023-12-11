@@ -16,7 +16,7 @@ class OrganizationPage extends StatelessWidget {
   OrganizationPage(this.name) {
     FirebaseAnalytics.instance.logSelectContent(
       contentType: 'organization',
-      itemId: '${name}',
+      itemId: '$name',
     );
   }
 
@@ -38,7 +38,7 @@ class OrganizationPage extends StatelessWidget {
 
               FirebaseAnalytics.instance.logShare(
                 contentType: 'organization',
-                itemId: '${name}',
+                itemId: '$name',
                 method: 'unknown',
               );
             },
