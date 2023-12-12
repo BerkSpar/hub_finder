@@ -104,10 +104,10 @@ class LocalStorageService {
     return UserConfig.fromMap(data);
   }
 
-  Future<int> addHistoryPoint(HistoryPoint point) async {
+  Future<void> addHistoryPoint(HistoryPoint point) async {
     final box = await historyCompleter.future;
 
-    return await box.add(point.toMap());
+    await box.put(point.date.millisecondsSinceEpoch, point.toMap());
   }
 
   Future<List<HistoryPoint>> getHistoryPoints() async {
@@ -136,31 +136,26 @@ class LocalStorageService {
   Future<int> getStreak() async {
     final box = await historyCompleter.future;
 
-    final points = box.values.isNotEmpty
+    final data = box.values.isNotEmpty
         ? box.values.map((c) => HistoryPoint.fromMap(c)).toList()
         : [];
 
-    if (points.isEmpty) return 0;
+    if (data.isEmpty) return 0;
 
     int streak = 0;
 
-    for (int i = 0; i < points.length; i++) {
-      if (i == 0) {
-        streak++;
-        continue;
-      }
+    for (int i = 0; i < data.length; i++) {
+      if (i == 0) continue;
 
-      final current = points[i];
-      final previous = points[i - 1];
+      final current = data[i];
+      final previous = data[i - 1];
 
       final currentDay = DateTime(current.date.year, current.date.month,
           current.date.day, 0, 0, 0, 0, 0);
       final previousDay = DateTime(previous.date.year, previous.date.month,
           previous.date.day, 0, 0, 0, 0, 0);
 
-      final difference = currentDay.difference(previousDay).inDays;
-
-      if (difference == 1) {
+      if (currentDay.difference(previousDay).inDays == 1) {
         streak++;
       } else {
         break;
