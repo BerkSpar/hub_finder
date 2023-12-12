@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:hive/hive.dart';
 import 'package:hub_finder/shared/models/cached_user.dart';
+import 'package:hub_finder/shared/models/history_point.dart';
 import 'package:hub_finder/shared/models/user_config.dart';
 import 'package:path_provider/path_provider.dart';
 
@@ -9,6 +10,7 @@ class LocalStorageService {
   Completer<Box> adsCompleter = Completer<Box>();
   Completer<Box> reviewCompleter = Completer<Box>();
   Completer<Box> configCompleter = Completer<Box>();
+  Completer<Box> historyCompleter = Completer<Box>();
 
   LocalStorageService() {
     _init();
@@ -29,6 +31,9 @@ class LocalStorageService {
 
     final configBox = await Hive.openBox('config');
     if (!configCompleter.isCompleted) configCompleter.complete(configBox);
+
+    final historyBox = await Hive.openBox('history');
+    if (!historyCompleter.isCompleted) historyCompleter.complete(historyBox);
   }
 
   Future<List<CachedUser>> getCachedUsers() async {
@@ -97,5 +102,71 @@ class LocalStorageService {
     if (data == null) return UserConfig();
 
     return UserConfig.fromMap(data);
+  }
+
+  Future<int> addHistoryPoint(HistoryPoint point) async {
+    final box = await historyCompleter.future;
+
+    return await box.add(point.toMap());
+  }
+
+  Future<List<HistoryPoint>> getHistoryPoints() async {
+    final box = await historyCompleter.future;
+
+    List<HistoryPoint> list = box.values.isNotEmpty
+        ? box.values.map((c) => HistoryPoint.fromMap(c)).toList()
+        : [];
+
+    return list;
+  }
+
+  Future<HistoryPoint?> getLastHistoryPoint() async {
+    final box = await historyCompleter.future;
+
+    final data = box.values.isNotEmpty ? box.values.last : null;
+
+    if (data == null) return null;
+
+    return HistoryPoint.fromMap(data);
+  }
+
+  // Pega todos os pontos de histórico. Se não houver nenhum, retorna 0.
+  // Conta quantos pontos de histórico existem em que os dias são consecutivos.
+  // Se não houver pontos de histórico consecutivos, retorna 0.
+  Future<int> getStreak() async {
+    final box = await historyCompleter.future;
+
+    final points = box.values.isNotEmpty
+        ? box.values.map((c) => HistoryPoint.fromMap(c)).toList()
+        : [];
+
+    if (points.isEmpty) return 0;
+
+    int streak = 0;
+
+    for (int i = 0; i < points.length; i++) {
+      if (i == 0) {
+        streak++;
+        continue;
+      }
+
+      final current = points[i];
+      final previous = points[i - 1];
+
+      final currentDay = DateTime(current.date.year, current.date.month,
+          current.date.day, 0, 0, 0, 0, 0);
+      final previousDay = DateTime(previous.date.year, previous.date.month,
+          previous.date.day, 0, 0, 0, 0, 0);
+
+      final difference = currentDay.difference(previousDay).inDays;
+
+      if (difference == 1) {
+        streak++;
+      } else {
+        break;
+      }
+    }
+
+    return streak;
   }
 }
