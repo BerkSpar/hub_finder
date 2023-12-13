@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
-import 'package:hub_finder/pages/home/home_page.dart';
+import 'package:hub_finder/pages/onboarding/onboarding_page.dart';
 import 'package:hub_finder/shared/core/app_ad.dart';
 import 'package:hub_finder/shared/core/app_colors.dart';
 import 'package:hub_finder/shared/services/database_service.dart';
@@ -38,6 +38,15 @@ class MyApp extends StatelessWidget {
           color: Colors.white,
         ),
         visualDensity: VisualDensity.adaptivePlatformDensity,
+        elevatedButtonTheme: ElevatedButtonThemeData(
+          style: ElevatedButton.styleFrom(
+            minimumSize: Size(double.infinity, 48),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(5),
+            ),
+            backgroundColor: darkColor,
+          ),
+        ),
         colorScheme: ColorScheme.fromSwatch(
           primarySwatch: lightColor,
         )
@@ -46,7 +55,7 @@ class MyApp extends StatelessWidget {
             )
             .copyWith(background: Color(0xfff0f0f5)),
       ),
-      home: HomePage(),
+      home: OnboardingPage(),
     );
   }
 }
