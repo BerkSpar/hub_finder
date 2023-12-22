@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:hub_finder/shared/core/app_ad.dart';
 import 'package:hub_finder/shared/models/load_state.dart';
@@ -52,13 +54,17 @@ abstract class _OrganizationControllerBase with Store {
       ),
       size: AdSize.banner,
       request: AdRequest(),
-      listener: BannerAdListener(),
+      listener: BannerAdListener(
+        onAdLoaded: (_) {
+          adWidget = AdWidget(ad: myBanner);
+          showBannerAd = true;
+        },
+        onAdFailedToLoad: (_, error) {
+          log('Ad load failed (code=${error.code} message=${error.message})');
+        },
+      ),
     );
 
     await myBanner.load();
-
-    adWidget = AdWidget(ad: myBanner);
-
-    showBannerAd = true;
   }
 }

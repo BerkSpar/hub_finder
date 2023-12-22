@@ -236,7 +236,7 @@ class _HomePageState extends State<HomePage> {
               return Container(
                 alignment: Alignment.center,
                 width: MediaQuery.of(context).size.width,
-                height: 50,
+                height: controller.showBannerAd ? 50 : 0,
                 child: controller.showBannerAd ? controller.adWidget : null,
               );
             })

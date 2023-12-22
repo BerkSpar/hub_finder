@@ -176,7 +176,7 @@ class Body extends StatelessWidget {
               alignment: Alignment.center,
               child: controller.showBannerAd ? controller.adWidget : null,
               width: MediaQuery.of(context).size.width,
-              height: 50,
+              height: controller.showBannerAd ? 50 : 0,
             );
           }),
       ],

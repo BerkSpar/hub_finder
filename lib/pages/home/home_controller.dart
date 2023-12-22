@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:developer';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
@@ -93,13 +94,17 @@ abstract class _HomeControllerBase with Store {
       ),
       size: AdSize.banner,
       request: AdRequest(),
-      listener: BannerAdListener(),
+      listener: BannerAdListener(
+        onAdLoaded: (_) {
+          adWidget = AdWidget(ad: myBannerAd);
+          showBannerAd = true;
+        },
+        onAdFailedToLoad: (_, error) {
+          log('Ad load failed (code=${error.code} message=${error.message})');
+        },
+      ),
     );
 
     await myBannerAd.load();
-
-    adWidget = AdWidget(ad: myBannerAd);
-
-    showBannerAd = true;
   }
 }
