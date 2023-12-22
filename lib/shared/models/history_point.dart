@@ -14,7 +14,7 @@ class HistoryPoint {
     };
   }
 
-  factory HistoryPoint.fromMap(Map<String, dynamic> map) {
+  factory HistoryPoint.fromMap(Map map) {
     return HistoryPoint(
       date: DateTime.fromMillisecondsSinceEpoch(map['date']),
       value: map['value'],

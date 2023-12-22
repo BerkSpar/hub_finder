@@ -25,5 +25,8 @@ class FirebaseService {
     } else {
       log('User declined or has not accepted permission');
     }
+
+    messaging.setAutoInitEnabled(true);
+    messaging.subscribeToTopic('all');
   }
 }

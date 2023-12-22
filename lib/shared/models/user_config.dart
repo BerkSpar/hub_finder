@@ -29,7 +29,7 @@ class UserConfig {
     };
   }
 
-  factory UserConfig.fromMap(Map<String, dynamic> map) {
+  factory UserConfig.fromMap(Map map) {
     return UserConfig(
       didOnboarding: map['did_onboarding'] ?? false,
       goals: List<String>.from(map['goals'] ?? []),

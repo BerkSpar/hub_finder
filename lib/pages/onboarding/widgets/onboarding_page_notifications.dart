@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hub_finder/pages/onboarding/onboarding_controller.dart';
+import 'package:hub_finder/shared/services/firebase_service.dart';
 
 class OnboardingPageNotifications extends StatefulWidget {
   final OnboardingController controller;
@@ -133,8 +134,11 @@ class _OnboardingPageNotificationsState
               ),
               Spacer(),
               ElevatedButton(
-                onPressed: () {
+                onPressed: () async {
                   widget.controller.config.remindAt = _time;
+
+                  await FirebaseService.init();
+
                   widget.controller.next();
                 },
                 child: Text("Continue"),
