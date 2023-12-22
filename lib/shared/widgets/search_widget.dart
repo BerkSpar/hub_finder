@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hub_finder/shared/core/app_colors.dart';
 
 class SearchWidget extends StatelessWidget {
   final Function onTapSearch;
@@ -23,6 +24,7 @@ class SearchWidget extends StatelessWidget {
               fontWeight: FontWeight.w300,
               decoration: TextDecoration.none,
             ),
+            cursorColor: darkColor,
             decoration: InputDecoration(
               enabledBorder: OutlineInputBorder(
                 borderSide: BorderSide(

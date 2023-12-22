@@ -17,6 +17,7 @@ dependencies:
   mobx: ^2.2.1
   hive: ^2.2.3
   in_app_review: ^2.0.8
+  cupertino_icons: ^1.0.2
 
   firebase_analytics: ^10.7.2
   firebase_crashlytics: ^3.4.6

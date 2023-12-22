@@ -22,6 +22,9 @@ class _OnboardingPageState extends State<OnboardingPage> {
     return PageView(
       controller: controller.pageController,
       physics: const NeverScrollableScrollPhysics(),
+      onPageChanged: (index) {
+        WidgetsBinding.instance.focusManager.primaryFocus?.unfocus();
+      },
       children: [
         OnboardingPageStart(controller: controller),
         OnboardingPageGoals(controller: controller),
