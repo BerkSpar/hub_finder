@@ -6,6 +6,7 @@ import 'package:hub_finder/pages/repo/repo_page.dart';
 import 'package:hub_finder/pages/user/user_page.dart';
 import 'package:hub_finder/shared/core/app_ad.dart';
 import 'package:hub_finder/shared/core/app_colors.dart';
+import 'package:hub_finder/shared/services/review_service.dart';
 import 'package:hub_finder/shared/widgets/listtile_widget.dart';
 import 'package:hub_finder/shared/widgets/repo_listtile_widget.dart';
 import 'package:hub_finder/shared/widgets/search_widget.dart';
@@ -18,6 +19,12 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   final controller = HomeController();
+
+  @override
+  void initState() {
+    super.initState();
+    ReviewService.scheduleReview();
+  }
 
   @override
   Widget build(BuildContext context) {
