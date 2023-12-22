@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:developer';
 import 'package:hive/hive.dart';
 import 'package:hub_finder/shared/models/cached_user.dart';
 import 'package:hub_finder/shared/models/history_point.dart';
@@ -91,7 +92,9 @@ class LocalStorageService {
   Future<void> saveConfig(UserConfig config) async {
     final box = await configCompleter.future;
 
-    return await box.put('config', config.toMap());
+    await box.put('config', config.toMap());
+
+    log('Saved config: ${config.toMap()}');
   }
 
   Future<UserConfig> getConfig() async {

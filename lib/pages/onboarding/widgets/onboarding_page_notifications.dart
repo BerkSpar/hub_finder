@@ -133,7 +133,10 @@ class _OnboardingPageNotificationsState
               ),
               Spacer(),
               ElevatedButton(
-                onPressed: widget.controller.next,
+                onPressed: () {
+                  widget.controller.config.remindAt = _time;
+                  widget.controller.next();
+                },
                 child: Text("Continue"),
               ),
             ],

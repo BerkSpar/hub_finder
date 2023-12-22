@@ -16,7 +16,7 @@ class OnboardingPageQuestions extends StatefulWidget {
 }
 
 class _OnboardingPageQuestionsState extends State<OnboardingPageQuestions> {
-  List<String> types = [
+  List<String> tags = [
     'Mobile',
     'Web',
     'Data Science',
@@ -26,7 +26,7 @@ class _OnboardingPageQuestionsState extends State<OnboardingPageQuestions> {
     'QA',
   ];
 
-  List<String> selectedTypes = [];
+  List<String> selectedTags = [];
 
   @override
   Widget build(BuildContext context) {
@@ -63,18 +63,20 @@ class _OnboardingPageQuestionsState extends State<OnboardingPageQuestions> {
                     childAspectRatio: 2 / 1,
                   ),
                   itemBuilder: (context, index) {
-                    final item = types[index];
-                    final isSelected = selectedTypes.contains(types[index]);
+                    final item = tags[index];
+                    final isSelected = selectedTags.contains(tags[index]);
 
                     return InkWell(
                       onTap: () {
                         setState(() {
                           if (isSelected) {
-                            selectedTypes.remove(item);
+                            selectedTags.remove(item);
                           } else {
-                            selectedTypes.add(item);
+                            selectedTags.add(item);
                           }
                         });
+
+                        widget.controller.config.tags = selectedTags;
                       },
                       child: Container(
                         decoration: BoxDecoration(
@@ -98,12 +100,15 @@ class _OnboardingPageQuestionsState extends State<OnboardingPageQuestions> {
                       ),
                     );
                   },
-                  itemCount: 3,
+                  itemCount: tags.length,
                 ),
               ),
               const SizedBox(height: 16),
               ElevatedButton(
-                onPressed: widget.controller.next,
+                onPressed: () {
+                  widget.controller.config.didOnboarding = true;
+                  widget.controller.next();
+                },
                 child: Text("Continue"),
               ),
             ],

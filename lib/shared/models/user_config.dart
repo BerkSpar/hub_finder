@@ -1,8 +1,10 @@
+import 'package:flutter/material.dart';
+
 class UserConfig {
   bool didOnboarding;
   List<String> goals;
   String? username;
-  DateTime? remindAt;
+  TimeOfDay? remindAt;
   List<String> tags;
   int commitGoal;
 
@@ -20,9 +22,10 @@ class UserConfig {
       'did_onboarding': didOnboarding,
       'goals': goals,
       'username': username,
-      'remind_at': remindAt?.millisecondsSinceEpoch,
       'tags': tags,
       'commit_goal': commitGoal,
+      'remind_at_hour': remindAt?.hour,
+      'remind_at_minute': remindAt?.minute,
     };
   }
 
@@ -31,8 +34,11 @@ class UserConfig {
       didOnboarding: map['did_onboarding'] ?? false,
       goals: List<String>.from(map['goals'] ?? []),
       username: map['username'],
-      remindAt: map['remind_at'] != null
-          ? DateTime.fromMillisecondsSinceEpoch(map['remind_at'])
+      remindAt: map['remind_at_hour'] != null && map['remind_at_minute'] != null
+          ? TimeOfDay(
+              hour: map['remind_at_hour'],
+              minute: map['remind_at_minute'],
+            )
           : null,
       tags: List<String>.from(map['tags'] ?? []),
       commitGoal: map['commit_goal'] ?? 1,

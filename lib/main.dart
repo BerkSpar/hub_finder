@@ -15,6 +15,8 @@ void main() async {
   await MobileAds.instance.initialize();
 
   AppAd.showAd = await LocalStorageService().showAds();
+
+  // TODO: Change when call show review
   ReviewService.showReview();
 
   await Firebase.initializeApp(

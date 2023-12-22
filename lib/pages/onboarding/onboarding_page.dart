@@ -1,12 +1,11 @@
-import 'package:flutter/foundation.dart';
-import 'package:flutter/widgets.dart';
+import 'package:flutter/material.dart';
 import 'package:hub_finder/pages/onboarding/onboarding_controller.dart';
-import 'package:hub_finder/pages/onboarding/onboarding_page_end.dart';
-import 'package:hub_finder/pages/onboarding/onboarding_page_goals.dart';
-import 'package:hub_finder/pages/onboarding/onboarding_page_notifications.dart';
-import 'package:hub_finder/pages/onboarding/onboarding_page_questions.dart';
-import 'package:hub_finder/pages/onboarding/onboarding_page_start.dart';
-import 'package:hub_finder/pages/onboarding/onboarding_page_username.dart';
+import 'package:hub_finder/pages/onboarding/widgets/onboarding_page_end.dart';
+import 'package:hub_finder/pages/onboarding/widgets/onboarding_page_goals.dart';
+import 'package:hub_finder/pages/onboarding/widgets/onboarding_page_notifications.dart';
+import 'package:hub_finder/pages/onboarding/widgets/onboarding_page_questions.dart';
+import 'package:hub_finder/pages/onboarding/widgets/onboarding_page_start.dart';
+import 'package:hub_finder/pages/onboarding/widgets/onboarding_page_username.dart';
 
 class OnboardingPage extends StatefulWidget {
   const OnboardingPage({Key? key}) : super(key: key);

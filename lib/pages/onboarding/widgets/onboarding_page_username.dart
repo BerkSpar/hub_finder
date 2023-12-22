@@ -42,6 +42,7 @@ class OnboardingPageUsername extends StatelessWidget {
               ),
               const SizedBox(height: 16),
               TextField(
+                onChanged: (value) => controller.config.username = value,
                 style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.w300,
