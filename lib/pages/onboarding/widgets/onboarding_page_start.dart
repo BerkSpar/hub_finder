@@ -3,7 +3,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:hub_finder/pages/onboarding/onboarding_controller.dart';
 import 'package:hub_finder/pages/privacy_policy/privacy_policy_page.dart';
-import 'package:hub_finder/pages/terms_of_use/terms_of_use_page.dart';
+import 'package:hub_finder/pages/terms_and_conditions/terms_and_conditions_page.dart';
 
 class OnboardingPageStart extends StatelessWidget {
   final OnboardingController controller;
@@ -58,7 +58,7 @@ class OnboardingPageStart extends StatelessWidget {
                         ..onTap = () {
                           Navigator.of(context).push(
                             MaterialPageRoute(
-                              builder: (_) => TermsOfUsePage(),
+                              builder: (_) => TermsAndConditionsPage(),
                             ),
                           );
                         },

@@ -55,7 +55,6 @@ class OnboardingPageGoals extends StatelessWidget {
                             color: isSelected ? darkColor : Colors.grey[200],
                             borderRadius: BorderRadius.circular(5),
                           ),
-                          // TODO: Verificar se no celular não ocorro erro
                           child: Icon(
                             item.icon,
                             color: isSelected ? Colors.white : darkColor,

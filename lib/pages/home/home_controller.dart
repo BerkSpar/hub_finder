@@ -77,7 +77,9 @@ abstract class _HomeControllerBase with Store {
         onAdLoaded: (RewardedAd ad) {
           myRewardedAd = ad;
         },
-        onAdFailedToLoad: (_) {},
+        onAdFailedToLoad: (_) {
+          log('Ad load failed (code=${_.code} message=${_.message})');
+        },
       ),
     );
   }
