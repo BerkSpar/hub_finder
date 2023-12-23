@@ -29,7 +29,7 @@ class OnboardingPageStart extends StatelessWidget {
             children: [
               Spacer(),
               Text(
-                "The best way to improve your skills",
+                "Elevate your coding prowess",
                 style: TextStyle(
                   fontSize: 24,
                   fontWeight: FontWeight.w700,
@@ -38,7 +38,7 @@ class OnboardingPageStart extends StatelessWidget {
               ),
               const SizedBox(height: 16),
               Text(
-                "Improve your developer skills with Hub Finder",
+                "Enhance your developer skills effortlessly with Hub Finder",
                 style: TextStyle(
                   fontSize: 16,
                 ),

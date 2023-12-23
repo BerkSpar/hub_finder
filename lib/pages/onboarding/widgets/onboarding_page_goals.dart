@@ -4,13 +4,20 @@ import 'package:hub_finder/pages/onboarding/onboarding_controller.dart';
 import 'package:hub_finder/shared/core/app_colors.dart';
 import 'package:hub_finder/shared/models/user_goal.dart';
 
-class OnboardingPageGoals extends StatelessWidget {
+class OnboardingPageGoals extends StatefulWidget {
   final OnboardingController controller;
 
   const OnboardingPageGoals({
     Key? key,
     required this.controller,
   }) : super(key: key);
+
+  @override
+  State<OnboardingPageGoals> createState() => _OnboardingPageGoalsState();
+}
+
+class _OnboardingPageGoalsState extends State<OnboardingPageGoals> {
+  bool get _canSubmit => widget.controller.selectedGoals.isNotEmpty;
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +29,7 @@ class OnboardingPageGoals extends StatelessWidget {
           child: Column(
             children: [
               Text(
-                "What is your goals?",
+                "What's your coding focus?",
                 style: TextStyle(
                   fontSize: 24,
                   fontWeight: FontWeight.w700,
@@ -31,7 +38,7 @@ class OnboardingPageGoals extends StatelessWidget {
               ),
               const SizedBox(height: 16),
               Text(
-                "It helps to improve your app experience",
+                "Define your path with hub finder",
                 style: TextStyle(
                   fontSize: 16,
                 ),
@@ -45,7 +52,7 @@ class OnboardingPageGoals extends StatelessWidget {
 
                     return Observer(builder: (context) {
                       final isSelected =
-                          controller.selectedGoals.contains(item);
+                          widget.controller.selectedGoals.contains(item);
 
                       return ListTile(
                         leading: Container(
@@ -62,10 +69,14 @@ class OnboardingPageGoals extends StatelessWidget {
                         ),
                         title: Text(item.title),
                         subtitle: Text(item.subtitle),
-                        onTap: () => controller.selectGoal(item),
+                        onTap: () {
+                          setState(() {
+                            widget.controller.selectGoal(item);
+                          });
+                        },
                         trailing: IconButton(
                           icon: Icon(Icons.add_circle, color: Colors.grey),
-                          onPressed: () => controller.selectGoal(item),
+                          onPressed: () => widget.controller.selectGoal(item),
                         ),
                       );
                     });
@@ -75,7 +86,7 @@ class OnboardingPageGoals extends StatelessWidget {
               ),
               const SizedBox(height: 16),
               ElevatedButton(
-                onPressed: controller.next,
+                onPressed: _canSubmit ? widget.controller.next : null,
                 child: Text("Continue"),
               ),
             ],

@@ -2,13 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:hub_finder/pages/onboarding/onboarding_controller.dart';
 import 'package:hub_finder/shared/core/app_colors.dart';
 
-class OnboardingPageUsername extends StatelessWidget {
+class OnboardingPageUsername extends StatefulWidget {
   final OnboardingController controller;
 
   const OnboardingPageUsername({
     Key? key,
     required this.controller,
   }) : super(key: key);
+
+  @override
+  State<OnboardingPageUsername> createState() => _OnboardingPageUsernameState();
+}
+
+class _OnboardingPageUsernameState extends State<OnboardingPageUsername> {
+  bool get _canSubmit => widget.controller.config.username?.isNotEmpty ?? false;
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +33,7 @@ class OnboardingPageUsername extends StatelessWidget {
             children: [
               Spacer(),
               Text(
-                "What is your username?",
+                "What is your github username?",
                 style: TextStyle(
                   fontSize: 24,
                   fontWeight: FontWeight.w700,
@@ -43,7 +50,11 @@ class OnboardingPageUsername extends StatelessWidget {
               ),
               const SizedBox(height: 16),
               TextField(
-                onChanged: (value) => controller.config.username = value,
+                onChanged: (value) {
+                  setState(() {
+                    widget.controller.config.username = value;
+                  });
+                },
                 style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.w300,
@@ -79,7 +90,7 @@ class OnboardingPageUsername extends StatelessWidget {
               ),
               Spacer(),
               ElevatedButton(
-                onPressed: controller.next,
+                onPressed: _canSubmit ? widget.controller.next : null,
                 child: Text("Continue"),
               ),
             ],

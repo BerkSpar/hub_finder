@@ -17,16 +17,41 @@ class OnboardingPageQuestions extends StatefulWidget {
 
 class _OnboardingPageQuestionsState extends State<OnboardingPageQuestions> {
   List<String> tags = [
-    'Mobile',
-    'Web',
-    'Data Science',
-    'DevOps',
-    'UX/UI',
-    'Game Dev',
-    'QA',
+    "Mobile App Development",
+    "Web Development",
+    "Data Science",
+    "DevOps",
+    "UX/UI Design",
+    "Game Development",
+    "Quality Assurance",
+    "Machine Learning",
+    "Cybersecurity",
+    "Frontend Development",
+    "Backend Development",
+    "Cloud Computing",
+    "Internet of Things",
+    "Blockchain",
+    "Augmented Reality",
+    "Virtual Reality",
+    "Full Stack Development",
+    "Embedded Systems",
+    "Artificial Intelligence",
+    "Robotics",
+    "Graphic Design",
+    "User Interface Design",
+    "User Experience Design",
+    "Motion Design",
+    "Web Design",
   ];
 
   List<String> selectedTags = [];
+
+  bool get _canSubmit => selectedTags.isNotEmpty;
+
+  void _submit() {
+    widget.controller.config.didOnboarding = true;
+    widget.controller.next();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +63,7 @@ class _OnboardingPageQuestionsState extends State<OnboardingPageQuestions> {
           child: Column(
             children: [
               Text(
-                "What is your history?",
+                "Discover your expertise",
                 style: TextStyle(
                   fontSize: 24,
                   fontWeight: FontWeight.w700,
@@ -47,7 +72,7 @@ class _OnboardingPageQuestionsState extends State<OnboardingPageQuestions> {
               ),
               const SizedBox(height: 16),
               Text(
-                "It helps to improve your app experience",
+                "Let us know your preferred technologies and workspaces for a tailored experience",
                 style: TextStyle(
                   fontSize: 16,
                 ),
@@ -91,6 +116,7 @@ class _OnboardingPageQuestionsState extends State<OnboardingPageQuestions> {
                         child: Center(
                           child: Text(
                             item,
+                            textAlign: TextAlign.center,
                             style: TextStyle(
                               color: isSelected ? Colors.white : Colors.grey,
                               fontWeight: FontWeight.w700,
@@ -105,10 +131,7 @@ class _OnboardingPageQuestionsState extends State<OnboardingPageQuestions> {
               ),
               const SizedBox(height: 16),
               ElevatedButton(
-                onPressed: () {
-                  widget.controller.config.didOnboarding = true;
-                  widget.controller.next();
-                },
+                onPressed: _canSubmit ? _submit : null,
                 child: Text("Continue"),
               ),
             ],
