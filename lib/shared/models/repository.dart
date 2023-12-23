@@ -35,13 +35,12 @@ class Repository {
   }
 
   Repository.fromTreding(Map json) {
-    stars = json['totalStars'];
-    name = json['repositoryName'];
+    stars = json['stars'];
+    name = json['name'];
     forks = json['forks'];
-    fullName = '${json['username']}/${json['repositoryName']}';
+    fullName = '${json['author']}/${json['name']}';
     description = json['description'];
     language = json['language'];
-    rank = json['rank'];
   }
 
   Map<String, dynamic> toJson() {

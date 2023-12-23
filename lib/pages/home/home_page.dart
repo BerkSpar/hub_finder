@@ -85,7 +85,7 @@ class _HomePageState extends State<HomePage> {
                 }),
                 SizedBox(height: 32),
                 Observer(builder: (context) {
-                  if (controller.trendingRepositories.isEmpty) {
+                  if (controller.trendingUsers.isEmpty) {
                     return Container();
                   }
 

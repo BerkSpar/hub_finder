@@ -8,6 +8,7 @@ import 'package:hub_finder/shared/models/cached_user.dart';
 import 'package:hub_finder/shared/models/repository.dart';
 import 'package:hub_finder/shared/models/user.dart';
 import 'package:hub_finder/shared/repositories/github_datasource.dart';
+import 'package:hub_finder/shared/repositories/trending_datasource.dart';
 import 'package:hub_finder/shared/services/database_service.dart';
 import 'package:mobx/mobx.dart';
 
@@ -18,6 +19,7 @@ class HomeController = _HomeControllerBase with _$HomeController;
 abstract class _HomeControllerBase with Store {
   final localStorage = LocalStorageService();
   final githubDatasource = GithubDataSource();
+  final trendingDatasource = TrendingDatasource();
 
   AdWidget? adWidget;
   late BannerAd myBannerAd;
@@ -54,11 +56,11 @@ abstract class _HomeControllerBase with Store {
   }
 
   _loadTredingRepositories() async {
-    trendingRepositories = await githubDatasource.getRepositories();
+    trendingRepositories = await trendingDatasource.getRepositories();
   }
 
   _loadTredingUsers() async {
-    trendingUsers = await githubDatasource.getUsers();
+    trendingUsers = await trendingDatasource.getUsers();
   }
 
   _loadRewardedAd() {
