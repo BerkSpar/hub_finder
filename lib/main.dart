@@ -45,6 +45,9 @@ class MyApp extends StatelessWidget {
             backgroundColor: darkColor,
           ),
         ),
+        progressIndicatorTheme: ProgressIndicatorThemeData(
+          color: darkColor,
+        ),
         colorScheme: ColorScheme.fromSwatch(
           primarySwatch: lightColor,
         )
