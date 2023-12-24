@@ -1,0 +1,18 @@
+name: beta-test
+
+on:
+  push:
+    branches: [main]
+  paths:
+    - "pubspec.yaml"
+
+jobs:
+  build:
+    runs-on: macos-latest
+    steps:
+      - run: cd ios
+
+      - uses: actions/checkout@v2
+      - run: fastlane beta
+        env:
+          MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
