@@ -18,5 +18,6 @@ jobs:
       - run: fastlane beta
         env:
           MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
+          MATCH_GIT_BASIC_AUTHORIZATION: ${{ secrets.MATCH_GIT_BASIC_AUTHORIZATION }}
           FASTLANE_APPLE_ID: "${{ secrets.FASTLANE_APPLE_ID }}"
           FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD: "${{ secrets.FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD }}"
