@@ -6,7 +6,7 @@ class ReviewService {
   static final InAppReview inAppReview = InAppReview.instance;
 
   static void scheduleReview(
-      [Duration waitTime = const Duration(seconds: 20)]) async {
+      [Duration waitTime = const Duration(minutes: 1)]) async {
     if (!(await LocalStorageService().showReview())) return;
 
     await Future.delayed(waitTime);
