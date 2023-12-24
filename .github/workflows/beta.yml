@@ -10,9 +10,10 @@ on:
 jobs:
   build:
     runs-on: macos-latest
+    defaults:
+      run:
+        working-directory: ./ios
     steps:
-      - run: cd ios
-
       - uses: actions/checkout@v2
       - run: fastlane beta
         env:
