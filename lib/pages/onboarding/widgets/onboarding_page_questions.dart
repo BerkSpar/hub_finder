@@ -52,9 +52,9 @@ class _OnboardingPageQuestionsState extends State<OnboardingPageQuestions> {
   void _submit() {
     widget.controller.config.didOnboarding = true;
 
-    FirebaseAnalytics.instance.logTutorialComplete(
-      parameters: widget.controller.config.toMap(),
-    );
+    var params = widget.controller.config.toMap();
+    params = params.map((key, value) => MapEntry(key, value.toString()));
+    FirebaseAnalytics.instance.logTutorialComplete(parameters: params);
 
     widget.controller.next();
   }
