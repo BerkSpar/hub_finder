@@ -1,3 +1,4 @@
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
 import 'package:hub_finder/pages/onboarding/onboarding_controller.dart';
 import 'package:hub_finder/shared/core/app_colors.dart';
@@ -50,6 +51,11 @@ class _OnboardingPageQuestionsState extends State<OnboardingPageQuestions> {
 
   void _submit() {
     widget.controller.config.didOnboarding = true;
+
+    FirebaseAnalytics.instance.logTutorialComplete(
+      parameters: widget.controller.config.toMap(),
+    );
+
     widget.controller.next();
   }
 

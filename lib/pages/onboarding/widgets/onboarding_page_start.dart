@@ -1,4 +1,4 @@
-import 'package:flutter/cupertino.dart';
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:hub_finder/pages/onboarding/onboarding_controller.dart';
@@ -8,10 +8,12 @@ import 'package:hub_finder/pages/terms_and_conditions/terms_and_conditions_page.
 class OnboardingPageStart extends StatelessWidget {
   final OnboardingController controller;
 
-  const OnboardingPageStart({
+  OnboardingPageStart({
     Key? key,
     required this.controller,
-  }) : super(key: key);
+  }) : super(key: key) {
+    FirebaseAnalytics.instance.logTutorialBegin();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -56,6 +58,9 @@ class OnboardingPageStart extends StatelessWidget {
                       ),
                       recognizer: TapGestureRecognizer()
                         ..onTap = () {
+                          FirebaseAnalytics.instance
+                              .logEvent(name: 'read_terms_and_conditions');
+
                           Navigator.of(context).push(
                             MaterialPageRoute(
                               builder: (_) => TermsAndConditionsPage(),
@@ -71,6 +76,9 @@ class OnboardingPageStart extends StatelessWidget {
                       ),
                       recognizer: TapGestureRecognizer()
                         ..onTap = () {
+                          FirebaseAnalytics.instance
+                              .logEvent(name: 'read_privacy_policy');
+
                           Navigator.of(context).push(
                             MaterialPageRoute(
                               builder: (_) => PrivacyPolicyPage(),
