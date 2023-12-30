@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://raw.githubusercontent.com/BerkSpar/hub_finder/main/asset/images/logo_light.png" alt="hub_finder" heigth="40%" width="40%" />
+  <img src="/asset/images/logo_light.png" alt="hub_finder" heigth="40%" width="40%" />
 </p>
 
 <h3 align="center">Find user, repos and organizations in your phone</h3>
