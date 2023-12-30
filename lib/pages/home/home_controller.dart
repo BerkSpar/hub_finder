@@ -128,6 +128,12 @@ abstract class _HomeControllerBase with Store {
     await myBannerAd.load();
   }
 
+  Future<bool> hasHistoryPoint(DateTime date) async {
+    final result = await localStorage.getHistoryPoint(date);
+
+    return result != null;
+  }
+
   Future onUserEarnedReward(ad, item) async {
     myRewardedAd = null;
     AppAd.showAd = false;

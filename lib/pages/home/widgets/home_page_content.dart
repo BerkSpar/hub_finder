@@ -2,6 +2,7 @@ import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:hub_finder/pages/home/home_controller.dart';
+import 'package:hub_finder/pages/home/widgets/circular_streak.dart';
 import 'package:hub_finder/pages/repo/repo_page.dart';
 import 'package:hub_finder/pages/user/user_page.dart';
 import 'package:hub_finder/shared/core/app_ad.dart';
@@ -26,6 +27,33 @@ class HomePageContent extends StatefulWidget {
 }
 
 class _HomePageContentState extends State<HomePageContent> {
+  List<Widget> circularStreaks = [];
+
+  @override
+  void initState() {
+    super.initState();
+    getCircularStreak();
+  }
+
+  void getCircularStreak() async {
+    final today = DateTime.now();
+
+    final days = List.generate(7, (index) {
+      return today.add(Duration(days: index - today.weekday + 1));
+    });
+
+    for (final day in days) {
+      final isActive = await widget.controller.hasHistoryPoint(day);
+
+      circularStreaks.add(
+        CircularStreak(
+          date: day,
+          isActive: isActive,
+        ),
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -84,6 +112,64 @@ class _HomePageContentState extends State<HomePageContent> {
                 );
               }),
               SizedBox(height: 32),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'Streak',
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.w300,
+                    ),
+                  ),
+                  SizedBox(height: 16),
+                  Container(
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(5),
+                    ),
+                    padding: EdgeInsets.all(16),
+                    child: Column(
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: circularStreaks,
+                        ),
+                        const SizedBox(height: 16),
+                        Row(
+                          children: [
+                            Icon(
+                              Icons.whatshot,
+                              color: Color(0xFFFB7338),
+                            ),
+                            const SizedBox(width: 8),
+                            Text.rich(
+                              TextSpan(
+                                children: [
+                                  TextSpan(
+                                    text: 'My streak is ',
+                                  ),
+                                  TextSpan(
+                                    text: "${widget.controller.streak}",
+                                    style: TextStyle(
+                                      color: Color(0xFFFB7338),
+                                    ),
+                                  ),
+                                  TextSpan(
+                                    text:
+                                        ' day${widget.controller.streak > 1 ? 's' : ''}',
+                                  ),
+                                ],
+                              ),
+                            )
+                          ],
+                        )
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(height: 16),
               Observer(builder: (context) {
                 if (widget.controller.trendingUsers.isEmpty) {
                   return Container();

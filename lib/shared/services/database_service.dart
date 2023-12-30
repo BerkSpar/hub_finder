@@ -107,6 +107,16 @@ class LocalStorageService {
     return UserConfig.fromMap(data);
   }
 
+  Future<HistoryPoint?> getHistoryPoint(DateTime date) async {
+    final box = await historyCompleter.future;
+
+    final data = box.get("${date.year}-${date.month}-${date.day}");
+
+    if (data == null) return null;
+
+    return HistoryPoint.fromMap(data);
+  }
+
   Future<void> addHistoryPoint(HistoryPoint point) async {
     final box = await historyCompleter.future;
 
