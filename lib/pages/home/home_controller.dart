@@ -8,6 +8,7 @@ import 'package:hub_finder/shared/models/cached_user.dart';
 import 'package:hub_finder/shared/models/history_point.dart';
 import 'package:hub_finder/shared/models/repository.dart';
 import 'package:hub_finder/shared/models/user.dart';
+import 'package:hub_finder/shared/models/user_config.dart';
 import 'package:hub_finder/shared/repositories/github_datasource.dart';
 import 'package:hub_finder/shared/repositories/trending_datasource.dart';
 import 'package:hub_finder/shared/services/database_service.dart';
@@ -47,13 +48,21 @@ abstract class _HomeControllerBase with Store {
 
   final searchController = TextEditingController();
 
+  @observable
+  UserConfig config = UserConfig();
+
   _HomeControllerBase() {
     _loadBannerAd();
     _loadRewardedAd();
-    _loadTredingRepositories();
-    _loadTredingUsers();
+    _loadTrendingRepositories();
+    _loadTrendingUsers();
     _loadCachedUsers();
     _loadStreak();
+    _loadConfig();
+  }
+
+  _loadConfig() async {
+    config = await localStorage.getConfig();
   }
 
   _loadStreak() async {
@@ -77,11 +86,11 @@ abstract class _HomeControllerBase with Store {
     });
   }
 
-  _loadTredingRepositories() async {
+  _loadTrendingRepositories() async {
     trendingRepositories = await trendingDatasource.getRepositories();
   }
 
-  _loadTredingUsers() async {
+  _loadTrendingUsers() async {
     trendingUsers = await trendingDatasource.getUsers();
   }
 

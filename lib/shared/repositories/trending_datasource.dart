@@ -17,7 +17,7 @@ class TrendingDatasource {
       final list = <Repository>[].asObservable();
 
       result.data.forEach((e) {
-        list.add(Repository.fromTreding(e));
+        list.add(Repository.fromTrending(e));
       });
 
       return list;
@@ -33,7 +33,7 @@ class TrendingDatasource {
       final list = <User>[].asObservable();
 
       result.data.forEach((e) {
-        list.add(User.fromTreding(e));
+        list.add(User.fromTrending(e));
       });
 
       return list;

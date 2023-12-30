@@ -34,7 +34,7 @@ class Repository {
     language = json['language'];
   }
 
-  Repository.fromTreding(Map json) {
+  Repository.fromTrending(Map json) {
     stars = json['stars'];
     name = json['name'];
     forks = json['forks'];

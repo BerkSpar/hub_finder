@@ -57,7 +57,7 @@ class User {
     following = json['following'];
   }
 
-  User.fromTreding(Map json) {
+  User.fromTrending(Map json) {
     login = json['username'];
     avatarUrl = json['avatar'];
     url = json['url'];

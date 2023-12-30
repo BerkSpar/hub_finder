@@ -122,6 +122,22 @@ mixin _$HomeController on _HomeControllerBase, Store {
     });
   }
 
+  late final _$configAtom =
+      Atom(name: '_HomeControllerBase.config', context: context);
+
+  @override
+  UserConfig get config {
+    _$configAtom.reportRead();
+    return super.config;
+  }
+
+  @override
+  set config(UserConfig value) {
+    _$configAtom.reportWrite(value, super.config, () {
+      super.config = value;
+    });
+  }
+
   @override
   String toString() {
     return '''
@@ -131,7 +147,8 @@ cachedUsers: ${cachedUsers},
 trendingRepositories: ${trendingRepositories},
 trendingUsers: ${trendingUsers},
 streak: ${streak},
-isActiveStreak: ${isActiveStreak}
+isActiveStreak: ${isActiveStreak},
+config: ${config}
     ''';
   }
 }

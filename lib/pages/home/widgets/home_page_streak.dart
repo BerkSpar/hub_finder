@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:hub_finder/pages/home/home_controller.dart';
+import 'package:hub_finder/shared/models/user_goal.dart';
 
 class HomePageStreak extends StatefulWidget {
   final PageController pageController;
@@ -17,6 +18,40 @@ class HomePageStreak extends StatefulWidget {
 }
 
 class _HomePageStreakState extends State<HomePageStreak> {
+  List<Widget> _getTitleWidgets() {
+    final background = Theme.of(context).scaffoldBackgroundColor;
+    final goals = widget.controller.config.goals;
+    if (goals.isEmpty) return [];
+
+    int seed = DateTime.now().day % widget.controller.config.goals.length;
+
+    final goal = UserGoal.all.firstWhere((e) => e.title == goals[seed]);
+
+    final title = "Do ${goal.title}";
+
+    return [
+      Text(
+        title,
+        style: TextStyle(
+          color: widget.controller.isActiveStreak ? background : Colors.black,
+          fontSize: 24,
+          fontWeight: FontWeight.w700,
+        ),
+      ),
+      const SizedBox(height: 8),
+      Text(
+        widget.controller.isActiveStreak
+            ? "You are awesome!!!"
+            : "${goal.subtitle} today",
+        style: TextStyle(
+          color: widget.controller.isActiveStreak ? background : Colors.black,
+          fontSize: 16,
+          fontWeight: FontWeight.w400,
+        ),
+      )
+    ];
+  }
+
   @override
   Widget build(BuildContext context) {
     final background = Theme.of(context).scaffoldBackgroundColor;
@@ -31,27 +66,7 @@ class _HomePageStreakState extends State<HomePageStreak> {
         child: Column(
           children: [
             const SizedBox(height: 24),
-            Text(
-              "Be amazing!",
-              style: TextStyle(
-                color: widget.controller.isActiveStreak
-                    ? background
-                    : Colors.black,
-                fontSize: 24,
-                fontWeight: FontWeight.w700,
-              ),
-            ),
-            const SizedBox(height: 8),
-            Text(
-              widget.controller.isActiveStreak ? "You are awesome!!!" : "Today",
-              style: TextStyle(
-                color: widget.controller.isActiveStreak
-                    ? background
-                    : Colors.black,
-                fontSize: 16,
-                fontWeight: FontWeight.w400,
-              ),
-            ),
+            ..._getTitleWidgets(),
             Spacer(),
             GestureDetector(
               onTap: widget.controller.onTapStreak,

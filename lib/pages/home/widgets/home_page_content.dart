@@ -180,7 +180,7 @@ class _HomePageContentState extends State<HomePageContent> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Treding users',
+                      'Trending users',
                       style: TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.w300,
@@ -228,7 +228,7 @@ class _HomePageContentState extends State<HomePageContent> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Treding repositories',
+                      'Trending repositories',
                       style: TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.w300,
