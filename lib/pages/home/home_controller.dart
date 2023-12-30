@@ -38,6 +38,12 @@ abstract class _HomeControllerBase with Store {
   @observable
   List<User> trendingUsers = <User>[];
 
+  @observable
+  int streak = 0;
+
+  @observable
+  bool isActiveStreak = false;
+
   final searchController = TextEditingController();
 
   _HomeControllerBase() {
@@ -46,6 +52,21 @@ abstract class _HomeControllerBase with Store {
     _loadTredingRepositories();
     _loadTredingUsers();
     _loadCachedUsers();
+    loadStreak();
+  }
+
+  loadStreak() async {
+    streak = await localStorage.getStreak();
+
+    final last = await localStorage.getLastHistoryPoint();
+    if (last != null &&
+        last.date.day == DateTime.now().day &&
+        last.date.month == DateTime.now().month &&
+        last.date.year == DateTime.now().year) {
+      isActiveStreak = true;
+    } else {
+      isActiveStreak = false;
+    }
   }
 
   _loadCachedUsers() async {

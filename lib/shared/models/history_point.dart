@@ -4,7 +4,7 @@ class HistoryPoint {
 
   HistoryPoint({
     required this.date,
-    required this.value,
+    this.value = 1,
   });
 
   Map<String, dynamic> toMap() {

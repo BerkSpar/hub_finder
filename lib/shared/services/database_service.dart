@@ -110,7 +110,21 @@ class LocalStorageService {
   Future<void> addHistoryPoint(HistoryPoint point) async {
     final box = await historyCompleter.future;
 
-    await box.put(point.date.millisecondsSinceEpoch, point.toMap());
+    await box.put("${point.date.year}-${point.date.month}-${point.date.day}",
+        point.toMap());
+  }
+
+  Future<void> removeHistoryPoint(HistoryPoint point) async {
+    final box = await historyCompleter.future;
+
+    await box
+        .delete("${point.date.year}-${point.date.month}-${point.date.day}");
+  }
+
+  Future<void> clearHistoryPoints() async {
+    final box = await historyCompleter.future;
+
+    await box.clear();
   }
 
   Future<List<HistoryPoint>> getHistoryPoints() async {
@@ -136,29 +150,35 @@ class LocalStorageService {
   // Pega todos os pontos de histórico. Se não houver nenhum, retorna 0.
   // Conta quantos pontos de histórico existem em que os dias são consecutivos.
   // Se não houver pontos de histórico consecutivos, retorna 0.
+  // Utiliza a data atual para verificar se os dias são consecutivos.
   Future<int> getStreak() async {
     final box = await historyCompleter.future;
 
-    final data = box.values.isNotEmpty
+    List<HistoryPoint> data = box.values.isNotEmpty
         ? box.values.map((c) => HistoryPoint.fromMap(c)).toList()
         : [];
 
     if (data.isEmpty) return 0;
 
+    // Ordena os pontos de histórico por data.
+    data.sort((a, b) => a.date.compareTo(b.date));
+    data = data.reversed.toList();
+
     int streak = 0;
 
     for (int i = 0; i < data.length; i++) {
-      if (i == 0) continue;
+      HistoryPoint current = data[i];
+      HistoryPoint previous =
+          i == 0 ? HistoryPoint(date: DateTime.now()) : data[i - 1];
 
-      final current = data[i];
-      final previous = data[i - 1];
+      final currentDay =
+          DateTime(current.date.year, current.date.month, current.date.day);
+      final previousDay =
+          DateTime(previous.date.year, previous.date.month, previous.date.day);
 
-      final currentDay = DateTime(current.date.year, current.date.month,
-          current.date.day, 0, 0, 0, 0, 0);
-      final previousDay = DateTime(previous.date.year, previous.date.month,
-          previous.date.day, 0, 0, 0, 0, 0);
-
-      if (currentDay.difference(previousDay).inDays == 1) {
+      if (currentDay.difference(previousDay).inDays == -1) {
+        streak++;
+      } else if (currentDay == previousDay) {
         streak++;
       } else {
         break;

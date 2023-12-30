@@ -90,6 +90,38 @@ mixin _$HomeController on _HomeControllerBase, Store {
     });
   }
 
+  late final _$streakAtom =
+      Atom(name: '_HomeControllerBase.streak', context: context);
+
+  @override
+  int get streak {
+    _$streakAtom.reportRead();
+    return super.streak;
+  }
+
+  @override
+  set streak(int value) {
+    _$streakAtom.reportWrite(value, super.streak, () {
+      super.streak = value;
+    });
+  }
+
+  late final _$isActiveStreakAtom =
+      Atom(name: '_HomeControllerBase.isActiveStreak', context: context);
+
+  @override
+  bool get isActiveStreak {
+    _$isActiveStreakAtom.reportRead();
+    return super.isActiveStreak;
+  }
+
+  @override
+  set isActiveStreak(bool value) {
+    _$isActiveStreakAtom.reportWrite(value, super.isActiveStreak, () {
+      super.isActiveStreak = value;
+    });
+  }
+
   @override
   String toString() {
     return '''
@@ -97,7 +129,9 @@ showBannerAd: ${showBannerAd},
 myRewardedAd: ${myRewardedAd},
 cachedUsers: ${cachedUsers},
 trendingRepositories: ${trendingRepositories},
-trendingUsers: ${trendingUsers}
+trendingUsers: ${trendingUsers},
+streak: ${streak},
+isActiveStreak: ${isActiveStreak}
     ''';
   }
 }
