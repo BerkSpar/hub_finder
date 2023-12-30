@@ -92,7 +92,7 @@ abstract class _HomeControllerBase with Store {
     RewardedAd.load(
       adUnitId: AppAd.getRewardedUnitId(
         'ca-app-pub-2005622694052245/1931838279',
-        'ca-app-pub-2005622694052245/1470835084',
+        'ca-app-pub-2005622694052245/8920837270',
       ),
       request: AdRequest(),
       rewardedAdLoadCallback: RewardedAdLoadCallback(
@@ -110,7 +110,7 @@ abstract class _HomeControllerBase with Store {
     myBannerAd = BannerAd(
       adUnitId: AppAd.getBannerUnitId(
         'ca-app-pub-2005622694052245/2018624292',
-        'ca-app-pub-2005622694052245/1730689531',
+        'ca-app-pub-2005622694052245/7399075880',
       ),
       size: AdSize.banner,
       request: AdRequest(),

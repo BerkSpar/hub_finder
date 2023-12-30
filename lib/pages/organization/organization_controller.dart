@@ -50,7 +50,7 @@ abstract class _OrganizationControllerBase with Store {
     myBanner = BannerAd(
       adUnitId: AppAd.getBannerUnitId(
         'ca-app-pub-2005622694052245/4740990550',
-        'ca-app-pub-2005622694052245/1982821038',
+        'ca-app-pub-2005622694052245/5951059004',
       ),
       size: AdSize.banner,
       request: AdRequest(),
