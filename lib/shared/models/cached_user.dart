@@ -5,13 +5,17 @@ class CachedUser {
   String? title;
   String? subtitle;
   String? username;
+  DateTime? date;
 
   CachedUser({
     required this.imageUrl,
     required this.title,
     required this.subtitle,
     required this.username,
-  });
+    this.date,
+  }) {
+    this.date ??= DateTime.now();
+  }
 
   Map<String, dynamic> toMap() {
     return {
@@ -19,6 +23,7 @@ class CachedUser {
       'title': title,
       'subtitle': subtitle,
       'username': username,
+      'date': date?.millisecondsSinceEpoch,
     };
   }
 
@@ -28,6 +33,9 @@ class CachedUser {
       title: map['title'],
       subtitle: map['subtitle'],
       username: map['username'],
+      date: map['date'] == null
+          ? DateTime(1970)
+          : DateTime.fromMillisecondsSinceEpoch(map['date']),
     );
   }
 

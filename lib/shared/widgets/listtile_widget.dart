@@ -44,23 +44,22 @@ class ListTileWidget extends StatelessWidget {
         padding: EdgeInsets.all(16),
         child: Row(
           children: [
-            Expanded(
-              flex: 2,
-              child: SizedBox(
-                height: 52,
-                width: 52,
-                child: CircleAvatar(
-                  backgroundImage: NetworkImage(imageUrl!),
-                ),
+            SizedBox(
+              height: 52,
+              width: 52,
+              child: CircleAvatar(
+                backgroundImage: NetworkImage(imageUrl!),
               ),
             ),
+            const SizedBox(width: 8),
             Expanded(
-              flex: 7,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
                     title!,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
                     style: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.w500,
@@ -70,14 +69,12 @@ class ListTileWidget extends StatelessWidget {
                 ],
               ),
             ),
-            Expanded(
-              flex: 1,
-              child: Center(
-                child: Icon(
-                  Icons.arrow_forward_ios,
-                  color: Colors.grey,
-                  size: 18,
-                ),
+            const SizedBox(width: 8),
+            Center(
+              child: Icon(
+                Icons.arrow_forward_ios,
+                color: Colors.grey,
+                size: 18,
               ),
             ),
           ],

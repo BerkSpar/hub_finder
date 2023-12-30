@@ -44,13 +44,18 @@ class LocalStorageService {
         ? box.values.map((c) => CachedUser.fromMap(c)).toList()
         : [];
 
+    list = list.reversed.toList();
+    if (list.length > 5) {
+      list = list.sublist(0, 5);
+    }
+
     return list;
   }
 
-  Future<int> addCachedUser(CachedUser cachedUser) async {
+  Future<void> addCachedUser(CachedUser cachedUser) async {
     final box = await cacheCompleter.future;
 
-    return await box.add(cachedUser.toMap());
+    return await box.put(cachedUser.username, cachedUser.toMap());
   }
 
   Future saveRemoveAdDate() async {

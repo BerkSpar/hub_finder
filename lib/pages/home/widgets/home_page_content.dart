@@ -94,36 +94,36 @@ class _HomePageContentState extends State<HomePageContent> {
                 searchController: widget.controller.searchController,
                 hintText: 'Type the user name',
               ),
-              SizedBox(height: 8),
-              Observer(builder: (context) {
-                if (widget.controller.myRewardedAd == null) {
-                  return Container();
-                }
+              // SizedBox(height: 8),
+              // Observer(builder: (context) {
+              //   if (widget.controller.myRewardedAd == null) {
+              //     return Container();
+              //   }
 
-                return ElevatedButton(
-                  onPressed: () {
-                    widget.controller.myRewardedAd!.show(
-                      onUserEarnedReward: (ad, item) async {
-                        await widget.controller.onUserEarnedReward(ad, item);
-                        this.setState(() {});
-                      },
-                    );
-                  },
-                  child: Text('Remove ads'),
-                );
-              }),
-              SizedBox(height: 32),
+              //   return ElevatedButton(
+              //     onPressed: () {
+              //       widget.controller.myRewardedAd!.show(
+              //         onUserEarnedReward: (ad, item) async {
+              //           await widget.controller.onUserEarnedReward(ad, item);
+              //           this.setState(() {});
+              //         },
+              //       );
+              //     },
+              //     child: Text('Remove ads'),
+              //   );
+              // }),
+              SizedBox(height: 24),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Streak',
+                    'Week streak',
                     style: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.w300,
                     ),
                   ),
-                  SizedBox(height: 16),
+                  SizedBox(height: 8),
                   Container(
                     decoration: BoxDecoration(
                       color: Colors.white,
@@ -148,7 +148,7 @@ class _HomePageContentState extends State<HomePageContent> {
                               TextSpan(
                                 children: [
                                   TextSpan(
-                                    text: 'My streak is ',
+                                    text: 'My current streak is ',
                                   ),
                                   TextSpan(
                                     text: "${widget.controller.streak}",
@@ -170,7 +170,7 @@ class _HomePageContentState extends State<HomePageContent> {
                   ),
                 ],
               ),
-              SizedBox(height: 16),
+              SizedBox(height: 24),
               Observer(builder: (context) {
                 if (widget.controller.trendingUsers.isEmpty) {
                   return Container();
@@ -186,7 +186,7 @@ class _HomePageContentState extends State<HomePageContent> {
                         fontWeight: FontWeight.w300,
                       ),
                     ),
-                    SizedBox(height: 16),
+                    SizedBox(height: 8),
                     GridView.builder(
                       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: 2,
@@ -203,21 +203,22 @@ class _HomePageContentState extends State<HomePageContent> {
                         final user = widget.controller.trendingUsers[index];
 
                         return UserCard(
-                            user: user,
-                            onTap: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => UserPage(user.login),
-                                ),
-                              );
-                            });
+                          user: user,
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => UserPage(user.login),
+                              ),
+                            );
+                          },
+                        );
                       },
                     ),
                   ],
                 );
               }),
-              SizedBox(height: 16),
+              // SizedBox(height: 24),
               Observer(builder: (context) {
                 if (widget.controller.trendingRepositories.isEmpty) {
                   return Container();
@@ -233,7 +234,7 @@ class _HomePageContentState extends State<HomePageContent> {
                         fontWeight: FontWeight.w300,
                       ),
                     ),
-                    SizedBox(height: 16),
+                    SizedBox(height: 8),
                     ListView.separated(
                       shrinkWrap: true,
                       itemCount:
@@ -245,32 +246,29 @@ class _HomePageContentState extends State<HomePageContent> {
                         final repository =
                             widget.controller.trendingRepositories[index];
 
-                        return Padding(
-                          padding: EdgeInsets.symmetric(vertical: 5),
-                          child: RepoListTileWidget(
-                            title: repository.name,
-                            subtitle: repository.language,
-                            color: language_colors[repository.language],
-                            onTap: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) =>
-                                      RepoPage(repository.fullName),
-                                ),
-                              );
-                            },
-                          ),
+                        return RepoListTileWidget(
+                          title: repository.name,
+                          subtitle: repository.language,
+                          color: language_colors[repository.language],
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    RepoPage(repository.fullName),
+                              ),
+                            );
+                          },
                         );
                       },
                       separatorBuilder: (_, __) {
-                        return SizedBox(height: 5);
+                        return SizedBox(height: 16);
                       },
                     )
                   ],
                 );
               }),
-              SizedBox(height: 16),
+              //SizedBox(height: 16),
               Observer(builder: (context) {
                 if (widget.controller.cachedUsers.isEmpty) {
                   return Container();
@@ -286,7 +284,7 @@ class _HomePageContentState extends State<HomePageContent> {
                         fontWeight: FontWeight.w300,
                       ),
                     ),
-                    SizedBox(height: 16),
+                    SizedBox(height: 8),
                     ListView.separated(
                       shrinkWrap: true,
                       itemCount: widget.controller.cachedUsers.length,
@@ -310,7 +308,7 @@ class _HomePageContentState extends State<HomePageContent> {
                         );
                       },
                       separatorBuilder: (_, __) {
-                        return SizedBox(height: 5);
+                        return SizedBox(height: 16);
                       },
                     )
                   ],
