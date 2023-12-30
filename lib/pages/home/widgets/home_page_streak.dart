@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:hub_finder/pages/home/home_controller.dart';
-import 'package:hub_finder/shared/models/history_point.dart';
 
 class HomePageStreak extends StatefulWidget {
   final PageController pageController;
@@ -55,28 +54,7 @@ class _HomePageStreakState extends State<HomePageStreak> {
             ),
             Spacer(),
             GestureDetector(
-              onTap: () async {
-                final last =
-                    await widget.controller.localStorage.getLastHistoryPoint();
-
-                if (last?.date.day == DateTime.now().day) {
-                  widget.controller.localStorage
-                      .removeHistoryPoint(HistoryPoint(
-                    date: DateTime.now(),
-                    value: 1,
-                  ));
-
-                  widget.controller.loadStreak();
-                  return;
-                }
-
-                widget.controller.localStorage.addHistoryPoint(HistoryPoint(
-                  date: DateTime.now(),
-                  value: 1,
-                ));
-
-                widget.controller.loadStreak();
-              },
+              onTap: widget.controller.onTapStreak,
               child: Container(
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,

@@ -5,6 +5,7 @@ import 'package:flutter/foundation.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:hub_finder/shared/core/app_ad.dart';
 import 'package:hub_finder/shared/models/cached_user.dart';
+import 'package:hub_finder/shared/models/history_point.dart';
 import 'package:hub_finder/shared/models/repository.dart';
 import 'package:hub_finder/shared/models/user.dart';
 import 'package:hub_finder/shared/repositories/github_datasource.dart';
@@ -52,10 +53,10 @@ abstract class _HomeControllerBase with Store {
     _loadTredingRepositories();
     _loadTredingUsers();
     _loadCachedUsers();
-    loadStreak();
+    _loadStreak();
   }
 
-  loadStreak() async {
+  _loadStreak() async {
     streak = await localStorage.getStreak();
 
     final last = await localStorage.getLastHistoryPoint();
@@ -105,12 +106,6 @@ abstract class _HomeControllerBase with Store {
     );
   }
 
-  Future onUserEarnedReward(ad, item) async {
-    myRewardedAd = null;
-    AppAd.showAd = false;
-    await localStorage.saveRemoveAdDate();
-  }
-
   _loadBannerAd() async {
     myBannerAd = BannerAd(
       adUnitId: AppAd.getBannerUnitId(
@@ -131,5 +126,32 @@ abstract class _HomeControllerBase with Store {
     );
 
     await myBannerAd.load();
+  }
+
+  Future onUserEarnedReward(ad, item) async {
+    myRewardedAd = null;
+    AppAd.showAd = false;
+    await localStorage.saveRemoveAdDate();
+  }
+
+  void onTapStreak() async {
+    final last = await localStorage.getLastHistoryPoint();
+
+    if (last?.date.day == DateTime.now().day) {
+      localStorage.removeHistoryPoint(HistoryPoint(
+        date: DateTime.now(),
+        value: 1,
+      ));
+
+      _loadStreak();
+      return;
+    }
+
+    localStorage.addHistoryPoint(HistoryPoint(
+      date: DateTime.now(),
+      value: 1,
+    ));
+
+    _loadStreak();
   }
 }
