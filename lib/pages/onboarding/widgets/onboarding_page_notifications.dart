@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hub_finder/pages/onboarding/onboarding_controller.dart';
 import 'package:hub_finder/shared/services/firebase_service.dart';
+import 'package:hub_finder/shared/services/notification_service.dart';
 
 class OnboardingPageNotifications extends StatefulWidget {
   final OnboardingController controller;
@@ -139,10 +140,17 @@ class _OnboardingPageNotificationsState
 
                   await FirebaseService.init();
 
+                  await NotificationService.instance.initialize();
+
+                  await NotificationService.instance.scheduleNotification(
+                    TimeOfDay.now(),
+                  );
+
                   widget.controller.next();
                 },
                 child: Text("Continue"),
               ),
+              const SizedBox(height: 16),
             ],
           ),
         ),

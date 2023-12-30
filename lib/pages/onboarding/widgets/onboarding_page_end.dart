@@ -53,6 +53,7 @@ class OnboardingPageEnd extends StatelessWidget {
                 },
                 child: Text("Start Journey"),
               ),
+              const SizedBox(height: 16),
             ],
           ),
         ),

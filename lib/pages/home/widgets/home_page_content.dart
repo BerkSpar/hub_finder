@@ -62,6 +62,7 @@ class _HomePageContentState extends State<HomePageContent> {
           child: ListView(
             controller: widget.scrollController,
             shrinkWrap: true,
+            physics: BouncingScrollPhysics(),
             padding: EdgeInsets.fromLTRB(24, 24, 24, 0),
             children: [
               Text(
@@ -157,7 +158,7 @@ class _HomePageContentState extends State<HomePageContent> {
                                   ),
                                   TextSpan(
                                     text:
-                                        ' day${widget.controller.streak > 1 ? 's' : ''}',
+                                        ' day${widget.controller.streak != 1 ? 's' : ''}',
                                   ),
                                 ],
                               ),

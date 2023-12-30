@@ -95,6 +95,7 @@ class OnboardingPageStart extends StatelessWidget {
                 onPressed: controller.next,
                 child: Text("Continue"),
               ),
+              const SizedBox(height: 16),
             ],
           ),
         ),

@@ -93,6 +93,7 @@ class _OnboardingPageUsernameState extends State<OnboardingPageUsername> {
                 onPressed: _canSubmit ? widget.controller.next : null,
                 child: Text("Continue"),
               ),
+              const SizedBox(height: 16),
             ],
           ),
         ),

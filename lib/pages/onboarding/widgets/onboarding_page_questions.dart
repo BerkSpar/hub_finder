@@ -140,6 +140,7 @@ class _OnboardingPageQuestionsState extends State<OnboardingPageQuestions> {
                 onPressed: _canSubmit ? _submit : null,
                 child: Text("Continue"),
               ),
+              const SizedBox(height: 16),
             ],
           ),
         ),
