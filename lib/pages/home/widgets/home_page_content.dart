@@ -46,6 +46,10 @@ class _HomePageContentState extends State<HomePageContent> {
               SizedBox(height: 24),
               SearchWidget(
                 onTapSearch: () async {
+                  if (widget.controller.searchController.text.isEmpty) {
+                    return;
+                  }
+
                   Navigator.push(
                     context,
                     MaterialPageRoute(
