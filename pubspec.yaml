@@ -19,6 +19,7 @@ dependencies:
   in_app_review: ^2.0.8
   cupertino_icons: ^1.0.2
   flutter_local_notifications: ^16.3.0
+  flutter_animate: ^4.3.0
 
   firebase_analytics: ^10.7.2
   firebase_crashlytics: ^3.4.6

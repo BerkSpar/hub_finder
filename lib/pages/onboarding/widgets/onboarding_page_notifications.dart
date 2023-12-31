@@ -87,7 +87,7 @@ class _OnboardingPageNotificationsState
               ),
               const SizedBox(height: 8),
               Text(
-                "Enable notifications to receive updates",
+                "Enable notifications to keep you on track",
                 style: TextStyle(
                   fontSize: 16,
                 ),
@@ -126,11 +126,9 @@ class _OnboardingPageNotificationsState
                 "You can change it later on settings",
                 textAlign: TextAlign.center,
                 style: TextStyle(
-                  color: Color(0xFFC6C6C6),
-                  fontSize: 14,
-                  fontFamily: 'Kumbh Sans',
+                  fontSize: 16,
                   fontWeight: FontWeight.w300,
-                  height: 0,
+                  color: Color(0xFF5A5A5A),
                 ),
               ),
               Spacer(),

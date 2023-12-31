@@ -1,11 +1,13 @@
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:hub_finder/pages/onboarding/onboarding_controller.dart';
 import 'package:hub_finder/pages/privacy_policy/privacy_policy_page.dart';
 import 'package:hub_finder/pages/terms_and_conditions/terms_and_conditions_page.dart';
+import 'package:hub_finder/shared/models/user_goal.dart';
 
-class OnboardingPageStart extends StatelessWidget {
+class OnboardingPageStart extends StatefulWidget {
   final OnboardingController controller;
 
   OnboardingPageStart({
@@ -13,6 +15,27 @@ class OnboardingPageStart extends StatelessWidget {
     required this.controller,
   }) : super(key: key) {
     FirebaseAnalytics.instance.logTutorialBegin();
+  }
+
+  @override
+  State<OnboardingPageStart> createState() => _OnboardingPageStartState();
+}
+
+class _OnboardingPageStartState extends State<OnboardingPageStart> {
+  String text = "skills";
+
+  int currentGoal = 0;
+
+  void suffleText() {
+    if (currentGoal == UserGoal.all.length - 1) {
+      currentGoal = 0;
+    } else {
+      currentGoal++;
+    }
+
+    setState(() {
+      text = UserGoal.all[currentGoal].title.toLowerCase();
+    });
   }
 
   @override
@@ -31,16 +54,39 @@ class OnboardingPageStart extends StatelessWidget {
             children: [
               Spacer(),
               Text(
-                "Elevate your coding prowess",
+                "Improve your ",
                 style: TextStyle(
                   fontSize: 24,
                   fontWeight: FontWeight.w700,
                 ),
                 textAlign: TextAlign.center,
               ),
+              Text(
+                text,
+                style: TextStyle(
+                  fontSize: 24,
+                  fontWeight: FontWeight.w700,
+                  color: Colors.green,
+                ),
+                textAlign: TextAlign.center,
+              )
+                  .animate(
+                    autoPlay: true,
+                    onComplete: (controller) {
+                      controller.repeat();
+                    },
+                  )
+                  .fadeIn(duration: Duration(seconds: 1))
+                  .fadeOut(
+                    duration: Duration(seconds: 1),
+                    delay: Duration(seconds: 2),
+                  )
+                  .callback(
+                    callback: (_) => suffleText(),
+                  ),
               const SizedBox(height: 16),
               Text(
-                "Enhance your developer skills effortlessly with Hub Finder",
+                "Enhance your developer skills with Hub Finder",
                 style: TextStyle(
                   fontSize: 16,
                 ),
@@ -92,7 +138,7 @@ class OnboardingPageStart extends StatelessWidget {
               ),
               const SizedBox(height: 16),
               ElevatedButton(
-                onPressed: controller.next,
+                onPressed: widget.controller.next,
                 child: Text("Continue"),
               ),
               const SizedBox(height: 16),

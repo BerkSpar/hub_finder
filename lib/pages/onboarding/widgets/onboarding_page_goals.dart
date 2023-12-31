@@ -74,14 +74,6 @@ class _OnboardingPageGoalsState extends State<OnboardingPageGoals> {
                             widget.controller.selectGoal(item);
                           });
                         },
-                        trailing: IconButton(
-                          icon: Icon(Icons.add_circle, color: Colors.grey),
-                          onPressed: () {
-                            setState(() {
-                              widget.controller.selectGoal(item);
-                            });
-                          },
-                        ),
                       );
                     });
                   },

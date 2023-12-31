@@ -18,32 +18,32 @@ class OnboardingPageQuestions extends StatefulWidget {
 
 class _OnboardingPageQuestionsState extends State<OnboardingPageQuestions> {
   List<String> tags = [
-    "Mobile App Development",
     "Web Development",
-    "Data Science",
     "DevOps",
-    "UX/UI Design",
+    "Data Science",
+    "Mobile App Development",
     "Game Development",
+    "Artificial Intelligence",
+    "Cloud Computing",
+    "Cybersecurity",
+    "Backend Development",
     "Quality Assurance",
     "Machine Learning",
-    "Cybersecurity",
-    "Frontend Development",
-    "Backend Development",
-    "Cloud Computing",
+    "Augmented Reality",
+    "UX/UI Design",
     "Internet of Things",
     "Blockchain",
-    "Augmented Reality",
-    "Virtual Reality",
-    "Full Stack Development",
     "Embedded Systems",
-    "Artificial Intelligence",
-    "Robotics",
-    "Graphic Design",
-    "User Interface Design",
-    "User Experience Design",
-    "Motion Design",
+    "Virtual Reality",
+    "Frontend Development",
     "Web Design",
+    "Motion Design",
+    "Robotics",
+    "Full Stack Development",
+    "Graphic Design",
   ];
+
+  final gridController = ScrollController();
 
   List<String> selectedTags = [];
 
@@ -57,6 +57,30 @@ class _OnboardingPageQuestionsState extends State<OnboardingPageQuestions> {
     FirebaseAnalytics.instance.logTutorialComplete(parameters: params);
 
     widget.controller.next();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _animate();
+  }
+
+  void _animate() async {
+    await Future.delayed(Durations.short3);
+
+    gridController.animateTo(
+      50,
+      duration: Durations.long4,
+      curve: Curves.easeIn,
+    );
+
+    await Future.delayed(Durations.long4);
+
+    gridController.animateTo(
+      0,
+      duration: Durations.long4,
+      curve: Curves.easeOut,
+    );
   }
 
   @override
@@ -87,6 +111,7 @@ class _OnboardingPageQuestionsState extends State<OnboardingPageQuestions> {
               const SizedBox(height: 16),
               Expanded(
                 child: GridView.builder(
+                  controller: gridController,
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 2,
                     mainAxisSpacing: 16,
