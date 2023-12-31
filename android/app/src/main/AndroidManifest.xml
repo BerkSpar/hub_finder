@@ -1,5 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="tech.bunnie.hub_finder">
+     <uses-permission android:name="android.permission.VIBRATE" />
    <application
         android:label="Hub Finder"
         android:name="${applicationName}"
