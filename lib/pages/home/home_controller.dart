@@ -30,9 +30,6 @@ abstract class _HomeControllerBase with Store {
   bool showBannerAd = false;
 
   @observable
-  RewardedAd? myRewardedAd;
-
-  @observable
   List<CachedUser> cachedUsers = <CachedUser>[];
 
   @observable
@@ -54,7 +51,6 @@ abstract class _HomeControllerBase with Store {
 
   _HomeControllerBase() {
     _loadBannerAd();
-    _loadRewardedAd();
     _loadTrendingRepositories();
     _loadTrendingUsers();
     _loadCachedUsers();
@@ -95,27 +91,6 @@ abstract class _HomeControllerBase with Store {
     trendingUsers = await trendingDatasource.getUsers();
   }
 
-  _loadRewardedAd() {
-    if (!AppAd.showAd) return;
-    if (!kReleaseMode) return;
-
-    RewardedAd.load(
-      adUnitId: AppAd.getRewardedUnitId(
-        'ca-app-pub-2005622694052245/1931838279',
-        'ca-app-pub-2005622694052245/8920837270',
-      ),
-      request: AdRequest(),
-      rewardedAdLoadCallback: RewardedAdLoadCallback(
-        onAdLoaded: (RewardedAd ad) {
-          myRewardedAd = ad;
-        },
-        onAdFailedToLoad: (_) {
-          log('Ad load failed (code=${_.code} message=${_.message})');
-        },
-      ),
-    );
-  }
-
   _loadBannerAd() async {
     myBannerAd = BannerAd(
       adUnitId: AppAd.getBannerUnitId(
@@ -142,12 +117,6 @@ abstract class _HomeControllerBase with Store {
     final result = await localStorage.getHistoryPoint(date);
 
     return result != null;
-  }
-
-  Future onUserEarnedReward(ad, item) async {
-    myRewardedAd = null;
-    AppAd.showAd = false;
-    await localStorage.saveRemoveAdDate();
   }
 
   void onTapStreak() async {

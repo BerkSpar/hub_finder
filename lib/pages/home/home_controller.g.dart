@@ -25,22 +25,6 @@ mixin _$HomeController on _HomeControllerBase, Store {
     });
   }
 
-  late final _$myRewardedAdAtom =
-      Atom(name: '_HomeControllerBase.myRewardedAd', context: context);
-
-  @override
-  RewardedAd? get myRewardedAd {
-    _$myRewardedAdAtom.reportRead();
-    return super.myRewardedAd;
-  }
-
-  @override
-  set myRewardedAd(RewardedAd? value) {
-    _$myRewardedAdAtom.reportWrite(value, super.myRewardedAd, () {
-      super.myRewardedAd = value;
-    });
-  }
-
   late final _$cachedUsersAtom =
       Atom(name: '_HomeControllerBase.cachedUsers', context: context);
 
@@ -142,7 +126,6 @@ mixin _$HomeController on _HomeControllerBase, Store {
   String toString() {
     return '''
 showBannerAd: ${showBannerAd},
-myRewardedAd: ${myRewardedAd},
 cachedUsers: ${cachedUsers},
 trendingRepositories: ${trendingRepositories},
 trendingUsers: ${trendingUsers},
