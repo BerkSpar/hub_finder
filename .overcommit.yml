@@ -1,0 +1,4 @@
+PreCommit:
+  RunTests:
+    enabled: true
+    required_executable: "./hooks/run-tests.sh"
