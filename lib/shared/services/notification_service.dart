@@ -49,7 +49,6 @@ class NotificationService {
       0,
       'Time to review your day',
       'Take a moment to review your day and learn from your mistakes',
-      // TODO: Change to perfom on time
       RepeatInterval.daily,
       platformChannelSpecifics,
       androidScheduleMode: AndroidScheduleMode.inexactAllowWhileIdle,

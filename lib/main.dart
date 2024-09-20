@@ -70,7 +70,7 @@ class MyApp extends StatelessWidget {
             .copyWith(
               secondary: Colors.black,
             )
-            .copyWith(background: Color(0xfff0f0f5)),
+            .copyWith(surface: Color(0xfff0f0f5)),
       ),
       home: SplashPage(),
     );
