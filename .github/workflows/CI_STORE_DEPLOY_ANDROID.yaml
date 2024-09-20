@@ -18,7 +18,7 @@ jobs:
       KEYSTORE_PATH: android/upload-keystore.jks
       KEY_PROPS_PATH: android/key.properties
       SERVICE_ACCOUNT_PATH: store_credentials.json
-      PACKAGE_NAME: com.example.hub_finder
+      PACKAGE_NAME: tech.bunnie.hub_finder
     steps:
       # Checkout repository codebase
       - name: Checkout the code
