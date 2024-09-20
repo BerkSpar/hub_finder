@@ -72,13 +72,13 @@ jobs:
         uses: actions/upload-artifact@master
         with:
           name: aab-stores
-          path: { { env.AAB_PATH } }
+          path: ${{ env.AAB_PATH }}
 
       # Deploy bundle to Google Play internal testing
       - name: Deploy to Play Store (Internal testing)
         uses: r0adkll/upload-google-play@v1
         with:
-          serviceAccountJson: { { env.SERVICE_ACCOUNT_PATH } }
-          packageName: { { env.PACKAGE_NAME } }
-          releaseFiles: { { env.AAB_PATH } }
+          serviceAccountJson: ${{ env.SERVICE_ACCOUNT_PATH }}
+          packageName: ${{ env.PACKAGE_NAME }}
+          releaseFiles: ${{ env.AAB_PATH }}
           track: internal
