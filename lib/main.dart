@@ -17,6 +17,8 @@ void main() async {
 
   AppAd.showAd = await LocalStorageService().showAds();
 
+  AppAd.showAd = false;
+
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );

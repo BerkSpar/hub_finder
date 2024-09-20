@@ -290,7 +290,7 @@ SPEC CHECKSUMS:
   FirebaseRemoteConfig: bbd42790a4e84fde6aab7eae810b608e7b5c0bf6
   FirebaseSessions: f90fe9212ee2818641eda051c0835c9c4e30d9ae
   FirebaseSharedSwift: 62e248642c0582324d0390706cadd314687c116b
-  Flutter: f04841e97a9d0b0a8025694d0796dd46242b2854
+  Flutter: e0871f40cf51350855a761d2e70bf5af5b9b5de7
   flutter_local_notifications: 0c0b1ae97e741e1521e4c1629a459d04b9aec743
   Google-Mobile-Ads-SDK: e81e8b009a182dc8dd14951782efdbb30a5e4510
   google_mobile_ads: 035df0d095e1a196b52e3c91534d0718d3dacf98
@@ -309,4 +309,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: 7be2f5f74864d463a8ad433546ed1de7e0f29aef
 
-COCOAPODS: 1.14.3
+COCOAPODS: 1.15.2

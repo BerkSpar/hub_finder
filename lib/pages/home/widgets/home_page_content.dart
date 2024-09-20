@@ -94,24 +94,6 @@ class _HomePageContentState extends State<HomePageContent> {
                 searchController: widget.controller.searchController,
                 hintText: 'Type the user name',
               ),
-              // SizedBox(height: 8),
-              // Observer(builder: (context) {
-              //   if (widget.controller.myRewardedAd == null) {
-              //     return Container();
-              //   }
-
-              //   return ElevatedButton(
-              //     onPressed: () {
-              //       widget.controller.myRewardedAd!.show(
-              //         onUserEarnedReward: (ad, item) async {
-              //           await widget.controller.onUserEarnedReward(ad, item);
-              //           this.setState(() {});
-              //         },
-              //       );
-              //     },
-              //     child: Text('Remove ads'),
-              //   );
-              // }),
               SizedBox(height: 24),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,

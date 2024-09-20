@@ -2,7 +2,6 @@ import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
 import 'package:hub_finder/pages/onboarding/onboarding_controller.dart';
 import 'package:hub_finder/shared/core/app_colors.dart';
-import 'package:flutter_animate/flutter_animate.dart';
 
 class OnboardingPageQuestions extends StatefulWidget {
   final OnboardingController controller;
