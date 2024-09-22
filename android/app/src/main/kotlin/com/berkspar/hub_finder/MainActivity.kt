@@ -1,4 +1,4 @@
-package com.berkspar.hub_finder
+package tech.bunnie.hub_finder
 
 import io.flutter.embedding.android.FlutterActivity
 

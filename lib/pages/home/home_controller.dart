@@ -77,7 +77,7 @@ abstract class _HomeControllerBase with Store {
 
   _loadCachedUsers() async {
     cachedUsers = await localStorage.getCachedUsers();
-    Timer.periodic(Duration(seconds: 3), (_) async {
+    Timer.periodic(const Duration(seconds: 3), (_) async {
       cachedUsers = await localStorage.getCachedUsers();
     });
   }
@@ -97,7 +97,7 @@ abstract class _HomeControllerBase with Store {
         'ca-app-pub-2005622694052245/7399075880',
       ),
       size: AdSize.banner,
-      request: AdRequest(),
+      request: const AdRequest(),
       listener: BannerAdListener(
         onAdLoaded: (_) {
           adWidget = AdWidget(ad: myBannerAd);

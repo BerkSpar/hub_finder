@@ -5,6 +5,8 @@ import 'package:hub_finder/pages/home/widgets/home_page_streak.dart';
 import 'package:hub_finder/shared/services/review_service.dart';
 
 class HomePage extends StatefulWidget {
+  const HomePage({super.key});
+
   @override
   _HomePageState createState() => _HomePageState();
 }
@@ -26,7 +28,7 @@ class _HomePageState extends State<HomePage> {
       if (scrollController.offset < -50) {
         pageController.animateToPage(
           0,
-          duration: Duration(milliseconds: 150),
+          duration: const Duration(milliseconds: 150),
           curve: Curves.linear,
         );
       }
@@ -63,7 +65,8 @@ class _HomePageState extends State<HomePage> {
           }
         },
         controller: pageController,
-        physics: blockPageController ? NeverScrollableScrollPhysics() : null,
+        physics:
+            blockPageController ? const NeverScrollableScrollPhysics() : null,
         children: [
           HomePageStreak(
             pageController: pageController,

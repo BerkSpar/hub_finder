@@ -29,14 +29,16 @@ void main() async {
     FirebaseAnalytics.instance.setAnalyticsCollectionEnabled(false);
   }
 
-  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+  SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
     statusBarColor: Colors.transparent,
   ));
 
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -48,20 +50,20 @@ class MyApp extends StatelessWidget {
         );
       },
       theme: ThemeData(
-        iconTheme: IconThemeData(
+        iconTheme: const IconThemeData(
           color: Colors.white,
         ),
         visualDensity: VisualDensity.adaptivePlatformDensity,
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: ElevatedButton.styleFrom(
-            minimumSize: Size(double.infinity, 48),
+            minimumSize: const Size(double.infinity, 48),
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(5),
             ),
             backgroundColor: darkColor,
           ),
         ),
-        progressIndicatorTheme: ProgressIndicatorThemeData(
+        progressIndicatorTheme: const ProgressIndicatorThemeData(
           color: darkColor,
         ),
         colorScheme: ColorScheme.fromSwatch(
@@ -70,9 +72,9 @@ class MyApp extends StatelessWidget {
             .copyWith(
               secondary: Colors.black,
             )
-            .copyWith(surface: Color(0xfff0f0f5)),
+            .copyWith(surface: const Color(0xfff0f0f5)),
       ),
-      home: SplashPage(),
+      home: const SplashPage(),
     );
   }
 }

@@ -1,4 +1,3 @@
-import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
 import 'package:hub_finder/pages/onboarding/onboarding_controller.dart';
 import 'package:hub_finder/shared/core/app_colors.dart';
@@ -52,9 +51,9 @@ class _OnboardingPageQuestionsState extends State<OnboardingPageQuestions> {
   void _submit() {
     widget.controller.config.didOnboarding = true;
 
-    var params = widget.controller.config.toMap();
-    params = params.map((key, value) => MapEntry(key, value.toString()));
-    FirebaseAnalytics.instance.logTutorialComplete(parameters: params);
+    // var params = widget.controller.config.toMap();
+    // params = params.map((key, value) => MapEntry(key, value.toString()));
+    // FirebaseAnalytics.instance.logTutorialComplete(parameters: params);
 
     widget.controller.next();
   }
