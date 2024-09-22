@@ -50,9 +50,16 @@ jobs:
     name: Test and Lint
     runs-on: ubuntu-latest
     needs: setup
+    env:
+      FLUTTER_VERSION: 3.24.3
     steps:
       - name: Checkout the code
         uses: actions/checkout@v3
+
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: ${{ env.FLUTTER_VERSION }}
 
       - name: 📦 Install dependencies
         run: flutter pub get
@@ -76,6 +83,11 @@ jobs:
     steps:
       - name: Checkout the code
         uses: actions/checkout@v3
+
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: ${{ env.FLUTTER_VERSION }}
 
       - name: Decode Android keystore
         run: echo "${{ secrets.ANDROID_KEYSTORE }}" | base64 --decode > ${{ env.KEYSTORE_PATH }}
