@@ -57,29 +57,12 @@ mixin _$RepoController on _RepoControllerBase, Store {
     });
   }
 
-  late final _$showBannerAdAtom =
-      Atom(name: '_RepoControllerBase.showBannerAd', context: context);
-
-  @override
-  bool get showBannerAd {
-    _$showBannerAdAtom.reportRead();
-    return super.showBannerAd;
-  }
-
-  @override
-  set showBannerAd(bool value) {
-    _$showBannerAdAtom.reportWrite(value, super.showBannerAd, () {
-      super.showBannerAd = value;
-    });
-  }
-
   @override
   String toString() {
     return '''
 repository: ${repository},
 contributors: ${contributors},
-load: ${load},
-showBannerAd: ${showBannerAd}
+load: ${load}
     ''';
   }
 }

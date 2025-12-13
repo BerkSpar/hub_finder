@@ -57,29 +57,12 @@ mixin _$OrganizationController on _OrganizationControllerBase, Store {
     });
   }
 
-  late final _$showBannerAdAtom =
-      Atom(name: '_OrganizationControllerBase.showBannerAd', context: context);
-
-  @override
-  bool get showBannerAd {
-    _$showBannerAdAtom.reportRead();
-    return super.showBannerAd;
-  }
-
-  @override
-  set showBannerAd(bool value) {
-    _$showBannerAdAtom.reportWrite(value, super.showBannerAd, () {
-      super.showBannerAd = value;
-    });
-  }
-
   @override
   String toString() {
     return '''
 organization: ${organization},
 members: ${members},
-load: ${load},
-showBannerAd: ${showBannerAd}
+load: ${load}
     ''';
   }
 }

@@ -5,7 +5,6 @@ import 'package:hub_finder/pages/home/home_controller.dart';
 import 'package:hub_finder/pages/home/widgets/circular_streak.dart';
 import 'package:hub_finder/pages/repo/repo_page.dart';
 import 'package:hub_finder/pages/user/user_page.dart';
-import 'package:hub_finder/shared/core/app_ad.dart';
 import 'package:hub_finder/shared/core/app_colors.dart';
 import 'package:hub_finder/shared/widgets/listtile_widget.dart';
 import 'package:hub_finder/shared/widgets/repo_listtile_widget.dart';
@@ -299,17 +298,6 @@ class _HomePageContentState extends State<HomePageContent> {
             ],
           ),
         ),
-        if (AppAd.showAd)
-          Observer(builder: (context) {
-            return Container(
-              alignment: Alignment.center,
-              width: MediaQuery.of(context).size.width,
-              height: widget.controller.showBannerAd ? 50 : 0,
-              child: widget.controller.showBannerAd
-                  ? widget.controller.adWidget
-                  : null,
-            );
-          })
       ],
     );
   }

@@ -2,9 +2,28 @@
   "project_info": {
     "project_number": "743986906813",
     "project_id": "hub-finder-29d1e",
-    "storage_bucket": "hub-finder-29d1e.appspot.com"
+    "storage_bucket": "hub-finder-29d1e.firebasestorage.app"
   },
   "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:743986906813:android:316357134bb4f6d3bd19d4",
+        "android_client_info": {
+          "package_name": "br.com.mariabrasileira.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCF14Dh9BgKxpwfOUIP9CD-KDmGb5ltAK0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
     {
       "client_info": {
         "mobilesdk_app_id": "1:743986906813:android:dc1ae5b0d0ba2a80bd19d4",

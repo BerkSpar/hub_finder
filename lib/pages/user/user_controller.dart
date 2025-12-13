@@ -1,7 +1,3 @@
-import 'dart:developer';
-
-import 'package:google_mobile_ads/google_mobile_ads.dart';
-import 'package:hub_finder/shared/core/app_ad.dart';
 import 'package:hub_finder/shared/models/cached_user.dart';
 import 'package:hub_finder/shared/models/load_state.dart';
 import 'package:hub_finder/shared/models/organization.dart';
@@ -31,14 +27,8 @@ abstract class _UserControllerBase with Store {
   @observable
   LoadState load = LoadState.loading;
 
-  AdWidget? adWidget;
-  late BannerAd myBanner;
-  @observable
-  bool showBannerAd = false;
-
   _UserControllerBase(String? username) {
     _init(username);
-    _loadAd();
   }
 
   _init(String? username) async {
@@ -64,27 +54,5 @@ abstract class _UserControllerBase with Store {
       subtitle: user!.location,
       username: user!.login,
     ));
-  }
-
-  _loadAd() async {
-    myBanner = BannerAd(
-      adUnitId: AppAd.getBannerUnitId(
-        'ca-app-pub-2005622694052245/1183861251',
-        'ca-app-pub-2005622694052245/6219486466',
-      ),
-      size: AdSize.banner,
-      request: AdRequest(),
-      listener: BannerAdListener(
-        onAdLoaded: (_) {
-          adWidget = AdWidget(ad: myBanner);
-          showBannerAd = true;
-        },
-        onAdFailedToLoad: (_, error) {
-          log('Ad load failed (code=${error.code} message=${error.message})');
-        },
-      ),
-    );
-
-    await myBanner.load();
   }
 }

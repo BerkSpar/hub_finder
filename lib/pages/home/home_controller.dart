@@ -1,9 +1,6 @@
 import 'dart:async';
-import 'dart:developer';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
-import 'package:google_mobile_ads/google_mobile_ads.dart';
-import 'package:hub_finder/shared/core/app_ad.dart';
 import 'package:hub_finder/shared/models/cached_user.dart';
 import 'package:hub_finder/shared/models/history_point.dart';
 import 'package:hub_finder/shared/models/repository.dart';
@@ -22,11 +19,6 @@ abstract class _HomeControllerBase with Store {
   final localStorage = LocalStorageService();
   final githubDatasource = GithubDataSource();
   final trendingDatasource = TrendingDatasource();
-
-  AdWidget? adWidget;
-  late BannerAd myBannerAd;
-  @observable
-  bool showBannerAd = false;
 
   @observable
   List<CachedUser> cachedUsers = <CachedUser>[];
@@ -49,7 +41,6 @@ abstract class _HomeControllerBase with Store {
   UserConfig config = UserConfig();
 
   _HomeControllerBase() {
-    _loadBannerAd();
     _loadTrendingRepositories();
     _loadTrendingUsers();
     _loadCachedUsers();
@@ -88,28 +79,6 @@ abstract class _HomeControllerBase with Store {
 
   _loadTrendingUsers() async {
     trendingUsers = await trendingDatasource.getUsers();
-  }
-
-  _loadBannerAd() async {
-    myBannerAd = BannerAd(
-      adUnitId: AppAd.getBannerUnitId(
-        'ca-app-pub-2005622694052245/2018624292',
-        'ca-app-pub-2005622694052245/7399075880',
-      ),
-      size: AdSize.banner,
-      request: const AdRequest(),
-      listener: BannerAdListener(
-        onAdLoaded: (_) {
-          adWidget = AdWidget(ad: myBannerAd);
-          showBannerAd = true;
-        },
-        onAdFailedToLoad: (_, error) {
-          log('Ad load failed (code=${error.code} message=${error.message})');
-        },
-      ),
-    );
-
-    await myBannerAd.load();
   }
 
   Future<bool> hasHistoryPoint(DateTime date) async {

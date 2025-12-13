@@ -54,7 +54,7 @@ class DefaultFirebaseOptions {
     appId: '1:743986906813:android:dc1ae5b0d0ba2a80bd19d4',
     messagingSenderId: '743986906813',
     projectId: 'hub-finder-29d1e',
-    storageBucket: 'hub-finder-29d1e.appspot.com',
+    storageBucket: 'hub-finder-29d1e.firebasestorage.app',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
@@ -62,7 +62,8 @@ class DefaultFirebaseOptions {
     appId: '1:743986906813:ios:d259a0c5cabec433bd19d4',
     messagingSenderId: '743986906813',
     projectId: 'hub-finder-29d1e',
-    storageBucket: 'hub-finder-29d1e.appspot.com',
+    storageBucket: 'hub-finder-29d1e.firebasestorage.app',
     iosBundleId: 'com.berkspar.hubfinder',
   );
+
 }

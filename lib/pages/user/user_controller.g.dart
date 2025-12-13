@@ -73,30 +73,13 @@ mixin _$UserController on _UserControllerBase, Store {
     });
   }
 
-  late final _$showBannerAdAtom =
-      Atom(name: '_UserControllerBase.showBannerAd', context: context);
-
-  @override
-  bool get showBannerAd {
-    _$showBannerAdAtom.reportRead();
-    return super.showBannerAd;
-  }
-
-  @override
-  set showBannerAd(bool value) {
-    _$showBannerAdAtom.reportWrite(value, super.showBannerAd, () {
-      super.showBannerAd = value;
-    });
-  }
-
   @override
   String toString() {
     return '''
 user: ${user},
 organizations: ${organizations},
 repositories: ${repositories},
-load: ${load},
-showBannerAd: ${showBannerAd}
+load: ${load}
     ''';
   }
 }
