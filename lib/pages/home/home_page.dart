@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hub_finder/pages/focus/focus_page.dart';
 import 'package:hub_finder/pages/home/home_controller.dart';
 import 'package:hub_finder/pages/home/widgets/home_page_content.dart';
 import 'package:hub_finder/pages/home/widgets/home_page_streak.dart';
@@ -49,6 +50,16 @@ class _HomePageState extends State<HomePage> {
         title: Image.asset('asset/images/logo_light.png', height: 32),
         centerTitle: true,
         elevation: 0,
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (_) => const FocusPage()),
+          );
+        },
+        backgroundColor: Colors.black,
+        child: const Icon(Icons.timer, color: Colors.white),
       ),
       body: PageView(
         pageSnapping: true,

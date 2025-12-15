@@ -3,7 +3,7 @@ description: Find user, repos and organizations in your phone.
 
 publish_to: "none"
 
-version: 2.0.0+30
+version: 2.1.0+31
 
 environment:
   sdk: ">=2.17.0 <3.0.0"
@@ -17,8 +17,11 @@ dependencies:
   hive: ^2.2.3
   in_app_review: ^2.0.9
   cupertino_icons: ^1.0.8
-  flutter_local_notifications: ^17.2.3
+  flutter_local_notifications: ^19.5.0
   flutter_animate: ^4.5.0
+  wakelock_plus: ^1.4.0
+  timezone: ^0.10.1
+  flutter_timezone: ^5.0.1
 
   firebase_analytics: ^12.0.4
   firebase_crashlytics: ^5.0.5
@@ -32,8 +35,8 @@ dependencies:
 
 dev_dependencies:
   flutter_lints: ^4.0.0
-  mobx_codegen: ^2.2.0
-  build_runner: ^2.3.3
+  mobx_codegen: ^2.7.4
+  build_runner: ^2.10.4
   flutter_test:
     sdk: flutter
 

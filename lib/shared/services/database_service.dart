@@ -2,6 +2,8 @@ import 'dart:async';
 import 'dart:developer';
 import 'package:hive/hive.dart';
 import 'package:hub_finder/shared/models/cached_user.dart';
+import 'package:hub_finder/shared/models/focus_session.dart';
+import 'package:hub_finder/shared/models/focus_type.dart';
 import 'package:hub_finder/shared/models/history_point.dart';
 import 'package:hub_finder/shared/models/user_config.dart';
 import 'package:path_provider/path_provider.dart';
@@ -12,6 +14,7 @@ class LocalStorageService {
   Completer<Box> reviewCompleter = Completer<Box>();
   Completer<Box> configCompleter = Completer<Box>();
   Completer<Box> historyCompleter = Completer<Box>();
+  Completer<Box> focusCompleter = Completer<Box>();
 
   LocalStorageService() {
     _init();
@@ -35,6 +38,9 @@ class LocalStorageService {
 
     final historyBox = await Hive.openBox('history');
     if (!historyCompleter.isCompleted) historyCompleter.complete(historyBox);
+
+    final focusBox = await Hive.openBox('focus_sessions');
+    if (!focusCompleter.isCompleted) focusCompleter.complete(focusBox);
   }
 
   Future<List<CachedUser>> getCachedUsers() async {
@@ -201,5 +207,35 @@ class LocalStorageService {
     }
 
     return streak;
+  }
+
+  Future<void> addFocusSession(FocusSession session) async {
+    final box = await focusCompleter.future;
+    await box.put(session.id, session.toMap());
+  }
+
+  Future<void> updateFocusSession(FocusSession session) async {
+    final box = await focusCompleter.future;
+    await box.put(session.id, session.toMap());
+  }
+
+  Future<List<FocusSession>> getFocusSessions() async {
+    final box = await focusCompleter.future;
+    List<FocusSession> list = box.values.isNotEmpty
+        ? box.values.map((c) => FocusSession.fromMap(c)).toList()
+        : [];
+    return list;
+  }
+
+  Future<int> getTotalFocusMinutes() async {
+    final sessions = await getFocusSessions();
+    return sessions
+        .where((s) => s.completed && s.type == FocusType.work)
+        .fold<int>(0, (sum, s) => sum + s.durationMinutes);
+  }
+
+  Future<int> getCompletedSessionCount() async {
+    final sessions = await getFocusSessions();
+    return sessions.where((s) => s.completed && s.type == FocusType.work).length;
   }
 }

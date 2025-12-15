@@ -46,3 +46,5 @@ Each page follows the pattern:
 - Firebase (Analytics, Crashlytics, Performance, In-App Messaging, Cloud Messaging)
 - Google Mobile Ads
 - In-app review
+- do not write .g.dart files, generate after with `dart run build_runner -d`
+- do not create function that return widgets. Instead prefer to create Stateful or Stateless widgets

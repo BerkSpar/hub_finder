@@ -61,7 +61,9 @@ class _HomePageContentState extends State<HomePageContent> {
           child: ListView(
             controller: widget.scrollController,
             shrinkWrap: true,
-            physics: BouncingScrollPhysics(),
+            physics: const AlwaysScrollableScrollPhysics(
+              parent: BouncingScrollPhysics(),
+            ),
             padding: EdgeInsets.fromLTRB(24, 24, 24, 0),
             children: [
               Text(
