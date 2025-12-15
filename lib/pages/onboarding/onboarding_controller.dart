@@ -30,7 +30,7 @@ abstract class _OnboardingControllerBase with Store {
   void next() {
     _save();
 
-    if (pageController.page! < 5) {
+    if (pageController.page! < 8) {
       pageController.nextPage(
         duration: Duration(milliseconds: 300),
         curve: Curves.easeInOut,

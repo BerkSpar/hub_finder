@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:hub_finder/pages/onboarding/onboarding_controller.dart';
+import 'package:hub_finder/pages/onboarding/widgets/onboarding_page_demo_streak.dart';
+import 'package:hub_finder/pages/onboarding/widgets/onboarding_page_demo_timer.dart';
+import 'package:hub_finder/pages/onboarding/widgets/onboarding_page_demo_trending.dart';
 import 'package:hub_finder/pages/onboarding/widgets/onboarding_page_end.dart';
 import 'package:hub_finder/pages/onboarding/widgets/onboarding_page_goals.dart';
 import 'package:hub_finder/pages/onboarding/widgets/onboarding_page_notifications.dart';
@@ -27,6 +30,9 @@ class _OnboardingPageState extends State<OnboardingPage> {
       },
       children: [
         OnboardingPageStart(controller: controller),
+        OnboardingPageDemoStreak(controller: controller),
+        OnboardingPageDemoTimer(controller: controller),
+        OnboardingPageDemoTrending(controller: controller),
         OnboardingPageGoals(controller: controller),
         OnboardingPageUsername(controller: controller),
         OnboardingPageNotifications(controller: controller),
