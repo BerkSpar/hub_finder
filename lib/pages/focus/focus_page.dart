@@ -6,6 +6,9 @@ import 'package:hub_finder/pages/focus/widgets/circular_timer_widget.dart';
 import 'package:hub_finder/pages/focus/widgets/duration_picker_widget.dart';
 import 'package:hub_finder/pages/focus/widgets/focus_stats_widget.dart';
 import 'package:hub_finder/shared/models/focus_type.dart';
+import 'package:hub_finder/shared/services/subscription_service.dart';
+import 'package:mobx/mobx.dart';
+import 'package:purchases_ui_flutter/purchases_ui_flutter.dart';
 
 class FocusPage extends StatefulWidget {
   const FocusPage({super.key});
@@ -16,6 +19,9 @@ class FocusPage extends StatefulWidget {
 
 class _FocusPageState extends State<FocusPage> with WidgetsBindingObserver {
   final controller = focusController;
+  bool isPro = false;
+  int remainingSessions = 3;
+  ReactionDisposer? _reactionDisposer;
 
   @override
   void initState() {
@@ -25,10 +31,58 @@ class _FocusPageState extends State<FocusPage> with WidgetsBindingObserver {
       contentType: 'focus_mode',
       itemId: 'focus_page',
     );
+    _loadSessionInfo();
+    _reactionDisposer = reaction(
+      (_) => controller.completedPomodoros,
+      (_) => _loadSessionInfo(),
+    );
+  }
+
+  Future<void> _loadSessionInfo() async {
+    final proStatus = await SubscriptionService.instance.isPro;
+    final remaining = await SubscriptionService.instance.remainingSessions;
+    if (mounted) {
+      setState(() {
+        isPro = proStatus;
+        remainingSessions = remaining;
+      });
+    }
+  }
+
+  Future<void> _handleStartSession() async {
+    if (controller.isRunning && !controller.isPaused) {
+      controller.pause();
+      return;
+    }
+
+    if (controller.isPaused) {
+      controller.start();
+      return;
+    }
+
+    if (controller.currentType != FocusType.work) {
+      controller.start();
+      return;
+    }
+
+    final canUse = await SubscriptionService.instance.canUseFocus;
+    if (!mounted) return;
+
+    if (canUse) {
+      await controller.start();
+      await _loadSessionInfo();
+    } else {
+      final result = await RevenueCatUI.presentPaywallIfNeeded('pro');
+      await _loadSessionInfo();
+      if (result == PaywallResult.purchased || result == PaywallResult.restored) {
+        await controller.start();
+      }
+    }
   }
 
   @override
   void dispose() {
+    _reactionDisposer?.call();
     WidgetsBinding.instance.removeObserver(this);
     super.dispose();
   }
@@ -51,10 +105,40 @@ class _FocusPageState extends State<FocusPage> with WidgetsBindingObserver {
         centerTitle: true,
         elevation: 0,
         actions: [
-          IconButton(
-            onPressed: () => _showSettingsBottomSheet(context),
-            icon: const Icon(Icons.settings),
-          ),
+          if (!isPro)
+            Container(
+              margin: const EdgeInsets.only(right: 8),
+              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+              decoration: BoxDecoration(
+                color: remainingSessions > 0
+                    ? Colors.green.shade100
+                    : Colors.red.shade100,
+                borderRadius: BorderRadius.circular(12),
+              ),
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Icon(
+                    Icons.local_fire_department,
+                    size: 14,
+                    color: remainingSessions > 0
+                        ? Colors.green.shade700
+                        : Colors.red.shade700,
+                  ),
+                  const SizedBox(width: 4),
+                  Text(
+                    '$remainingSessions/3',
+                    style: TextStyle(
+                      fontSize: 12,
+                      fontWeight: FontWeight.w600,
+                      color: remainingSessions > 0
+                          ? Colors.green.shade700
+                          : Colors.red.shade700,
+                    ),
+                  ),
+                ],
+              ),
+            ),
         ],
       ),
       body: Observer(
@@ -93,9 +177,11 @@ class _FocusPageState extends State<FocusPage> with WidgetsBindingObserver {
           children: [
             _buildTypeButton('Focus', FocusType.work, controller.switchToWork),
             const SizedBox(width: 8),
-            _buildTypeButton('Short Break', FocusType.shortBreak, controller.switchToShortBreak),
+            _buildTypeButton('Short Break', FocusType.shortBreak,
+                controller.switchToShortBreak),
             const SizedBox(width: 8),
-            _buildTypeButton('Long Break', FocusType.longBreak, controller.switchToLongBreak),
+            _buildTypeButton('Long Break', FocusType.longBreak,
+                controller.switchToLongBreak),
           ],
         );
       },
@@ -141,13 +227,7 @@ class _FocusPageState extends State<FocusPage> with WidgetsBindingObserver {
             ),
             const SizedBox(width: 24),
             GestureDetector(
-              onTap: () {
-                if (controller.isRunning && !controller.isPaused) {
-                  controller.pause();
-                } else {
-                  controller.start();
-                }
-              },
+              onTap: _handleStartSession,
               child: Container(
                 width: 80,
                 height: 80,

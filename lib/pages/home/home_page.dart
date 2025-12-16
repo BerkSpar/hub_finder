@@ -4,6 +4,8 @@ import 'package:hub_finder/pages/home/home_controller.dart';
 import 'package:hub_finder/pages/home/widgets/home_page_content.dart';
 import 'package:hub_finder/pages/home/widgets/home_page_streak.dart';
 import 'package:hub_finder/shared/services/review_service.dart';
+import 'package:hub_finder/shared/services/subscription_service.dart';
+import 'package:purchases_ui_flutter/purchases_ui_flutter.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -19,11 +21,13 @@ class _HomePageState extends State<HomePage> {
   final pageController = PageController();
 
   bool blockPageController = false;
+  bool isPro = false;
 
   @override
   void initState() {
     super.initState();
     ReviewService.scheduleReview();
+    _checkProStatus();
 
     scrollController.addListener(() {
       if (scrollController.offset < -50) {
@@ -34,6 +38,30 @@ class _HomePageState extends State<HomePage> {
         );
       }
     });
+  }
+
+  Future<void> _checkProStatus() async {
+    final proStatus = await SubscriptionService.instance.isPro;
+    if (mounted) {
+      setState(() {
+        isPro = proStatus;
+      });
+    }
+  }
+
+  Future<void> _handleFocusTap() async {
+    final canUse = await SubscriptionService.instance.canUseFocus;
+    if (!mounted) return;
+
+    if (canUse) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (_) => const FocusPage()),
+      );
+    } else {
+      await RevenueCatUI.presentPaywallIfNeeded('pro');
+      _checkProStatus();
+    }
   }
 
   @override
@@ -52,12 +80,7 @@ class _HomePageState extends State<HomePage> {
         elevation: 0,
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (_) => const FocusPage()),
-          );
-        },
+        onPressed: _handleFocusTap,
         backgroundColor: Colors.black,
         child: const Icon(Icons.timer, color: Colors.white),
       ),
@@ -86,6 +109,11 @@ class _HomePageState extends State<HomePage> {
           HomePageContent(
             controller: controller,
             scrollController: scrollController,
+            isPro: isPro,
+            onUpgradeTap: () async {
+              await RevenueCatUI.presentPaywall();
+              _checkProStatus();
+            },
           ),
         ],
       ),

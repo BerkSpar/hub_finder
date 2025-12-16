@@ -16,6 +16,8 @@ class UserConfig {
   int focusCompletedPomodoros;
   DateTime? focusExpectedEndTime;
   bool focusIsRunning;
+  int dailyFocusSessions;
+  DateTime? lastSessionDate;
 
   UserConfig({
     this.didOnboarding = false,
@@ -33,6 +35,8 @@ class UserConfig {
     this.focusCompletedPomodoros = 0,
     this.focusExpectedEndTime,
     this.focusIsRunning = false,
+    this.dailyFocusSessions = 0,
+    this.lastSessionDate,
   });
 
   Map<String, dynamic> toMap() {
@@ -53,6 +57,8 @@ class UserConfig {
       'focus_completed_pomodoros': focusCompletedPomodoros,
       'focus_expected_end_time': focusExpectedEndTime?.toIso8601String(),
       'focus_is_running': focusIsRunning,
+      'daily_focus_sessions': dailyFocusSessions,
+      'last_session_date': lastSessionDate?.toIso8601String(),
     };
   }
 
@@ -80,6 +86,10 @@ class UserConfig {
           ? DateTime.parse(map['focus_expected_end_time'])
           : null,
       focusIsRunning: map['focus_is_running'] ?? false,
+      dailyFocusSessions: map['daily_focus_sessions'] ?? 0,
+      lastSessionDate: map['last_session_date'] != null
+          ? DateTime.parse(map['last_session_date'])
+          : null,
     );
   }
 }

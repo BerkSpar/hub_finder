@@ -22,6 +22,9 @@ dependencies:
   wakelock_plus: ^1.4.0
   timezone: ^0.10.1
   flutter_timezone: ^5.0.1
+  purchases_flutter: ^9.10.0
+  purchases_ui_flutter: ^9.10.0
+  flutter_dotenv: ^5.2.1
 
   firebase_analytics: ^12.0.4
   firebase_crashlytics: ^5.0.5
@@ -45,4 +48,5 @@ flutter:
 
   assets:
     - asset/images/
+    - .env
 

@@ -14,11 +14,15 @@ import 'package:hub_finder/shared/widgets/user_card.dart';
 class HomePageContent extends StatefulWidget {
   final ScrollController scrollController;
   final HomeController controller;
+  final bool isPro;
+  final VoidCallback onUpgradeTap;
 
   const HomePageContent({
     super.key,
     required this.scrollController,
     required this.controller,
+    required this.isPro,
+    required this.onUpgradeTap,
   });
 
   @override
@@ -95,6 +99,75 @@ class _HomePageContentState extends State<HomePageContent> {
                 searchController: widget.controller.searchController,
                 hintText: 'Type the user name',
               ),
+              if (!widget.isPro) ...[
+                SizedBox(height: 16),
+                GestureDetector(
+                  onTap: widget.onUpgradeTap,
+                  child: Container(
+                    padding: EdgeInsets.all(16),
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(12),
+                      border: Border.all(color: Colors.grey.shade300),
+                    ),
+                    child: Row(
+                      children: [
+                        Container(
+                          padding: EdgeInsets.all(10),
+                          decoration: BoxDecoration(
+                            color: Color(0xFFFFF8E1),
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          child: Icon(
+                            Icons.workspace_premium,
+                            color: Color(0xFFFF8F00),
+                            size: 24,
+                          ),
+                        ),
+                        SizedBox(width: 14),
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                'Upgrade to Pro',
+                                style: TextStyle(
+                                  color: Colors.black87,
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              ),
+                              SizedBox(height: 2),
+                              Text(
+                                'Unlimited Focus sessions',
+                                style: TextStyle(
+                                  color: Colors.grey.shade600,
+                                  fontSize: 13,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        Container(
+                          padding: EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                          decoration: BoxDecoration(
+                            color: Colors.black,
+                            borderRadius: BorderRadius.circular(6),
+                          ),
+                          child: Text(
+                            'PRO',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 12,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
               SizedBox(height: 24),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,

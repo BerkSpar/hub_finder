@@ -3,11 +3,13 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" />
     <uses-permission android:name="android.permission.USE_EXACT_ALARM" /> 
-
+    <uses-permission android:name="com.android.vending.BILLING" />
+    
     <application
         android:label="Hub Finder"
         android:name="${applicationName}"
-        android:icon="@mipmap/ic_launcher">
+        android:icon="@mipmap/ic_launcher"
+        android:launchMode="standard">
         <activity
             android:name=".MainActivity"
             android:exported="true"

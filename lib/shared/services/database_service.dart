@@ -238,4 +238,21 @@ class LocalStorageService {
     final sessions = await getFocusSessions();
     return sessions.where((s) => s.completed && s.type == FocusType.work).length;
   }
+
+  Future<void> resetDailySessionsIfNeeded() async {
+    final config = await getConfig();
+    final lastDate = config.lastSessionDate;
+
+    if (lastDate == null) return;
+
+    final now = DateTime.now();
+    final lastDay = DateTime(lastDate.year, lastDate.month, lastDate.day);
+    final today = DateTime(now.year, now.month, now.day);
+
+    if (today.isAfter(lastDay)) {
+      config.dailyFocusSessions = 0;
+      config.lastSessionDate = null;
+      await saveConfig(config);
+    }
+  }
 }

@@ -5,6 +5,7 @@ import 'package:hub_finder/shared/models/focus_session.dart';
 import 'package:hub_finder/shared/models/focus_type.dart';
 import 'package:hub_finder/shared/services/database_service.dart';
 import 'package:hub_finder/shared/services/notification_service.dart';
+import 'package:hub_finder/shared/services/subscription_service.dart';
 import 'package:mobx/mobx.dart';
 import 'package:wakelock_plus/wakelock_plus.dart';
 
@@ -296,6 +297,7 @@ abstract class _FocusControllerBase with Store {
     if (currentType == FocusType.work) {
       completedPomodoros++;
       await _loadStats();
+      await SubscriptionService.instance.incrementFocusSession();
 
       if (completedPomodoros % cyclesBeforeLongBreak == 0) {
         currentType = FocusType.longBreak;
