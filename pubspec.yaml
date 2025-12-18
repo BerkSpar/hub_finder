@@ -3,7 +3,7 @@ description: Find user, repos and organizations in your phone.
 
 publish_to: "none"
 
-version: 2.1.0+31
+version: 2.1.1+40
 
 environment:
   sdk: ">=2.17.0 <3.0.0"
