@@ -25,6 +25,7 @@ dependencies:
   purchases_flutter: ^9.10.0
   purchases_ui_flutter: ^9.10.0
   flutter_dotenv: ^5.2.1
+  html: ^0.15.5
 
   firebase_analytics: ^12.0.4
   firebase_crashlytics: ^5.0.5

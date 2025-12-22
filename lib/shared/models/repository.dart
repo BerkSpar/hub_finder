@@ -12,6 +12,7 @@ class Repository {
 
   Repository({
     this.id,
+    this.rank,
     this.stars,
     this.forks,
     this.openIssues,
